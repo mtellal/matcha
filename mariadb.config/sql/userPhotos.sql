@@ -1,0 +1,8 @@
+--DROP TABLE IF EXISTS `userPhotos`;
+CREATE TABLE `userPhotos` (
+  `userId` INT UNSIGNED NOT NULL,
+  `path` CHAR(100) NOT NULL DEFAULT "",
+  `photoId` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY(photoId), 
+  FOREIGN KEY (userId) REFERENCES users(userId)
+);

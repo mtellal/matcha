@@ -1,0 +1,82 @@
+.userscollection {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.userscollection-c {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 900px;
+    height: fit-content;
+    margin-top: 10vh;
+}
+
+.userscollection-title {
+    font-size: 'Open Sans', sans-serif;
+    font-size: 26px;
+    color: white;
+    font-weight: 500;
+}
+
+.userscollection-users-c {
+    min-height: 500px;
+    min-width: 800px;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 2vw;
+    gap: 2vw;
+    background-color: var(--blue1);
+    border-radius: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 5vh;
+}
+
+
+
+
+
+@media screen and (max-width:1150px) {
+
+
+    .userscollection-users-c {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 3vw;
+        padding: 3vw;
+    }
+
+    .userscollection-c {
+        width: auto;
+        align-self: center;
+        margin-top: 0;
+    }
+
+    .profilepage-c {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .profilepage-menu {
+        position: initial;
+        align-self: center;
+    }
+
+}
+
+
+@media screen and (max-width:700px) {
+    .userscollection-users-c {
+        grid-template-columns: 1fr 1fr;
+        gap: 5vw;
+        padding: 5vw;
+        margin-bottom: 10vh;
+    }
+
+    .userscollection-c {
+        max-width: 90%;
+    }
+
+}

@@ -1,0 +1,91 @@
+.message {
+    display: flex;
+    width: 96%;
+    padding: 0 2%;
+}
+
+.message-text {
+    max-width: 400px;
+    padding: 5px 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    color: black;
+    font-size: 14px;
+    font-family: 'MontSerrat', sans-serif;
+    font-weight: 500;
+    margin: 0;
+    color: black;
+    overflow-wrap: break-word;
+    text-align: start;
+}
+
+.messenger {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+}
+
+.messenger-messages-c {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0 40px 0;
+}
+
+.msng-input-c {
+    width: 60%;
+    background-color: white;
+    position: sticky;
+    bottom: 10px;
+    right: 20%;
+    left: 20%;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px black;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+#msng-input {
+    width: 100%;
+    border: none;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    border-radius: 5px;
+    margin: 0;
+    background-color: white;
+}
+
+#msng-input:focus {
+    outline: none;
+}
+
+.msng-send-icon {
+    height: 25px;
+    width: 25px;
+    padding: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.msng-send-icon:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+@media screen and (max-width: 400px) {
+
+    .msng-input-c {
+        padding: 2px 5px;
+    }
+
+    .message-text, #msng-input {
+        font-size: min(14px, 3vw);
+    }
+}

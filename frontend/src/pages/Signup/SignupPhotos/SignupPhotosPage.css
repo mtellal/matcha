@@ -1,0 +1,171 @@
+
+.signuppagephotos-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    padding-top: 5vh;
+}
+
+
+.signuppagephotos-title-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signuppagephotos-title-pink {
+    color: #FFB2D7;
+    font-size: 50px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    padding-left: 10px;
+    align-self: flex-start;
+}
+
+.signuppagephotos-title {
+    margin: 0;
+    color: white;
+    font-size: 45px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.signuppagephotos-description {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.signup-photos-c {
+    margin-top: 2vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vh;
+    width: 40vw;
+    max-width: 600px;
+}
+
+.signuppagephotos-fpass-raw {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    margin: 5px 0;
+    align-self: flex-end;
+}
+
+.signuppagephotos-fpass {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    text-decoration: underline;
+    margin: 5px 0;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.signuppagephotos-fpass:hover {
+    font-weight: 600;
+}
+
+
+
+.signuppagephotos-carts-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-end;
+    margin: 0 3vw 4vh auto;
+}
+
+.signuppagephotos-carts-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    margin: 5px 0;
+    align-self: center;
+    max-width: 350px;
+    margin-bottom: 5vh;
+}
+
+
+.signuppagephotos-carts {
+    width: 35vw;
+}
+
+
+.signuppagephotos-tags {
+    display: flex;
+    width: 400px;
+    max-height: 100px;
+    flex-wrap: wrap;
+    gap: 5px;
+    overflow-y: auto;
+}
+
+
+@media screen and (max-width: 900px) {
+    .signuppagephotos-c {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: static;
+        width: 90%;
+        padding: 50px 0;
+        align-self: center;
+    }
+
+    .signup-photos-c {
+        width: 100%;
+    }
+    
+    .signuppagephotos-title {
+        font-size: 35px;
+    }
+
+    .signuppagephotos-title-pink {
+        font-size: 40px;
+    }
+
+    .signuppagephotos-description {
+        white-space: normal;
+    }
+
+    .signuppagephotos-input-c {
+        width: 100%;
+        min-width: 250px;
+        max-width: 400px;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .signuppagephotos-title {
+        font-size: 7vw;
+    }
+
+    .signuppagephotos-title-pink {
+        font-size: 8vw;
+    }
+
+    .signuppagephotos-description {
+        font-size: 3vw;
+        white-space: normal;
+    }
+
+    .signuppagephotos-fpass,
+    .signuppagephotos-fpass-raw {
+        font-size: 3vw;
+    }
+
+    .signuppagephotos-error {
+        font-size: 4vw;
+    }
+
+}

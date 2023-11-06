@@ -1,0 +1,68 @@
+.buttonborder {
+    border: 1px solid white;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 35px;
+    background-color: unset;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttonborder:hover {
+    background-color: #4A4E69;
+}
+
+.buttonborder:active {
+    background-color: unset;
+}
+
+.buttonborder-title {
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: white;
+}
+
+
+.buttonbordermenu {
+    border: none;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 35px;
+    background-color: unset;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttonbordermenu:hover {
+    border: 1px solid white;
+}
+
+.btnborder-menu {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--red);
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    border: 3px solid var(--blue1);
+}
+
+
+@media screen and (max-width: 400px) {
+    .buttonbordermenu, .buttonborder {
+        width: auto;
+        padding: 5px 10px;
+    }
+    
+    .buttonborder-title {
+        font-size: 4vw;
+    }
+}

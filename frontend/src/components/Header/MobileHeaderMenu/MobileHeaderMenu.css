@@ -1,0 +1,33 @@
+.mobileheadermenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.mobileheadermenu-button {
+    position: relative;
+}
+
+.mobileheader-menu {
+    width: 90px;
+    background-color: var(--purple2);
+    position: absolute;
+    border-radius: 5px;
+    z-index: 2;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.mobileheader-menu>p {
+    margin: 0;
+    flex: 1;
+    padding: 7px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+}
+
+.mobileheader-menu>p:hover {
+    background-color: grey;
+}

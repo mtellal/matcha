@@ -1,0 +1,54 @@
+.inputicon {
+    width: 96%;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #13182D;
+    padding: 0 2%;
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+    justify-content: space-between;
+}
+
+.inputicon-input {
+    height: 100%;
+    width: 100%;
+    caret-color: white;
+    color: white;
+    color: rgba(255, 255, 255);
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    background-color: unset;
+}
+
+.inputicon-input::placeholder {
+    color: rgba(255, 255, 255);
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+
+.inputicon-input[type=password]:not(:placeholder-shown)
+{
+    letter-spacing: 3px;
+}
+
+.inputicon-icon {
+    height: 80%;
+}
+
+
+@media screen and (max-width: 400px) {
+
+    .inputicon {
+        height: 50px;
+    }
+    
+    .inputicon-input, .inputicon-input::placeholder {
+        font-size: 12px;
+    }
+}

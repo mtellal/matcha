@@ -1,0 +1,152 @@
+.signinpage-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    padding-top: 10vh;
+}
+
+.signinpage-title-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signinpage-title-pink {
+    color: #FFB2D7;
+    font-size: 50px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    padding-left: 10px;
+    align-self: flex-start;
+}
+
+.signinpage-title {
+    margin: 0;
+    color: white;
+    font-size: 45px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.signinpage-description {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.signinpage-input-c {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5vh;
+    width: 400px;
+}
+
+.signinpage-pass {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.signinpage-fpass-raw {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    margin: 5px 0;
+    align-self: flex-end;
+}
+
+.signinpage-fpass {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    text-decoration: underline;
+    margin: 5px 0;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.signinpage-fpass:hover {
+    font-weight: 600;
+}
+
+
+
+.signinpage-carts-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-end;
+    margin: 0 3vw 4vh auto;
+}
+
+.signinpage-carts-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    margin: 5px 0;
+    align-self: center;
+    max-width: 350px;
+    margin-bottom: 5vh;
+}
+
+
+.signinpage-carts {
+    width: 35vw;
+}
+
+
+@media screen and (max-width: 900px) {
+
+    .signinpage-c {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: static;
+        width: 90%;
+        padding: 50px 0;
+        align-self: center;
+    }
+
+    .signinpage-title {
+        font-size: 35px;
+    }
+
+    .signinpage-title-pink {
+        font-size: 40px;
+    }
+
+    .signinpage-input-c {
+        width: 100%;
+        min-width: 250px;
+        max-width: 400px;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .signinpage-title {
+        font-size: 7vw;
+    }
+
+    .signinpage-title-pink {
+        font-size: 8vw;
+    }
+
+    .signinpage-description {
+        font-size: 3vw;
+        white-space: normal;
+    }
+
+    .signinpage-fpass, .signinpage-fpass-raw {
+        font-size: 3vw;
+    }
+    
+
+}

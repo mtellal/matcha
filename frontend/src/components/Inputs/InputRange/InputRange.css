@@ -1,0 +1,35 @@
+.inputrange {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+
+/***** Track Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--blue1);
+    border: 1px solid white;
+    border-radius: 5px;
+    height: 0.5rem;
+}
+
+/***** Thumb Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -8px; /* Centers thumb on the track */
+    background-color: var(--purple2);
+    height: 1.5rem;
+    width: 1.5rem;    
+    border: 1px solid white;
+    border-radius: 50%;
+ }

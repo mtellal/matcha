@@ -1,0 +1,30 @@
+.chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    min-height: 400px;
+}
+
+.chat-c {
+    height: 80%;
+    width: 60%;
+    min-width: 800px;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: flex;
+}
+
+.chatmessenger {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    .chat-c {
+        flex-direction: column;
+        width: 80%;
+        min-width: 200px;
+    }
+}

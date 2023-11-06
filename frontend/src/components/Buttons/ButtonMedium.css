@@ -1,0 +1,28 @@
+.buttonmedium {
+    background-color: white;
+    width: 130px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px 1px rgba(255, 255, 255, 0.5);
+    border: none;
+}
+
+.buttonmedium:hover {
+    background-color: rgb(218, 218, 218);
+}
+
+.buttonmedium:active {
+    background-color: white;
+}
+
+.buttonmedium-title
+{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #4A4E69;
+}

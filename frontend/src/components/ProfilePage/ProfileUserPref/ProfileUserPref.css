@@ -1,0 +1,44 @@
+
+.profileuserpref-informations {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profileuserpref-informations-editicon {
+    position: absolute;
+    top: -35px;
+    left: -35px;
+    height: 40px;
+    width: 40px;
+    aspect-ratio: 1 / 1;
+}
+
+.profileuserpref-tags {
+    display: flex;
+    width: 400px;
+    max-height: 100px;
+    flex-wrap: wrap;
+    gap: 5px;
+    overflow-y: auto;
+}
+
+
+@media screen and (max-width:700px) {
+    .profileuserpref-infos {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 5vh;
+        gap: 2vh;
+        width: 80vw;
+    }
+
+    .profileuserpref-informations-editicon {
+        top: -25px;
+        left: -25px;
+        height: 30px;
+        width: 30px;
+    }
+
+
+}

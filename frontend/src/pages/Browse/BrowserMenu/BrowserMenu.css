@@ -1,0 +1,6 @@
+.browsermenu {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    padding: 0 2vh;
+}

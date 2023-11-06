@@ -1,0 +1,45 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "createUser": "node ./scripts/generateUsers.js",
+    "testBackend": "npm run createUser 25 && node ./scripts/test.js --nodelete",
+    "start": "nodemon --watch src -e js,ts,json --exec \"ts-node src/app.ts\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.5",
+    "axios": "^1.4.0",
+    "jwt-decode": "^3.1.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@types/formidable": "^3.4.0",
+    "bcrypt": "^5.1.0",
+    "busboy": "^1.6.0",
+    "cors": "^2.8.5",
+    "date-fns": "^2.30.0",
+    "express": "^4.18.2",
+    "form-data-encoder": "^3.0.0",
+    "formdata-node": "^4.4.1",
+    "formidable": "^3.5.0",
+    "jsonwebtoken": "^9.0.1",
+    "mariadb": "^3.2.0",
+    "multer": "^1.4.5-lts.1",
+    "node-geocoder": "^4.2.0",
+    "nodemailer": "^6.9.4",
+    "sharp": "^0.32.4",
+    "socket.io": "^4.7.2"
+  }
+}

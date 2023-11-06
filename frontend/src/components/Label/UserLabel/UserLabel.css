@@ -1,0 +1,130 @@
+.userlabel {
+    display: flex;
+    gap: 5px;
+    height: 60px;
+    background-color: var(--purple2);
+    border-bottom: 1px solid white;
+    cursor: pointer;
+    padding: 0 2%;
+    width: 96%;
+    align-items: center;
+}
+
+.userlabel:hover {
+    background-color: var(--purple4);
+}
+
+.userlabel-pp-c {
+    height: 60px;
+    width: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.userlabel-status {
+    background-color: var(--green);
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    border: 3px solid var(--purple2);
+}
+
+.userlabel-infos {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    padding-left: 3px;
+    overflow: hidden;
+}
+
+.userlabel-infos>p {
+    margin: 0;
+}
+
+.userlabel-infos-username {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+}
+
+.userlabel-infos-msg {
+    flex: 1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    padding-left: 5px;
+}
+
+
+.usrlabel-usrinfos {
+    display: flex;
+    gap: 5px;
+    max-width: 100%;
+    flex: 1.5;
+    align-items: center;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+.usrlabel-usrinfos>p {
+    height: 100%;
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.usrlabel-font-18 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.usrlabel-font-16 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+
+@media screen and (max-width: 900px) {
+    
+    .userlabel-infos-username {
+        font-size: min(18px, 4vw);
+    }
+
+    .userlabel-infos-msg{
+        font-size: min(12px, 3vw);
+    }
+
+    .usrlabel-font-18 {
+        font-size: min(18px, 4vw);
+    }
+
+    .usrlabel-font-16 {
+        font-size: min(16px, 3vw);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .userlabel {
+        height: 50px;
+    }
+
+    .userlabel-pp-c {
+        height: 40px;
+        width: 40px;
+    }
+}

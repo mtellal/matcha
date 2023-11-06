@@ -1,0 +1,30 @@
+.inputsmall-c {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputsmall {
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    background-color: #13182D;
+    padding: 0 5px;
+
+
+    caret-color: white;
+    color: white;
+    color: rgba(255, 255, 255);
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    outline: none;
+}
+
+
+.inputsmall::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
