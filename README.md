@@ -19,7 +19,7 @@ of other users, and show interest in them with a “like”, chat with those tha
   - LocationIq api key `LOCATIONIQ_API_KEY=`
     
     If you can't or don't want to set these variables :
-    - You can bypass the mail verification by making a `/user/signup?fakeUser=true` request (ex `curl` or `postman`), this'll create an user without mail verification, then you can signin normally
+    - You can bypass the mail verification by making a `/user/signup?fakeUser=true` request (ex `curl` or `postman`), this'll create an user and return an access_token, set a cookie `access_token` with this token and go to `/profile`
     - You can let empty the locationiq but the automatic location detection will fail
       
 - Run `docker compose up --build`
