@@ -25,9 +25,10 @@ of other users, and show interest in them with a “like”, chat with those tha
 - Run `docker compose up --build`
 - Connect to `localhost:8080`
 
-You can generate fake users:
-- Go to the backend foler and run `npm run createUser`
-- Backend api test (you can see tests with `npm run testBackend`) 
+Scripts
+- go to the backend folder
+- Generate fake users: `npm run createUser`
+- Backend api test `npm run testBackend` 
  
 ### Frontend 
 
