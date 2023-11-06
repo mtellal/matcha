@@ -1,0 +1,43 @@
+.headermenu-bell {
+    height: 30px;
+    width: 30px;
+    margin-right: 1vw;    
+}
+
+.header-notif-menu {
+    height: 130px;
+    width: 200px;
+    background-color: var(--purple2);
+    position: absolute;
+    right: 0;
+    border-radius: 5px;
+    overflow-y: auto;
+    z-index: 2;
+}
+
+.header-notif {
+    padding: 15px;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.header-notif:hover {
+    background-color: var(--purple4);
+}
+
+.header-0notif {    
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 400px) {
+    .headermenu-bell {
+        height: 8vw;
+        width: 8vw;
+    }
+}

@@ -1,0 +1,77 @@
+
+.profileinfos {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profileinfos-name-c {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.profileinfos-name {
+    margin: 0;
+    font-size: 24px;
+    font-family: 'Open Sans' sans-serif;
+    font-weight: 600;
+    color: white;
+}
+
+.profileinfos-infos {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profileinfos-infos > p {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Open Sans' sans-serif;
+    font-weight: 400;
+    color: white;
+}
+
+.profileinfos-infos-icon {
+    height: 20px;
+    width: 20px
+}
+
+.profileinfos-infos-icon-status {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: var(--red);
+    margin-right: 5px;
+}
+
+
+.pinfos-menu-countries {
+    position: absolute;
+    z-index: 2;
+    background-color: var(--purple3);
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    color: white;
+    width: 100%;
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.pinfos-menu-countries > p {
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+    text-align: start;
+}
+
+.pinfos-menu-countries > p:hover {
+    background-color: var(--purple4);
+    width: 100%;
+
+}

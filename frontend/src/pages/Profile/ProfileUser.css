@@ -1,0 +1,70 @@
+.profileuser {
+    display: flex;
+    width: 90%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    padding: 5%;
+}
+
+.profileuser-c1 {
+    overflow-y: visible;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileuser-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+    width: 60vw;
+    height: auto;
+    padding: 5vh 0;
+    overflow: visible;
+}
+
+.profileuser-infos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10vh;
+    padding: 0 10px;
+}
+
+
+.profileuser-biolabel {
+    width: 30vw;
+}
+
+@media screen and (max-width: 1400px) {
+
+    .profileuser {
+        flex-direction: column;
+        justify-content: unset;
+    }
+
+    .profileuser-c1 {
+        flex: 1;
+        overflow: visible;
+    }    
+
+    .profileuser-infos {
+        flex: unset;
+        min-width: 60%;
+        align-self: center;
+    }
+
+    .profileuser-biolabel {
+        min-width: 150px;
+        width: auto;
+        max-width: 700px;
+    }
+    
+}

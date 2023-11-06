@@ -1,0 +1,41 @@
+services:
+
+  frontend: 
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/usr/src/app
+    environment:
+      - PORT=${FRONT_PORT}
+      - REACT_APP_BACK_PORT=${BACK_PORT}
+      - REACT_APP_BACK_DOMAIN=${BACK_DOMAIN}
+    ports:
+      - ${FRONT_PORT}:${FRONT_PORT}
+
+  backend:
+    build:
+      context: ./backend
+    volumes: 
+      - ./backend:/usr/src/app
+    env_file:
+      - ./backend/.env
+      - .env
+    ports:
+      - ${BACK_PORT}:${BACK_PORT}
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+  mariadb:
+    build:
+      context: ./mariadb.config
+    restart: always
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    env_file:
+      - ./backend/.env
+    healthcheck:
+      test: "mariadb -u$$MARIADB_USER -p$$MARIADB_ROOT_PASSWORD -e 'SELECT 1;'"
+      interval: 2s
+      timeout: 5s
+      retries: 10

@@ -1,0 +1,134 @@
+.banner {
+    background-color: var(--purple2);
+    display: flex;
+    height: 70px;
+    align-items: center;
+    gap: 2%;
+    padding: 0 5px;
+}
+
+
+.banner-pp-c {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.banner-arrow-c {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.banner-arrowleft {
+    height: 30px;
+    rotate: calc(-180deg);
+}
+
+.banner-arrowleft:hover {
+    background-color: var(--purple1);
+}
+
+.banner-status {
+    background-color: var(--green);
+    border-radius: 50%;
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    bottom: 10px;
+    right: -5px;
+    border: 3px solid var(--purple2);
+}
+
+.banner-infos {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5px;
+}
+
+.banner-infos>p {
+    margin: 0;
+}
+
+.banner-infos-username {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+    color: white;
+}
+
+.banner-infos-msg {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.banner-infos-user {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.banner-infos-user>p {
+    margin: 0;
+}
+
+.banner-font-18 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.banner-font-16 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (max-width: 900px) {
+    .banner-infos-username {
+        font-size: min(21px, 3.2vw);
+    }
+
+    .banner-font-18 {
+        font-size: min(18px, 3vw);
+    }
+
+    .banner-font-16 {
+        font-size: min(16px, 2.5vw);
+    }
+
+    .banner-infos-msg {
+        font-size: min(14px, 2.2vw);
+    }
+}
+
+
+@media screen and (max-width: 400px) {
+
+    .banner {
+        height: 50px;
+    }
+    
+    .banner-arrow-c {
+        gap: 2vw
+    }
+
+    .banner-arrowleft {
+        height: 6vw;
+    }
+
+    .banner-status {
+        height: 9px;
+        width: 9px;
+    }
+
+}

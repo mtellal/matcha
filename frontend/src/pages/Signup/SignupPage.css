@@ -1,0 +1,152 @@
+.signuppage-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    padding-top: 5vh;
+}
+
+
+.signuppage-title-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signuppage-title-pink {
+    color: #FFB2D7;
+    font-size: 50px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    padding-left: 10px;
+    align-self: flex-start;
+}
+
+.signuppage-title {
+    margin: 0;
+    color: white;
+    font-size: 45px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.signuppage-description {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.signuppage-input-c {
+    width: 100%;
+    max-width: 400px;
+    padding-top: 4vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.signuppage-error {
+    margin: 0;
+    top: 0;
+    position: absolute;
+    color: var(--red);
+}
+
+.signuppage-fpass-raw {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    margin: 5px 0;
+    align-self: flex-end;
+}
+
+.signuppage-fpass {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    text-decoration: underline;
+    margin: 5px 0;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.signuppage-fpass:hover {
+    font-weight: 600;
+}
+
+.signuppage-intereststags {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.signuppage-intereststags-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+
+@media screen and (max-width: 900px) {
+    .signuppage-c {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: static;
+        width: 90%;
+        padding: 50px 0;
+        align-self: center;
+    }
+
+    .signuppage-title {
+        font-size: 35px;
+    }
+
+    .signuppage-title-pink {
+        font-size: 40px;
+    }
+
+    .signuppage-description {
+        white-space: normal;
+    }
+
+    .signuppage-input-c {
+        width: 100%;
+        min-width: 250px;
+        max-width: 400px;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .signuppage-title {
+        font-size: 7vw;
+    }
+
+    .signuppage-title-pink {
+        font-size: 8vw;
+    }
+
+    .signuppage-description {
+        font-size: 3vw;
+        white-space: normal;
+    }
+
+    .signuppage-fpass,
+    .signuppage-fpass-raw {
+        font-size: 3vw;
+    }
+
+    .signuppage-error {
+        font-size: 4vw;
+    }
+
+}

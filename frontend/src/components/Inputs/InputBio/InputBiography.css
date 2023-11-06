@@ -1,0 +1,24 @@
+#inputbio {
+    width: 96%;
+    height: 150px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: #13182D;
+    padding: 2%;
+
+    caret-color: white;
+    color: white;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    outline: none;
+    resize: none;
+}
+
+textarea::placeholder,
+#inputbio-input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}

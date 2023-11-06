@@ -1,0 +1,144 @@
+
+.signupinfos-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    padding-top: 5vh;
+    max-height: 87vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.signupinfos-title-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signupinfos-title-pink {
+    color: #FFB2D7;
+    font-size: 50px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    padding-left: 10px;
+    align-self: flex-start;
+}
+
+.signupinfos-title {
+    margin: 0;
+    color: white;
+    font-size: 45px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.signupinfos-description {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.signupinfos-input-c {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 400px;
+}
+
+.signupinfos-carts-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-end;
+    margin: 0 3vw 4vh auto;
+}
+
+.signupinfos-carts-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: white;
+    margin: 5px 0;
+    align-self: center;
+    max-width: 350px;
+    margin-bottom: 5vh;
+}
+
+
+.signupinfos-carts {
+    width: 35vw;
+}
+
+
+.signupinfos-button-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+@media screen and (max-width: 900px) {
+    .signupinfos-c {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: static;
+        width: 90%;
+        padding: 50px 0;
+        align-self: center;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .signupinfos-title {
+        font-size: 35px;
+    }
+
+    .signupinfos-title-pink {
+        font-size: 40px;
+    }
+
+    .signupinfos-description {
+        white-space: normal;
+    }
+
+    .signupinfos-input-c {
+        width: 100%;
+        min-width: 250px;
+        max-width: 400px;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .signupinfos-title {
+        font-size: 7vw;
+    }
+
+    .signupinfos-title-pink {
+        font-size: 8vw;
+    }
+
+    .signupinfos-description {
+        font-size: 3vw;
+        white-space: normal;
+    }
+
+    .signupinfos-fpass,
+    .signupinfos-fpass-raw {
+        font-size: 3vw;
+    }
+
+    .signupinfos-error {
+        font-size: 4vw;
+    }
+
+}

@@ -1,0 +1,25 @@
+.tags {
+    padding: 2px 0px 2px 5px;
+    background-color: #4A4E69;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.tag-text {
+    font-size: 14px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.tagspick:hover {
+    background-color: #9A8C98;
+}
+
+.tagspick {
+    padding: 5px;
+}

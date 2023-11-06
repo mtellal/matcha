@@ -1,0 +1,58 @@
+.biolabel {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+}
+
+.biolabel-nobio {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.biolabel-input {
+    margin: 0;
+    height: 200px;
+    width: 96%;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: #13182D;
+    padding: 2%;
+
+    caret-color: white;
+    color: white;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    text-align: start;
+    white-space: pre-wrap;
+    position: relative;
+}
+
+.biolabel-absolute-c {
+    display: flex;
+    position: absolute;
+    top: 0px;
+    right: -20px;
+}
+
+.biolabel-editicon {
+    padding: 5px;
+    background-color: var(--blue3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    aspect-ratio: 1 / 1;
+}
+
+
+@media screen and (max-width: 700px) {
+    .biolabel-editicon {
+        height: 30px;
+        width: 30px;
+    }
+}

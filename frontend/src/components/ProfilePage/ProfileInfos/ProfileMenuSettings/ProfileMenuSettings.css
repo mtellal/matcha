@@ -1,0 +1,26 @@
+
+.profilemenusettings-menu {
+    width: 80px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: #4A4E69;
+    margin: 0;
+    overflow: hidden;
+}
+
+.profilemenusettings-menu > p {
+    margin: 0;
+    color:white;
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    flex: 1;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.profilemenusettings-menu > p:hover {
+    background-color: #9A8C98;
+}

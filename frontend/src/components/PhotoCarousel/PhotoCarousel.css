@@ -1,0 +1,109 @@
+
+.photocarousel {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    gap: 2%;
+    height: 100%;
+    width: 100%; 
+    aspect-ratio: 2 / 1;
+    max-height: 450px;
+    max-width: 800px;
+}
+
+.photocarousel-c2 {
+    height: 80%;
+    width: 28%;
+    position: relative;
+    display: flex;
+    aspect-ratio: 1 / 2;
+}
+
+.photocarousel-i2 {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+} 
+
+.photocarousel-shadow-left {
+    background: linear-gradient(90deg, #1A1F35 23.43%, rgba(26, 31, 53, 0.75) 54.64%, rgba(26, 31, 53, 0.00) 100%);
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photocarousel-shadow-right {
+    background: linear-gradient(-90deg, #1A1F35 23.43%, rgba(26, 31, 53, 0.75) 54.64%, rgba(26, 31, 53, 0.00) 100%);
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photocarousel-c1-c {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    width:40%;
+    min-width: 200px;
+}
+
+.photocarousel-c1 {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
+}
+
+.photocarousel-heart1 {
+    position: absolute;
+    bottom: -20px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    padding: 5px;
+    right:-20px;
+    height: 40px;
+    width: 40px;
+    background-color: #1A1F35;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.photocarousel-heart1:hover {
+    background-color: #4A4E69;
+}
+
+.photocarousel-heart2 {
+    position: absolute;
+    height: 10%;
+    width: 15%;
+    bottom: 0;
+    left: 0;
+}
+
+.photocarousel-like-text {
+    margin: 0;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+
+}
+
+@media screen and (max-width:700px) {
+    .photocarousel-heart1 {
+        height: 30px;
+        width: 30px;
+    }
+}

@@ -1,0 +1,53 @@
+.chatmenu {
+    flex: 3;
+    max-width: 30%;
+    background-color: var(--purple1);
+    border-radius: 5px 0 0 5px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid white;
+    overflow: hidden;
+}
+
+.chatmenu-title {
+    display: flex;
+    align-items: center;
+    height: 70px;    
+    padding: 0 10px;
+}
+
+.chatmenu-title>h1 {
+    text-align: start;
+    font-size: 24px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.chatmenu-search-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10% 20%;
+}
+
+.chatmenu-conversation-c {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.chatmenu-users {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    .chatmenu {
+        width: 100%;
+        max-width: none;
+    }
+    
+}

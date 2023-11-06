@@ -1,0 +1,39 @@
+.buttonlarge {
+    width: 200px;
+    height: 60px;
+    background-color: #4A4E69;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+}
+
+.buttonlarge:hover {
+    background-color: #5e6280;
+}
+
+.buttonlarge:active {
+    background-color: #4A4E69;
+}
+
+.buttonlarge-title
+{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: white;
+}
+
+
+@media screen and (max-width: 400px) {
+    .buttonlarge {
+        height: 40px;
+        width: 60%;
+    }
+
+    .buttonlarge-title {
+        font-size: 14px;
+    }
+}
