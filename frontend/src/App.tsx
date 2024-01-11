@@ -13,7 +13,7 @@ import NotificationsProvider from './contexts/NotificationsProvider';
 
 
 import loveIllustration from './assets/loveIllustration1.jpg'
-import cartsUsers from './assets/cartsUsers.svg'
+import cartsUsers from './assets/carts_users.png'
 
 import './pages/Singin/SigninPage.css'
 import { User } from './types';
