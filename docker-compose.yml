@@ -7,8 +7,8 @@ services:
       - ./frontend:/usr/src/app
     environment:
       - PORT=${FRONT_PORT}
-      - REACT_APP_BACK_PORT=${BACK_PORT}
-      - REACT_APP_BACK_DOMAIN=${BACK_DOMAIN}
+      - REACT_APP_BACK_PORT=443
+      - REACT_APP_BACK_DOMAIN=matcha.mezyann.fr
     ports:
       - ${FRONT_PORT}:${FRONT_PORT}
 
@@ -17,11 +17,10 @@ services:
       context: ./backend
     volumes: 
       - ./backend:/usr/src/app
+    ports:
+      - 3000:3000
     env_file:
       - ./backend/.env
-      - .env
-    ports:
-      - ${BACK_PORT}:${BACK_PORT}
     depends_on:
       mariadb:
         condition: service_healthy
