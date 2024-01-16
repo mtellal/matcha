@@ -66,6 +66,18 @@
 }
 
 
+.header-credits {
+    margin-left: auto;
+    color: white;
+    padding: 0 10px;
+    font-size: small;
+    align-self: center;
+}
+
+.header-credits > a {
+    color: white;
+}
+
 @media screen and (max-width: 900px) {
     .header-c2-username {
         display: none;
