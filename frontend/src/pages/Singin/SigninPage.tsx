@@ -1,4 +1,5 @@
 import './SigninPage.css'
+import '../../generic.css'
 import Input from '../../components/Inputs/Input/Input';
 import { useEffect, useState } from 'react';
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
@@ -51,16 +52,14 @@ export default function SigninPage() {
     }
 
     return (
-        <div className="signinpage-c" >
-            <div className="signinpage-title-c">
-                <p className='signinpage-title'>Log into Your</p>
-                <span className='signinpage-title-pink'>Account</span>
-            </div>
-            <p className='signinpage-description'>Authenticate yourself and get access to 2000+ profiles.</p>
+        <div className="c" >
+            <h1 className='c-title'>Log into Your
+                <span className='c-title-pink'>Account</span></h1>
+            <p className='c-description'>Authenticate yourself and get access to 2000+ profiles.</p>
 
-            {error && <p style={{ color: 'var(--red)', margin: '10px 0' }}>{error}</p>}
-            {message && <p style={{ color: 'var(--green)' }}>{message}</p>}
-            <div className='signinpage-input-c' style={{ position: 'relative' }}>
+            <div className='c-input-c'>
+                {error && <p className='c-error-msg'>{error}</p>}
+                {message && <p className='c-success-msg'>{message}</p>}
                 <Input
                     id='singin-username'
                     placeholder='Username'
@@ -81,17 +80,19 @@ export default function SigninPage() {
                         onSubmit={onSignin}
                         onChange={() => setError("")}
                     />
-                    <p onClick={() => navigate("/signin/password")} className='signinpage-fpass'>Forgot your password ? </p>
+                    <p
+                        onClick={() => navigate("/signin/password")}
+                        className='cb-text-underline'>Forgot your password ? </p>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div className='c-button'>
                     <ButtonLarge
                         title="Signin"
                         style={{ marginTop: '2vh' }}
                         onClick={onSignin}
                     />
-                    <div style={{ display: 'flex', marginTop: '5px' }}>
-                        <p className='signinpage-fpass-raw'>Don't have an account ?</p>
-                        <p onClick={() => navigate("/signup")} className='signinpage-fpass' style={{ paddingLeft: '5px' }}>Register here</p>
+                    <div className='cb-text-c'>
+                        <p className='cb-text'>Don't have an account ?</p>
+                        <p onClick={() => navigate("/signup")} className='cb-text-underline'>Register here</p>
                     </div>
                 </div>
             </div>

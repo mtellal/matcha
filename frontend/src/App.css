@@ -1,8 +1,34 @@
+:root {
+    --font-xl: 3em;
+    --font-m: 2.7em;
+    --font-xs: 2.5em;
+    --font-900: 2.2em;
+    --font-800: 2em;
+    --font-700: 1.8em;
+    --font-600: 1.5em;
+    --font-500: 1.2em;
+    --font-400: clamp(14px, 1vw, 2em);
+
+  --background-color: #20253a;
+
+}
+
+
+h1, 
+h2,
+h3,
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: var(--font-400);
+}
+
+
 .App {
   text-align: center;
   margin: 0;
   padding: 0;
-  background-color: #1A1F35;
+  background-color: #20253a;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -47,7 +73,7 @@
 
 .app-carts-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
+  font-size: var(--font-400);
   color: white;
   margin: 5px 0;
   align-self: center;
@@ -110,9 +136,6 @@
 }
 
 @media screen and (max-width: 400px) {
-  .app-carts-text {
-    font-size: 0.6em;
-  }
 
   .app-carts {
     min-width: 200px;

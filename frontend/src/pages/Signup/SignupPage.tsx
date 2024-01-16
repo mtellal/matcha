@@ -1,5 +1,6 @@
 
 import './SignupPage.css'
+import '../../generic.css'
 import Input from '../../components/Inputs/Input/Input';
 import { MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
@@ -70,14 +71,13 @@ export function SignupPageForm() {
     }
 
     return (
-        <div className="signuppage-c">
-            <div className="signuppage-title-c">
-                <p className='signuppage-title'> Create your </p>
-                <span className='signuppage-title-pink'>Account</span>
-            </div>
-            <p className='signuppage-description'>Hey, are you new ? Register your information to create an account and access profiles !</p>
-            <div className='signuppage-input-c' style={{ position: 'relative' }}>
-                {error && <p className='signuppage-error' style={{ margin: '0', top: '0', position: 'absolute', color: 'var(--red)' }}>{error}</p>}
+        <div className="c">
+                <p className='c-title'> Create your 
+                <span className='c-title-pink'>Account</span>
+                </p>
+            <p className='c-description'>Hey, are you new ? Register your information to create an account and access profiles !</p>
+            <div className='c-input-c' style={{ gap: '20px' }}>
+                {error && <p className='c-error-msg'>{error}</p>}
                 <Input
                     id='signup-email'
                     placeholder='Email'
@@ -125,14 +125,14 @@ export function SignupPageForm() {
                     maxLength={40}
                 />
 
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div className='c-button'>
                     <ButtonWrapper onClick={onSignup} >
                         <h1 className='buttonlarge-title'>Continue</h1>
                         <img src={arrowRightIcon} style={{ marginLeft: '15px' }} />
                     </ButtonWrapper>
-                    <div style={{ display: 'flex', marginTop: '5px' }}>
-                        <p className='signuppage-fpass-raw'>Have an account ?</p>
-                        <p onClick={() => navigate("/signin")} className='signuppage-fpass' style={{ paddingLeft: '5px' }}>Authenticate here</p>
+                    <div className='cb-text-c'>
+                        <p className='cb-text'>Have an account ?</p>
+                        <p onClick={() => navigate("/signin")} className='cb-text-underline'>Authenticate here</p>
                     </div>
                 </div>
             </div>

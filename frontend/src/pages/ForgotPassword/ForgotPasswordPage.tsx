@@ -1,8 +1,5 @@
 
-import loveIllustration from '../../assets/loveIllustration1.jpg'
-import cartsUsers from '../../assets/cartsUsers.svg'
-
-import './ForgotPasswordPage.css'
+import '../../generic.css'
 import Input from '../../components/Inputs/Input/Input';
 import { useState } from 'react';
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
@@ -28,17 +25,14 @@ export default function ForgotPasswordPage() {
     }
 
     return (
-        <div className="frgtpassword-c" >
-            <div className="frgtpassword-title-c">
-                <p className='frgtpassword-title'>Reset your</p>
-                <span className='frgtpassword-title-pink'>Password</span>
-            </div>
-            <p className='frgtpassword-description'>Forgot your password ? No worries, we'll send you reset instructions.</p>
+        <div className="c" >
+            <p className='c-title'>Reset your
+                <span className='c-title-pink'>Password</span></p>
+            <p className='c-description'>Forgot your password ? No worries, we'll send you reset instructions.</p>
 
-            <div className='frgtpassword-input-c' style={{ position: 'relative' }}>
-                {error && <p style={{ margin: '0', position: 'absolute', top: '-5vh', color: 'var(--red)' }}>{error}</p>}
-                {success && <p style={{ margin: '0', position: 'absolute', top: '-5vh', color: 'var(--green)' }}>{success}</p>}
-
+            <div className='c-input-c'>
+                {error && <p className='c-error-msg'>{error}</p>}
+                {success && <p className='c-success-msg'>{success}</p>}
                 <Input
                     id='forgetpass-firstname'
                     placeholder='Email'
@@ -48,15 +42,15 @@ export default function ForgotPasswordPage() {
                     onSubmit={onSubmit}
                 />
 
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div className='c-button'>
                     <ButtonLarge
                         title="Send"
                         style={{ marginTop: '2vh' }}
                         onClick={onSubmit}
                     />
-                    <div style={{ display: 'flex', marginTop: '5px' }}>
-                        <p className='frgtpassword-fpass-raw'>Have an account ?</p>
-                        <p onClick={() => navigate("/signin")} className='frgtpassword-fpass' style={{ paddingLeft: '5px' }}>Authenticate here</p>
+                    <div className='cb-text-c'>
+                        <p className='cb-text'>Have an account ?</p>
+                        <p onClick={() => navigate("/signin")} className='cb-text-underline' >Authenticate here</p>
                     </div>
                 </div>
             </div>

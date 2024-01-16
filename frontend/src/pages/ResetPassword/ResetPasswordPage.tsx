@@ -1,5 +1,5 @@
 
-import './ResetPasswordPage.css'
+import '../../generic.css'
 import { useEffect, useState } from 'react';
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 import { useNavigate } from 'react-router';
@@ -68,20 +68,16 @@ export default function ResetPasswordPage() {
         setSuccess("");
     }
 
-
     return (
-        <div className="resetpage-c" >
-            <div className="resetpage-title-c">
-                <p className='resetpage-title'>
-                    Reset your
-                </p>
-                <span className='resetpage-title-pink'>Password</span>
-            </div>
-            <p className='resetpage-description'>Set a new password to your account. We recommand you to choose a strong password with at least 8 characters with letters, numbers and special charachters.</p>
+        <div className="c" >
+            <p className='c-title'>
+                Reset your<span className='c-title-pink'>Password</span>
+            </p>
+            <p className='c-description'>Set a new password to your account. We recommand you to choose a strong password with at least 8 characters with letters, numbers and special charachters.</p>
 
-            <div className='resetpage-input-c' style={{ position: 'relative' }}>
-                {error && <p style={{ margin: '0', position: 'absolute', top: '-5vh', color: 'var(--red)' }}>{error}</p>}
-                {success && <p style={{ margin: '0', position: 'absolute', top: '-5vh', color: 'var(--green)' }}>{success}</p>}
+            <div className='c-input-c'>
+                {error && <p className='c-error-msg'>{error}</p>}
+                {success && <p className='c-success-msg'>{success}</p>}
 
                 <InputIconPassword
                     id='reset-newpass'
@@ -105,15 +101,15 @@ export default function ResetPasswordPage() {
                     onChange={resetInfo}
                 />
 
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div className='c-button'>
                     <ButtonLarge
                         title="Reset"
                         style={{ marginTop: '2vh' }}
                         onClick={onSubmit}
                     />
-                    <div style={{ display: 'flex', marginTop: '5px' }}>
-                        <p className='resetpage-fpass-raw'>Have an account ?</p>
-                        <p onClick={() => navigate("/signin")} className='resetpage-fpass' style={{ paddingLeft: '5px' }}>Authenticate here</p>
+                    <div className='cb-text-c'>
+                        <p className='cb-text'>Have an account ?</p>
+                        <p onClick={() => navigate("/signin")} className='cb-text-underline'>Authenticate here</p>
                     </div>
                 </div>
             </div>

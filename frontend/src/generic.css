@@ -1,0 +1,127 @@
+.c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    padding-top: 10vh;
+}
+
+.c-title-pink {
+    color: #FFB2D7;
+    font-size: var(--font-500);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    padding-left: 5px;
+}
+
+.c-title {
+    margin: 0;
+    color: white;
+    font-size: var(--font-xs);
+    font-weight: 600;
+    text-shadow: 0 0 10px var(--background-color);
+
+}
+
+.c-description {
+    margin-top: 10px;
+    color: white;
+    font-size: var(--font-400);
+    font-weight: 500;
+    white-space: nowrap;
+    text-shadow: 2px 0 var(--background-color),
+    -2px 0 var(--background-color), 
+    0 2px var(--background-color),
+    0 -2px var(--background-color),
+    1px 1px var(--background-color), 
+    -1px -1px var(--background-color), 
+    1px -1px var(--background-color), 
+    -1px 1px var(--background-color);
+}
+
+.c-succes-msg, 
+.c-error-msg {
+    margin: 0;
+    position: absolute;
+    top: 0px;
+}
+
+.c-succes-msg {
+    color: var(--green)
+}
+
+.c-error-msg {
+    color: var(--red)
+}
+
+
+.c-input-c {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5vh;
+    width: 400px;
+    padding-top: 40px;
+}
+
+.c-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.cb-text-c {
+    display: flex;
+    margin-top: 5px;
+}
+
+.cb-text {
+    font-size: var(--font-400);
+    color: white;
+    margin: 5px 0;
+    align-self: flex-end;
+}
+
+.cb-text-underline {
+    font-size: var(--font-400);
+    color: white;
+    text-decoration: underline;
+    margin: 5px 0;
+    align-self: flex-end;
+    cursor: pointer;
+    padding-left: 5px;
+}
+
+.cb-text-underline:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (max-width: 900px) {
+
+    .c {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: static;
+        width: 90%;
+        padding: 50px 0;
+        align-self: center;
+    }
+
+    .c-input-c {
+        width: 100%;
+        min-width: 250px;
+        max-width: 400px;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+
+    .c-description {
+        white-space: normal;
+    }
+
+}

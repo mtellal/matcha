@@ -14,28 +14,27 @@
     justify-content: center;
 }
 
+
 .homepage-title-pink {
     color: #FFB2D7;
-    font-size: 50px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-xl);
     font-weight: 600;
     padding-right: 10px;
     align-self: flex-start;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .homepage-title {
     margin: 0;
     color: white;
-    font-size: 45px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-xs);
     font-weight: 600;
+    align-self: flex-end;
 }
 
 .homepage-description {
     margin-top: 10px;
     color: white;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
 }
 
@@ -68,4 +67,5 @@
         position: static;
         width: 90%;
     }
+
 }

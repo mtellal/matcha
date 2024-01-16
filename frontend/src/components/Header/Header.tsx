@@ -21,6 +21,8 @@ export default function Header() {
                 <img className="header-logo" src={heart} />
                 <h2 className="header-name" onClick={handleClick}>Matcha</h2>
             </div>
-        </header>
+	            <p className="header-credits"> made by <a href='https://mezyann.fr'>Mezyann Tellal</a> </p>
+        
+</header>
     )
 }

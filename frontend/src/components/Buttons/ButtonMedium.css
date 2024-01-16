@@ -23,6 +23,6 @@
 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    font-size: 24px;
+    font-size: var(--font-700);
     color: #4A4E69;
 }
