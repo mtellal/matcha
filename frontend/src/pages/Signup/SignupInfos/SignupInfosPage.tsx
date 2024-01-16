@@ -1,5 +1,6 @@
 
 import './SignupInfosPage.css'
+import '../../../generic.css'
 import { useCallback, useEffect, useState } from 'react';
 import PickMenu from '../../../components/Picker/PickMenu/PickMenu';
 import InputBiography from '../../../components/Inputs/InputBio/InputBiography';
@@ -20,6 +21,7 @@ import InputInterestsTags from './InputInterestsTags/InputInterestsTags';
 import { City } from '../../../types';
 import { ConfirmPage } from '../SignupPage';
 import { AxiosError, AxiosResponse, formToJSON } from 'axios';
+import { ButtonLarge } from '../../../components/Buttons/ButtonLarge';
 
 export type TForm = {
     age: string,
@@ -49,7 +51,7 @@ function InputGeolocation({ city, setCity, onSubmit }: InputGeolocationProps) {
 
 
     return (
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative', width: '100%' }}>
             <InputLabelIcon
                 icon={pinIcon}
                 label='Location'
@@ -95,7 +97,7 @@ export default function SignupInfosPage() {
         let finalForm: any = {};
         if (form.age)
             finalForm.age = form.age
-        
+
         console.log(form.city)
         if (form.city.name || form.city)
             finalForm.city = form.city
@@ -143,14 +145,13 @@ export default function SignupInfosPage() {
     }
 
     return (
-        <div className="signupinfos-c">
-            <div className="signupinfos-title-c">
-                <p className='signupinfos-title'> Tell us more about </p>
-                <span className='signupinfos-title-pink'>You</span>
-            </div>
-            <p className='signupinfos-description'>To uncover the most relevant profiles, we require additional details about you.</p>
-            <div className='signupinfos-input-c'>
-                {error && <p className='signupinfos-error error-msg'>{error}</p>}
+        <div className="c" style={{paddingBottom: '5vh'}}>
+            <p className='c-title'> Tell us more about
+                <span className='c-title-pink'>You</span>
+            </p>
+            <p className='c-description'>To uncover the most relevant profiles, we require additional details about you.</p>
+            <div className='c-input-c' style={{ gap: '20px' }}>
+                {error && <p className='c-error-msg'>{error}</p>}
 
                 <InputLabel
                     label='Age'
@@ -195,16 +196,16 @@ export default function SignupInfosPage() {
                     setForm={setForm}
                 />
 
-                <div className='signupinfos-button-c'>
-                    <ButtonWrapper onClick={onSubmit}>
-                        <h1 className='buttonlarge-title'>Continue</h1>
-                        <img src={arroRightIcon} style={{ marginLeft: '15px' }} />
-                    </ButtonWrapper>
+                <div className='c-button'>
+                    <ButtonLarge
+                        title="Continue"
+                        onClick={onSubmit}
+                    />
                     <p
-                        className='underline-14' style={{ marginTop: '3px' }}
+                        className='cb-text-underline' style={{ marginTop: '3px' }}
                         onClick={() => navigate("/profile")}
                     >
-                        Set this informations later
+                        Set these informations later
                     </p>
                 </div>
             </div>

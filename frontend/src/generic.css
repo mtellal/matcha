@@ -5,6 +5,7 @@
     position: absolute;
     width: 100%;
     padding-top: 10vh;
+    height: fit-content;
 }
 
 .c-title-pink {
@@ -115,10 +116,6 @@
         min-width: 250px;
         max-width: 400px;
     }
-
-}
-
-@media screen and (max-width: 400px) {
 
     .c-description {
         white-space: normal;

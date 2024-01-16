@@ -20,6 +20,7 @@ services:
       - ${BACK_PORT}:${BACK_PORT}
     env_file:
       - ./backend/.env
+      - .env
     depends_on:
       mariadb:
         condition: service_healthy

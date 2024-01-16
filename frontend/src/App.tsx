@@ -41,8 +41,10 @@ export function NotAuthenticateSpace() {
       <div className="App">
          <Header />
 
-         <div style={{ height: '93vh', width: '100%', position: 'relative', overflow: 'hidden' }}>
-
+         <div style={{
+            height: '93vh', width: '100%',
+            position: 'relative', overflow: 'auto'
+         }}>
             <div className='app-c'>
                <div className='app-phoneimg-c'>
                   <img src={loveIllustration} className='app-phoneimg' />

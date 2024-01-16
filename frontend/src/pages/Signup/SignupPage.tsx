@@ -14,6 +14,7 @@ import arrowRightIcon from '../../assets/Arrow_Right.svg'
 import TagsPickerPage from '../../components/TagsPickerPage/TagsPickerPage';
 import { validateEmail, validateNames } from '../../utils';
 import { useSearchParams } from 'react-router-dom';
+import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 
 type TForm = {
     email: string,
@@ -72,9 +73,9 @@ export function SignupPageForm() {
 
     return (
         <div className="c">
-                <p className='c-title'> Create your 
+            <p className='c-title'> Create your
                 <span className='c-title-pink'>Account</span>
-                </p>
+            </p>
             <p className='c-description'>Hey, are you new ? Register your information to create an account and access profiles !</p>
             <div className='c-input-c' style={{ gap: '20px' }}>
                 {error && <p className='c-error-msg'>{error}</p>}
@@ -126,10 +127,11 @@ export function SignupPageForm() {
                 />
 
                 <div className='c-button'>
-                    <ButtonWrapper onClick={onSignup} >
-                        <h1 className='buttonlarge-title'>Continue</h1>
-                        <img src={arrowRightIcon} style={{ marginLeft: '15px' }} />
-                    </ButtonWrapper>
+                    <ButtonLarge
+                        title="Continue"
+                        style={{ marginTop: '2vh' }}
+                        onClick={onSignup}
+                    />
                     <div className='cb-text-c'>
                         <p className='cb-text'>Have an account ?</p>
                         <p onClick={() => navigate("/signin")} className='cb-text-underline'>Authenticate here</p>

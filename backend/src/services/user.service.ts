@@ -520,7 +520,7 @@ const createUser = exports.createUser = async (datas: CreateUserDatas, fakeUser:
         }
 
         const token = jwt.sign({ accountConfirmed: true, id: user.userId }, process.env.JWT_SECRET);
-        const url = `http://${process.env.FRONT_DOMAIN}:${process.env.FRONT_PORT}/signup?token=${token}`;
+        const url = `http://localhost:8080/signup?token=${token}`;
 
         if (fakeUser)
             return ({ token, user });

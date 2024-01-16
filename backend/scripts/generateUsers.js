@@ -5,7 +5,7 @@ const { fileFromPath } = require('formdata-node/file-from-path')
 const axios = require('axios')
 const jwt_decode = require('jwt-decode')
 
-const apiURL = `http://localhost:3000`;
+const apiURL = `https://matcha.mezyann.fr/api`;
 
 // 400 male names
 const maleNames = [

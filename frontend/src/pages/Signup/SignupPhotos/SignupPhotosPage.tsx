@@ -1,5 +1,6 @@
 
 import './SignupPhotosPage.css'
+import '../../../generic.css'
 import { useState } from 'react';
 import { ButtonWrapper } from '../../../components/Buttons/ButtonWrapper';
 
@@ -8,6 +9,7 @@ import PickPhotos from '../../../components/PickPhotos/PickPhotos';
 
 import { useNavigate } from 'react-router';
 import { updatePhotosRequest } from '../../../requests';
+import { ButtonLarge } from '../../../components/Buttons/ButtonLarge';
 
 export default function SignupPhotosPage() {
 
@@ -34,25 +36,23 @@ export default function SignupPhotosPage() {
     }
 
     return (
-        <div className="signuppagephotos-c">
-            <div className="signuppagephotos-title-c">
-                <p className='signuppagephotos-title'>Tell us more about</p>
-                <span className='signuppagephotos-title-pink'>You</span>
-            </div>
-            <p className='signuppagephotos-description'>To uncover the most relevant profiles, we require additional details about you.</p>
+        <div className="c">
+            <p className='c-title'>Tell us more about
+                <span className='c-title-pink'>You</span>
+            </p>
+            <p className='c-description'>To uncover the most relevant profiles, we require additional details about you.</p>
             <div className='signup-photos-c'>
                 <PickPhotos
                     title="Import some photos"
                     photos={photos}
                     setPhotos={setPhotos}
                 />
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <ButtonWrapper onClick={onSubmit}>
-                        <h1 className='buttonlarge-title'>Profile</h1>
-                        <img src={arroRightIcon} style={{ padding: '0 15px' }} />
-                    </ButtonWrapper>
-                </div>
             </div>
+            <ButtonLarge
+                title="Valid"
+                style={{ marginTop: '2vh' }}
+                onClick={onSubmit}
+            />
 
         </div>
     )

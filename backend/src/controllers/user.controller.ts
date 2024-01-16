@@ -358,7 +358,7 @@ const resetPassword = exports.resetPassword = async (req: Request, res: Response
         if (!userId)
             throw "";
         const token = jwt.sign({ resetPassword: true, id: userId }, process.env.JWT_SECRET, { expiresIn: 60 * 20 })
-        const url = `http://${process.env.FRONT_DOMAIN}:${process.env.FRONT_PORT}/signin/resetPassword?token=${token}`;
+        const url = `http://localhost:8080/signin/resetPassword?token=${token}`;
         await userService.sendMail({
             from: process.env.MAIL_ADDRESS,
             to: req.query.email,

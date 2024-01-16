@@ -26,7 +26,7 @@ export default function InputLabelIcon(props: TInput) {
     }
 
     return (
-        <div className="pickmenu" style={props.style}>
+        <div className="pickmenu">
             <p className="title-input">{props.label}</p>
             <div
                 className="inputlabeladd-c"
