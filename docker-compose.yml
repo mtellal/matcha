@@ -7,8 +7,7 @@ services:
       - ./frontend:/usr/src/app
     environment:
       - PORT=${FRONT_PORT}
-      - REACT_APP_BACK_PORT=443
-      - REACT_APP_BACK_DOMAIN=matcha.mezyann.fr
+      - REACT_APP_API_URI=${API_URI}
     ports:
       - ${FRONT_PORT}:${FRONT_PORT}
 
@@ -18,7 +17,7 @@ services:
     volumes: 
       - ./backend:/usr/src/app
     ports:
-      - 3000:3000
+      - ${BACK_PORT}:${BACK_PORT}
     env_file:
       - ./backend/.env
     depends_on:

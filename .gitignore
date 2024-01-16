@@ -6,7 +6,7 @@
 /backend/uploads
 /backend/.env
 /frontend/.env
-
+.env
 
 /.pnp
 .pnp.js

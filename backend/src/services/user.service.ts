@@ -25,17 +25,18 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.office365.com',
-    port: 25,
-    secureConnection: false,
-    requireTLS: true,
-    auth: {
-        user: process.env.MAIL_ADDRESS,
-        pass: process.env.MAIL_PASSWORD
-    },
-    tls: {
-        ciphers: 'SSLv3',
-    }
+	service: "Gmail",
+	auth: {
+		user: process.env.MAIL_ADDRESS,
+		pass: process.env.MAIL_PASSWORD
+    	},
+    	tls: {
+        	ciphers: 'SSLv3',
+    	}
+})
+
+transporter.verify(function(error: string) {
+	console.log(error);
 })
 
 type MailMessageOptions = {
@@ -51,12 +52,12 @@ const sendMail = exports.sendMail = async (messageOption: MailMessageOptions) =>
             transporter.sendMail(messageOption, (error: Error, info: any) => {
                 if (error) {
                     console.log("Mail failed")
-                    // console.log(error);
+                    console.log(error);
                     reject("Mail sending failed")
                 }
                 if (info) {
                     console.log("Mail sent successfully")
-                    // console.log(info)
+                    console.log(info)
                     resolve("Mail sent successfully")
                 }
             })

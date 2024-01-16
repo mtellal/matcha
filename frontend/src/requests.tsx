@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AdvancedOptions } from "./types";
 
-export const apiURL = `https://${process.env.REACT_APP_BACK_DOMAIN}:${process.env.REACT_APP_BACK_PORT}/api`
+export const apiURL = process.env.REACT_APP_API_URI;
 
 
 axios.defaults.withCredentials = true;
