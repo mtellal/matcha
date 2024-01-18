@@ -33,7 +33,7 @@ const socketIds = new SocketIds();
 io.of("/user").use(SocketJWTAuthentification)
 
 io.of("/user").on("connection", (socket: Socket) => {
-    socketIds.addSocketId(socket);
+	 socketIds.addSocketId(socket);
     UserEvents(io, socket, socketIds);
     socket.on('disconnect', (reason: DisconnectReason) => {
         socketIds.deleteSocketId(socket.data.token.id)

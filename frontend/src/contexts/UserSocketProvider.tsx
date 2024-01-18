@@ -25,7 +25,7 @@ export default function UserSocketProvider({ children }: { children: ReactNode }
 
 
     useEffect(() => {
-        const socket = io(`${apiURL}/user`, {
+        const socket = io(`https://matcha.mezyann.fr/user`, {
             transports: ['websocket'],
             withCredentials: true,
         })

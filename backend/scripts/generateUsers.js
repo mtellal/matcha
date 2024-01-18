@@ -826,7 +826,7 @@ async function generateRandomCity() {
     return (
         axios.get(`${apiURL}/randomCity`)
             .then(res => {
-                return (res.data && (res.data.data ?? ""))
+                return (res.data && (res.data.data ? res.data.data : ""))
             })
             .catch(err => "")
     )
