@@ -12,6 +12,8 @@ Users will be able to register, log in, complete their profile, search and view 
 of other users, and show interest in them with a “like”, chat with those that “liked” back.
 ```
 
+#### See the project online: http://matcha.mezyann.fr:8080/
+
 ## How to use
 - Clone the repository
 - Edit `backend/.env` file, set: 
