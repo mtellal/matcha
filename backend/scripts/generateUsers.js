@@ -1110,7 +1110,7 @@ async function createUsers(n) {
 
 
 async function resetUsersDatas() {
-    await axios.delete(`${apiURL}/user/deleteUsers`)
+	//await axios.delete(`${apiURL}/user/deleteUsers`)
 }
 
 console.log("script ...")

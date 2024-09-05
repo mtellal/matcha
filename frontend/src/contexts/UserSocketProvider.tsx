@@ -14,6 +14,7 @@ export function useUserSocket() {
     return (useContext(UserSocketContext))
 }
 
+
 export default function UserSocketProvider({ children }: { children: ReactNode }) {
 
     const { currentUser, addBlockUserId, removeBlockUserId } = useCurrentUser();
@@ -25,14 +26,14 @@ export default function UserSocketProvider({ children }: { children: ReactNode }
 
 
     useEffect(() => {
-        const socket = io(`https://matcha.mezyann.fr/user`, {
+        const socket = io(`https://matcha.mezyann.fr`, {
             transports: ['websocket'],
             withCredentials: true,
         })
 
         socket.on('connect', () => {
             setUserSocket(socket)
-
+		console.log("socket connected frontend")
         })
 
         return () => {

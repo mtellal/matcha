@@ -64,6 +64,7 @@ module.exports = async (io: any, socket: Socket, Sockets: SocketIds) => {
     })
 
     socket.on('like', async (likeUserId: string) => {
+	    console.log("like event triggered")
         try {
             if (parseInt(userId) === parseInt(likeUserId))
                 return;

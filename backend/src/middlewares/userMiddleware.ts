@@ -17,6 +17,7 @@ function extractCookie(cookies: string | undefined, key: string) {
 }
 
 const JWTAuthentification = exports.JWTAuthentification = async (req: Request, res: Response, next: NextFunction) => {
+	console.log("/////// jwtAuthentification function called //////////////////")
     try {
         let token: string | undefined = extractCookie(req.headers.cookie, "access_token")
         if (!token) {
@@ -46,9 +47,10 @@ const SocketJWTAuthentification = exports.SocketJWTAuthentification = async (soc
             throw "Authorization empty";
         token = await jwt.verify(token, process.env.JWT_SECRET)
         socket.data.token = token;
+	console.log("socket authentification success")
     }
     catch (e) {
-        // console.log("token not found from SOCKET JWT AUTH", e);
+        console.log("token not found from SOCKET JWT AUTH", e);
         return;
     }
     next();

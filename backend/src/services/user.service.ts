@@ -36,7 +36,7 @@ const transporter = nodemailer.createTransport({
 })
 
 transporter.verify(function(error: string) {
-	console.log(error);
+	console.log("Error => ", error);
 })
 
 type MailMessageOptions = {

@@ -29,11 +29,32 @@ const io = new Server(httpServer, {
 })
 
 const socketIds = new SocketIds();
+io.of("/").use((s:any, next:any) => {
+	console.log(".of('/') - wdfohwfojhfw");
+	next();
+})
+io.use((s:any, next:any) => {
+	console.log("not path specified - wdfohwfojhfw");
+	next();
+})
 
-io.of("/user").use(SocketJWTAuthentification)
-
-io.of("/user").on("connection", (socket: Socket) => {
-	 socketIds.addSocketId(socket);
+io.of("/").use(SocketJWTAuthentification)
+io.of("/").on("connection", (socket: Socket) => {
+	socketIds.addSocketId(socket);
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
+	console.log("///////////////   socket connected ///////////////");
     UserEvents(io, socket, socketIds);
     socket.on('disconnect', (reason: DisconnectReason) => {
         socketIds.deleteSocketId(socket.data.token.id)

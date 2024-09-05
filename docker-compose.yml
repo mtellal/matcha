@@ -1,5 +1,14 @@
 services:
 
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ./frontend/build:/usr/share/nginx/html    
+    ports:
+      - "80:80"
+      - "443:443"
+
   frontend: 
     build:
       context: ./frontend
@@ -8,16 +17,16 @@ services:
     environment:
       - PORT=${FRONT_PORT}
       - REACT_APP_API_URI=${API_URI}
-    ports:
-      - ${FRONT_PORT}:${FRONT_PORT}
+      #ports:
+      #- ${FRONT_PORT}:${FRONT_PORT}
 
   backend:
     build:
       context: ./backend
     volumes: 
       - ./backend:/usr/src/app
-    ports:
-      - ${BACK_PORT}:${BACK_PORT}
+      #ports:
+      #- ${BACK_PORT}:${BACK_PORT}
     env_file:
       - ./backend/.env
       - .env
