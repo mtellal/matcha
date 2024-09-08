@@ -3,30 +3,20 @@
     width: 90%;
     overflow-y: auto;
     overflow-x: hidden;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 90%;
     padding: 5%;
-}
-
-.profileuser-c1 {
-    overflow-y: visible;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .profileuser-carousel {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 2vh;
-    width: 60vw;
+    margin: 5vh;
     height: auto;
-    padding: 5vh 0;
-    overflow: visible;
+    flex: 2;
+    aspect-ratio: 2/1;
 }
 
 .profileuser-infos {
@@ -40,7 +30,7 @@
 
 
 .profileuser-biolabel {
-    width: 30vw;
+    width: 25vw;
 }
 
 @media screen and (max-width: 1400px) {
@@ -59,6 +49,7 @@
         flex: unset;
         min-width: 60%;
         align-self: center;
+        align-items: center;
     }
 
     .profileuser-biolabel {

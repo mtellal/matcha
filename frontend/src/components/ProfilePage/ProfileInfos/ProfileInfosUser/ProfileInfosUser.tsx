@@ -24,18 +24,9 @@ export default function ProfileInfosUser(props: { user: User, isCurrentUser: boo
             <div className="profileinfosuser-infos">
                 <img src={mapIcon} className="profileinfosuser-infos-icon" />
                 <p className="profileinfosuser-name" style={{ fontSize: '16px', fontWeight: '500' }}>
-                    {props.user && props.user.city && props.user.city.name || "Location not specified"}
+                    {props.user && props.user.city && props.user.city.name ?  `${props.user.department.name}, ${props.user.region.name}` : "Location not specified"}
                 </p>
             </div>
-            {
-                props.user && props.user.city &&
-                props.user.region && props.user.department &&
-                <div className="profileinfosuser-infos">
-                    <p className="profileinfosuser-name" style={{ fontSize: '14px', fontWeight: '500' }}>
-                        {`${props.user.department.name}, ${props.user.region.name}`}
-                    </p>
-                </div>
-            }
         </>
     )
 }

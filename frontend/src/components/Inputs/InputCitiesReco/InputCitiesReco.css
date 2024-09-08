@@ -14,9 +14,10 @@
 }
 
 .inputcities-c > p {
-    padding: 10px;
+    padding: 7px 10px;
     margin: 0;
     width: 100%;
+    font-size: var(--font-400);
     text-align: start;
 }
 

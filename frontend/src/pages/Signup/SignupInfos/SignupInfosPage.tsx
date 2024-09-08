@@ -145,12 +145,12 @@ export default function SignupInfosPage() {
     }
 
     return (
-        <div className="c" style={{paddingBottom: '5vh'}}>
+        <div className="c" style={{paddingTop: '5vh'}}>
             <p className='c-title'> Tell us more about
                 <span className='c-title-pink'>You</span>
             </p>
             <p className='c-description'>To uncover the most relevant profiles, we require additional details about you.</p>
-            <div className='c-input-c' style={{ gap: '20px' }}>
+            <div className='c-input-c' style={{ gap: '15px' }}>
                 {error && <p className='c-error-msg'>{error}</p>}
 
                 <InputLabel

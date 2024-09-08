@@ -5,7 +5,8 @@ const { fileFromPath } = require('formdata-node/file-from-path')
 const axios = require('axios')
 const jwt_decode = require('jwt-decode')
 
-const apiURL = `https://matcha.mezyann.fr/api`;
+//const apiURL = `https://matcha.mezyann.fr/api`;
+const apiURL = `http://localhost:3000`;
 
 // 400 male names
 const maleNames = [
@@ -1079,10 +1080,10 @@ async function createUsers(n) {
                         .catch(err => { console.log("upload tags failed") })
                 }
                 else {
-                    console.log("User failed ", res.data)
+                    console.log("User failed ", res, res.data)
                 }
             })
-            .catch(err => { console.log("User failed") })
+            .catch(err => { console.log("User failed", err.status) })
     }
 
     if (userTokens.length) {

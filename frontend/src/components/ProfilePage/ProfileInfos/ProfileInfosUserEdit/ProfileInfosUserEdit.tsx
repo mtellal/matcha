@@ -23,50 +23,58 @@ export default function ProfileInfosUserEdit(props: ProfileInfosUserEditProps) {
 
     return (
         <>
-            <InputSmall
-                id="user-email"
-                label="Email"
-                value={props.user && props.user.email}
-                setValue={setEmail}
-                maxLength={30}
-            />
+            <div style={{ display: 'flex', gap: '2vh', justifyContent: 'space-between' }}>
 
-            <InputSmall
-                id="user-username"
-                label="Username"
-                value={props.user && props.user.username}
-                setValue={setUsername}
-                maxLength={30}
-            />
+                <InputSmall
+                    id="user-email"
+                    label="Email"
+                    value={props.user && props.user.email}
+                    setValue={setEmail}
+                    maxLength={30}
+                />
 
-            <InputSmall
-                id="user-firstname"
-                label="First name"
-                value={props.user && props.user.firstName}
-                setValue={setFirstName}
-                maxLength={30}
-            />
+                <InputSmall
+                    id="user-username"
+                    label="Username"
+                    value={props.user && props.user.username}
+                    setValue={setUsername}
+                    maxLength={30}
+                />
+            </div>
 
-            <InputSmall
-                id="user-lastname"
-                label="Last name"
-                value={props.user && props.user.lastName}
-                setValue={setLastName}
-                maxLength={30}
-            />
+            <div style={{ display: 'flex', gap: '2vh', justifyContent: 'space-between'}}>
+                <InputSmall
+                    id="user-firstname"
+                    label="First name"
+                    value={props.user && props.user.firstName}
+                    setValue={setFirstName}
+                    maxLength={30}
+                />
 
-            <InputSmall
-                id="user-birthday"
-                label="Birthday"
-                value={props.user && props.user.age && props.user.age.length >= 10 && props.user.age.slice(0, 10)}
-                setValue={setAge}
-                type="date"
-            />
+                <InputSmall
+                    id="user-lastname"
+                    label="Last name"
+                    value={props.user && props.user.lastName}
+                    setValue={setLastName}
+                    maxLength={30}
+                />
+            </div>
 
-            <InputCitiesReco
-                city={props.user && props.user.city && props.user.city.name}
-                setCity={setCity}
-            />
+            <div style={{display: 'flex', gap: '2vh', justifyContent: 'space-between'}}>
+
+                <InputSmall
+                    id="user-birthday"
+                    label="Birthday"
+                    value={props.user && props.user.age && props.user.age.length >= 10 && props.user.age.slice(0, 10)}
+                    setValue={setAge}
+                    type="date"
+                />
+
+                <InputCitiesReco
+                    city={props.user && props.user.city && props.user.city.name}
+                    setCity={setCity}
+                />
+            </div>
         </>
     )
 }

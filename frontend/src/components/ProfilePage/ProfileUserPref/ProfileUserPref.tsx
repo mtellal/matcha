@@ -13,6 +13,13 @@ import { Icon } from "../../Icons/Icon";
 import addIcon from '../../../assets/Add_Plus.svg'
 import { TagsPickerPageContenxt } from "../../TagsPickerPage/TagsPickerPage";
 import { User } from "../../../types";
+import ProfileInfosUserEdit from "../ProfileInfos/ProfileInfosUserEdit/ProfileInfosUserEdit";
+import ProfileInfosUser from "../ProfileInfos/ProfileInfosUser/ProfileInfosUser";
+
+import HeartBorder from '../../../assets/Heart_Border.svg';
+import eyeIcon from '../../../assets/eye.svg';
+import starIcon from '../../../assets/Star.svg';
+
 
 type ProfileUserPrefEditProps = {
     user: User,
@@ -60,20 +67,22 @@ function ProfileUserPrefEdit(props: ProfileUserPrefEditProps) {
 
     return (
         <>
-            <PickMenuSmall
-                title="Gender"
-                options={["male", "female"]}
-                value={props.user.gender}
-                setValue={setGender}
-                style={{ maxWidth: '200px' }}
-            />
-            <PickMenuSmall
-                title="Sexual Preferences"
-                options={["male", "female"]}
-                value={props.user.sexualPreferences}
-                setValue={setSexualPreferences}
-                style={{ maxWidth: '200px' }}
-            />
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <PickMenuSmall
+                    title="Gender"
+                    options={["male", "female"]}
+                    value={props.user.gender}
+                    setValue={setGender}
+                    style={{ maxWidth: '200px' }}
+                />
+                <PickMenuSmall
+                    title="Sexual Preferences"
+                    options={["male", "female"]}
+                    value={props.user.sexualPreferences}
+                    setValue={setSexualPreferences}
+                    style={{ maxWidth: '200px' }}
+                />
+            </div>
             <div className='signuppage-intereststags'>
                 <div className='signuppage-intereststags-title'>
                     <p className='title-input' style={{ margin: '0px', alignSelf: 'center' }}>Interests Tags</p>
@@ -104,16 +113,60 @@ type TProfileUserPref = {
 
 export default function ProfileUserPref(props: TProfileUserPref) {
 
+
+    function convertDate(inputISOString: string) {
+        const inputDate = new Date(inputISOString);
+        const year = inputDate.getFullYear().toString().slice(-2);
+        const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+        const day = inputDate.getDate().toString().padStart(2, '0');
+        const hours = inputDate.getHours().toString().padStart(2, '0');
+        const minutes = inputDate.getMinutes().toString().padStart(2, '0');
+        const seconds = inputDate.getSeconds().toString().padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
     return (
         <div className="profileuserpref-informations" style={{ position: 'relative' }}>
             {
                 props.editing ?
-
-                    <ProfileUserPrefEdit {...props} />
+                    <>
+                        <ProfileInfosUserEdit user={props.user} setUser={props.setUser} />
+                        <ProfileUserPrefEdit {...props} />
+                    </>
                     :
                     <>
-                        <InfoLabel title="Gender" text={props.user && props.user.gender || "Not specified"} />
-                        <InfoLabel title="Sexual Preferences" text={props.user && props.user.sexualPreferences || "Not specified"} />
+                        <ProfileInfosUser user={props.user} isCurrentUser={true} />
+
+                        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                            <div className="profileinfos-infos">
+                                <img src={HeartBorder} className="profileinfos-infos-icon" />
+                                <p className="profileinfos-name">{props.user && String(props.user.likes)}</p>
+                            </div>
+                            <div className="profileinfos-infos">
+                                <img src={eyeIcon} className="profileinfos-infos-icon" />
+                                <p className="profileinfos-name">{props.user && String(props.user.views)}</p>
+                            </div>
+                            <div className="profileinfos-infos">
+                                <img src={starIcon} className="profileinfos-infos-icon" />
+                                <p className="profileinfos-name">
+                                    {props.user && String(props.user.fameRating)}
+                                </p>
+                            </div>
+                            <div className="profileinfos-infos">
+                                <div className="profileinfos-infos-icon-status" style={(true || props.user?.status) ? { backgroundColor: 'var(--green' } : {}} ></div>
+                                <p
+                                    className="profileinfos-name"
+                                    style={{ textAlign: 'start', whiteSpace: 'pre-line' }}
+                                >
+                                    {`${(true || props.user?.status) ? "Online" : "Offline"}\n${true && props.user && !props.user.status && props.user.lastConnection ? convertDate(props.user.lastConnection) : ""}`}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <InfoLabel title="Gender" text={props.user && props.user.gender || "Not specified"} />
+                            <InfoLabel title="Sexual Preferences" text={props.user && props.user.sexualPreferences || "Not specified"} />
+                        </div>
                         <InfoLabelTags title="Interests Tags" tags={props.user && props.user.tags} />
                     </>
             }

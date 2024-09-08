@@ -136,45 +136,35 @@ export default function ProfileCurrentUser() {
 
     return (
         <div className="profileuser">
-            <div className="profileuser-c1">
-                <div className="profileuser-carousel">
-                    {
-                        editPhotos ?
-                            <PickPhotos
-                                title="Edit your photos"
-                                photos={photos}
-                                setPhotos={setPhotos}
-                                style={{ width: '90%', maxWidth: '550px' }}
-                                editing={true}
-                                editClick={updatePhotos}
-                            /> :
-                            <PhotoCarousel
-                                user={profileUser}
-                                isCurrentUser={true}
-                                onClickIcon={() => setEditPhotos((p: boolean) => !p)}
-                                photos={photos}
-                            />
-                    }
-                    {error && <p className="font-14" style={{ color: 'var(--red)' }}>{error}</p>}
-                    <ProfileInfos
-                        isCurrentUser={true}
-                        editing={editPhotos}
-                        user={profileUser}
-                        setUser={setProfileUser}
-                    />
-
-                </div>
+            <div className="profileuser-carousel">
+                {
+                    editPhotos ?
+                        <PickPhotos
+                            title="Edit your photos"
+                            photos={photos}
+                            setPhotos={setPhotos}
+                            style={{ width: '90%', maxWidth: '550px' }}
+                            editing={true}
+                            editClick={updatePhotos}
+                        /> :
+                        <PhotoCarousel
+                            user={profileUser}
+                            isCurrentUser={true}
+                            onClickIcon={() => setEditPhotos((p: boolean) => !p)}
+                            photos={photos}
+                        />
+                }
+                {error && <p className="font-14" style={{ color: 'var(--red)' }}>{error}</p>}
             </div>
 
             <div className="profileuser-infos">
-                <div style={{ width: '70%' }}>
-                    <ProfileUserPref
-                        user={profileUser}
-                        setUser={setProfileUser}
-                        setEditInfos={updateInfos}
-                        editing={editInfos}
-                    />
-                </div>
+
+                <ProfileUserPref
+                    user={profileUser}
+                    setUser={setProfileUser}
+                    setEditInfos={updateInfos}
+                    editing={editInfos}
+                />
 
                 <div className="profileuser-biolabel">
                     <BioLabelEdit

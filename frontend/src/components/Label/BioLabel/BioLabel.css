@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 3px;
     position: relative;
+    min-width: 500px;
 }
 
 .biolabel-nobio {
@@ -50,7 +51,13 @@
 }
 
 
+
 @media screen and (max-width: 700px) {
+
+    .biolabel {
+        width: 80%;
+    }
+
     .biolabel-editicon {
         height: 30px;
         width: 30px;
