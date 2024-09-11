@@ -6,7 +6,7 @@
 }
 
 .pickmenu-select {
-    height: 50px;
+    height: 45px;
     padding: 0 15px;
     border-radius: 5px;
     background-color: #13182D;
@@ -44,7 +44,7 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
 
-    height: 50px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: flex-start;

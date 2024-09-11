@@ -1,0 +1,120 @@
+.photocar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+    aspect-ratio: 2 / 1;
+    height: 450px;
+    max-width: 800px;
+}
+
+.photocar-c2 {
+    height: 80%;
+    width: 28%;
+    position: relative;
+    display: flex;
+    aspect-ratio: 1 / 2;
+}
+
+.photocar-image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.photocar-shadow-left {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photocar-shadow-right {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photocar-c1-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 40%;
+    min-width: 200px;
+    position: relative;
+}
+
+.photocar-c1 {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
+    border-radius: 5px;
+}
+
+.photocar-noimage {
+    background-color: var(--blue1);
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.photocar-heart1 {
+    position: absolute;
+    bottom: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    right: -20px;
+    height: 40px;
+    width: 40px;
+    background-color: #1A1F35;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.photocar-label-add {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.photocar-heart1:hover {
+    background-color: #4A4E69;
+}
+
+.photocar-heart2 {
+    position: absolute;
+    height: 10%;
+    width: 15%;
+    bottom: 0;
+    left: 0;
+}
+
+.photocar-like-text {
+    margin: 0;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+
+}
+
+@media screen and (max-width:700px) {
+    .photocar-heart1 {
+        height: 30px;
+        width: 30px;
+    }
+}

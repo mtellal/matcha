@@ -7,7 +7,7 @@
     --font-700: 1.8em;
     --font-600: 1.5em;
     --font-500: 1.2em;
-    --font-400: clamp(12px, 0.8vw, 2em);
+    --font-400: clamp(13px, 0.8vw, 2em);
 
   --background-color: #20253a;
 

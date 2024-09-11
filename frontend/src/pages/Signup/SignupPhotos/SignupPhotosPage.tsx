@@ -10,6 +10,8 @@ import PickPhotos from '../../../components/PickPhotos/PickPhotos';
 import { useNavigate } from 'react-router';
 import { updatePhotosRequest } from '../../../requests';
 import { ButtonLarge } from '../../../components/Buttons/ButtonLarge';
+import PhotoCarousel from '../../../components/PhotoCarousel/PhotoCarousel';
+import PhotoCar from '../../../components/PhotoCar/PhotoCar';
 
 export default function SignupPhotosPage() {
 
@@ -42,11 +44,9 @@ export default function SignupPhotosPage() {
             </p>
             <p className='c-description'>To uncover the most relevant profiles, we require additional details about you.</p>
             <div className='signup-photos-c'>
-                <PickPhotos
-                    title="Import some photos"
-                    photos={photos}
-                    setPhotos={setPhotos}
+                <PhotoCar 
                 />
+
             </div>
             <ButtonLarge
                 title="Valid"
