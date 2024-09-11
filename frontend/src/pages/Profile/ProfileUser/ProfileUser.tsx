@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import '../ProfileUser.css'
 
-import PhotoCarousel from "../../../components/PhotoCarousel/PhotoCarousel";
+import PhotoCarrousel from "../../../components/PhotoCar/PhotoCarrousel";
 import ProfileInfos from "../../../components/ProfilePage/ProfileInfos/ProfileInfos";
 import { InfoLabel, InfoLabelTags } from "../../../components/ProfilePage/InfoLabel/InfoLabel";
 import { useNavigate, useParams } from "react-router";
@@ -78,7 +78,7 @@ export default function ProfileUser() {
         <div className="profileuser">
             <div className="profileuser-c1">
                 <div className="profileuser-carousel">
-                    <PhotoCarousel photos={photos} user={user} />
+                    <PhotoCarrousel currentUser={false} photos={photos} user={user} />
                     <ProfileInfos user={user} isCurrentUser={user && currentUser && user.userId === currentUser.userId} />
 
                 </div>

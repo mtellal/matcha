@@ -19,7 +19,7 @@ export type Notification = {
 export type UserPhoto = {
     index: number,
     url: string,
-    file?: File
+    file?: File | string
 }
 
 

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import './PhotoCar.css'
+import './PhotoCarrousel.css'
 
 import ArrowRightIcon from '../../assets/Arrow_Right.svg'
 
@@ -34,7 +34,7 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto }: a
         <div className="photocar-c1-c">
             <div className="photocar-c1" style={{ position: 'relative' }}>
                 {
-                    photos[index] && photos[index].url ?
+                    photos && photos[index] && photos[index].url ?
                         <img className="photocar-image" src={extractURL(index)} />
                         :
                         <div className="photocar-noimage"></div>
@@ -46,7 +46,7 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto }: a
                     }}
                 >
                     {
-                        photos[index] && photos[index].url &&
+                        photos && photos[index] && photos[index].url &&
                         <Icon
                             icon={CrossIcon}
                             style={{ width: '40px', height: '40px' }}
@@ -61,7 +61,7 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto }: a
                     </label>
 
                     <input
-                        key={`${photos[index].url}`}
+                        key={`${photos && photos[index] && photos[index].url}`}
                         id="file"
                         type="file"
                         style={{ visibility: 'hidden', position: 'absolute', left: '50%', top: '50%' }}
@@ -77,32 +77,10 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto }: a
 }
 
 
-export default function PhotoCar() {
+export default function PhotoCarrousel({ currentUser, photos, setPhotos }: any) {
 
 
     const [index, setIndex] = useState(1);
-    const [photos, setPhotos] = useState<UserPhoto[]>([
-        {
-            index: 0,
-            url: "",
-        },
-        {
-            index: 1,
-            url: "",
-        },
-        {
-            index: 2,
-            url: "",
-        },
-        {
-            index: 3,
-            url: "",
-        },
-        {
-            index: 4,
-            url: "",
-        }
-    ])
 
     const extractURL = (id: number) => {
         if (photos) {
@@ -112,24 +90,24 @@ export default function PhotoCar() {
         }
     }
 
-    const deletePhoto = (id: number) => {
-        if (photos) {
+    const deletePhoto = useCallback((id: number) => {
+        if (photos && setPhotos) {
             const photoObj = photos.map((p: UserPhoto) => {
                 if (p.index === id) {
-                    return {index: p.index, url: ""}
+                    return { index: p.index, url: "" }
                 }
                 return p
             })
             setPhotos(photoObj)
         }
-    }
+    }, [setPhotos, photos])
 
     return (
         <div className="photocar" >
 
             <div className="photocar-c2">
                 {
-                    photos.length >= 2 && index - 1 >= 0 &&
+                    photos && photos.length >= 2 && index - 1 >= 0 &&
                     photos[index - 1] &&
                     <>
                         {
@@ -141,7 +119,7 @@ export default function PhotoCar() {
                         <div className="photocar-shadow-left">
                             <Icon
                                 icon={ArrowRightIcon}
-                                style={{ height: '25px', transform: 'rotate(180deg)' }}
+                                style={{ height: '30px', padding: '2px', transform: 'rotate(180deg)' }}
                                 onClick={() => setIndex((i: number) => i > 0 ? i - 1 : i)}
                             />
                         </div>
@@ -149,19 +127,28 @@ export default function PhotoCar() {
                 }
             </div>
 
-            <PhotoContainer
-                key={index}
-                photos={photos}
-                setPhotos={setPhotos}
-                index={index}
-                extractURL={extractURL}
-                deletePhoto={deletePhoto}
-            />
+            {
+                currentUser && photos ?
+                    <PhotoContainer
+                        key={index}
+                        photos={photos}
+                        setPhotos={setPhotos}
+                        index={index}
+                        extractURL={extractURL}
+                        deletePhoto={deletePhoto}
+                    />
+                    :
+                    <div className="photocar-c1-c">
+                        <div className="photocar-c1">
+                            < img className="photocar-image" src={extractURL(index)} />
+                        </div>
+                    </div>
+            }
 
 
             <div className="photocar-c2">
                 {
-                    photos.length >= index + 1 &&
+                    photos && photos.length >= index + 1 &&
                     photos[index + 1] &&
                     <>
                         {
@@ -172,7 +159,7 @@ export default function PhotoCar() {
                         <div className="photocar-shadow-right">
                             <Icon
                                 icon={ArrowRightIcon}
-                                style={{ height: '25px' }}
+                                style={{ height: '30px', padding: '2px' }}
                                 onClick={() => setIndex((i: number) => i < photos.length ? i + 1 : i)}
                             />
                         </div>

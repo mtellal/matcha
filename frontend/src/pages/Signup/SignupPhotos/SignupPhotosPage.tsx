@@ -10,18 +10,39 @@ import PickPhotos from '../../../components/PickPhotos/PickPhotos';
 import { useNavigate } from 'react-router';
 import { updatePhotosRequest } from '../../../requests';
 import { ButtonLarge } from '../../../components/Buttons/ButtonLarge';
-import PhotoCarousel from '../../../components/PhotoCarousel/PhotoCarousel';
-import PhotoCar from '../../../components/PhotoCar/PhotoCar';
+import PhotoCarrousel from '../../../components/PhotoCar/PhotoCarrousel';
+import PhotoCar from '../../../components/PhotoCar/PhotoCarrousel';
+import { UserPhoto } from '../../../types';
 
 export default function SignupPhotosPage() {
 
     const navigate = useNavigate();
-    const [photos, setPhotos] = useState([]);
-
+    const [photos, setPhotos] = useState<UserPhoto[]>([
+        {
+            index: 0,
+            url: "",
+        },
+        {
+            index: 1,
+            url: "",
+        },
+        {
+            index: 2,
+            url: "",
+        },
+        {
+            index: 3,
+            url: "",
+        },
+        {
+            index: 4,
+            url: "",
+        }
+    ])
 
     async function onSubmit() {
         if (photos.length) {
-            const _photos = photos.filter((o: string | File) => typeof o === "object");
+            const _photos = photos.filter((o) => typeof o === "object");
             if (_photos && _photos.length) {
                 try {
                     const res = await updatePhotosRequest(_photos)
@@ -44,7 +65,9 @@ export default function SignupPhotosPage() {
             </p>
             <p className='c-description'>To uncover the most relevant profiles, we require additional details about you.</p>
             <div className='signup-photos-c'>
-                <PhotoCar 
+                <PhotoCarrousel 
+                    photos={photos}
+                    setPhotos={setPhotos}
                 />
 
             </div>

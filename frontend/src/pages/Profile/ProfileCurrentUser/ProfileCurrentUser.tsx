@@ -3,8 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import '../ProfileUser.css'
 import { differenceInYears, parse } from 'date-fns'
 
-
-import PhotoCarousel from "../../../components/PhotoCarousel/PhotoCarousel";
+import PhotoCarrousel from "../../../components/PhotoCar/PhotoCarrousel";
 import ProfileInfos from "../../../components/ProfilePage/ProfileInfos/ProfileInfos";
 import PickPhotos from "../../../components/PickPhotos/PickPhotos";
 
@@ -14,7 +13,8 @@ import { updatePhotosRequest, updateUserRequest } from "../../../requests";
 import { useCurrentUser } from "../../../contexts/UserContext";
 import { BioLabelEdit } from "./BioLabelEdit/BioLabelEdit";
 import { validateEmail, validateNames } from "../../../utils";
-import { City, User } from "../../../types";
+import { City, User, UserPhoto } from "../../../types";
+import { ButtonLarge } from "../../../components/Buttons/ButtonLarge";
 
 //        const keys = ["email", "username", "firstName", "lastName", "age", "location", "city"];
 
@@ -36,7 +36,28 @@ export default function ProfileCurrentUser() {
     const [editPhotos, setEditPhotos] = useState(false);
     const [editInfos, setEditInfos] = useState(false);
     const [editBio, setEditBio] = useState(false);
-    const [photos, setPhotos] = useState([]);
+    const [photos, setPhotos] = useState<UserPhoto[]>([
+        {
+            index: 0,
+            url: "",
+        },
+        {
+            index: 1,
+            url: "",
+        },
+        {
+            index: 2,
+            url: "",
+        },
+        {
+            index: 3,
+            url: "",
+        },
+        {
+            index: 4,
+            url: "",
+        }
+    ]);
     const [error, setError] = useState("");
 
     const initRef = useRef(false);
@@ -44,8 +65,11 @@ export default function ProfileCurrentUser() {
     useEffect(() => {
         if (currentUser && userPhotosLoadedRef.current && !initRef.current) {
             setProfileUser(currentUser)
-            if (currentUser.photos)
-                setPhotos(currentUser.photos)
+            if (currentUser.photos) {
+                const indexPhotosUser = currentUser.photos.map(e => e.index)
+                const initPhotos = photos.map(e => indexPhotosUser.includes(e.index) ? currentUser.photos.find(v => e.index == v.index) : e)
+               setPhotos(initPhotos)
+            }
             initRef.current = true
         }
     }, [currentUser, userPhotosLoadedRef.current, initRef.current])
@@ -67,13 +91,6 @@ export default function ProfileCurrentUser() {
     }
 
     const updatePhotos = useCallback(async () => {
-        setError("");
-        try {
-            verifyInputs(profileUser);
-        }
-        catch (e) {
-            return (setError(e))
-        }
 
         setEditPhotos((p: boolean) => !p);
 
@@ -87,12 +104,24 @@ export default function ProfileCurrentUser() {
                 updatePhotos.push(photos[i])
         }
 
+        console.log(updatePhotos)
         if (updatePhotos.length) {
             await updatePhotosRequest(updatePhotos)
                 .catch(err => { })
         }
 
-        const keys = ["email", "username", "firstName", "lastName", "age", "city"];
+    }, [profileUser, photos, currentUser]);
+
+    const updateUserInfos = () => {
+        setError("");
+        try {
+            verifyInputs(profileUser);
+        }
+        catch (e) {
+            return (setError(e))
+        }
+
+        /*  const keys = ["email", "username", "firstName", "lastName", "age", "city"];
         let updateDatas: any = {};
         let update: boolean = false;
         for (let k of keys) {
@@ -106,8 +135,8 @@ export default function ProfileCurrentUser() {
             await updateUserRequest(updateDatas)
                 .then(() => { setCurrentUser(profileUser) })
                 .catch(() => { })
-        }
-    }, [profileUser, photos, currentUser]);
+        } */
+    }
 
     const updateInfos = useCallback(async () => {
         setEditInfos((b: boolean) => !b)
@@ -137,23 +166,17 @@ export default function ProfileCurrentUser() {
     return (
         <div className="profileuser">
             <div className="profileuser-carousel">
-                {
-                    editPhotos ?
-                        <PickPhotos
-                            title="Edit your photos"
-                            photos={photos}
-                            setPhotos={setPhotos}
-                            style={{ width: '90%', maxWidth: '550px' }}
-                            editing={true}
-                            editClick={updatePhotos}
-                        /> :
-                        <PhotoCarousel
-                            user={profileUser}
-                            isCurrentUser={true}
-                            onClickIcon={() => setEditPhotos((p: boolean) => !p)}
-                            photos={photos}
-                        />
-                }
+                <PhotoCarrousel
+                    key={photos}
+                    currentUser={true}
+                    photos={photos}
+                    setPhotos={setPhotos}
+                />
+                <ButtonLarge
+                    title="Valid"
+                    style={{ marginTop: '2vh' }}
+                    onClick={updatePhotos}
+                />
                 {error && <p className="font-14" style={{ color: 'var(--red)' }}>{error}</p>}
             </div>
 
