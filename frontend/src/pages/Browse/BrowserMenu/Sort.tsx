@@ -4,7 +4,7 @@ import { useBrowserContext } from "../../../contexts/BrowserProvider";
 import { getUserAge } from "../../../utils";
 import { User } from "../../../types";
 
-import Icon from '../../../assets/Bell.svg'
+import sortIcon from '../../../assets/sort.svg'
 import { useOutsideComponent } from "../../../hooks/useOutsideComponent";
 
 type MenuSortProps = {
@@ -30,7 +30,10 @@ export default function MenuSort(props: MenuSortProps) {
     });
 
     const sortContainerRef = useRef(null)
+    
     const [display, setDisplay] = useState(false)
+
+    const [isOptions, setIsOptions] = useState(false)
 
     const sortConfigInitRef = useRef(false);
 
@@ -147,41 +150,29 @@ export default function MenuSort(props: MenuSortProps) {
 
             return (scoreAge + scoreDistance + scoreFame + scoreCommonTags)
         })
+        if (users.length && users !== browseUsers)
+            setIsOptions(true)
+        else
+            setIsOptions(false)
         browseDispatch({ type: 'browseUsers', browseUsers: users })
     }, [sorts])
 
     return (
         <div style={{ position: 'relative' }}>
-
             <div
-                className="filter-title"
-                style={{
-                    padding: '0px 15px',
-                    borderRadius: '5px',
-                    display: 'flex',
-                    gap: '20px'
-                }}
+                className="option-text-container"
                 onClick={() => setDisplay(p => !p)}
             >
-                <p style={{
-                    color: 'white',
-                    fontSize: 'var(--font-400)'
-                }}
-                >Sorts</p>
-                <img src={Icon} style={{ height: '20px', width: '20px', alignSelf: 'center' }} />
+                <div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>
+                    <p className="option-text">Sorts</p>
+                    {isOptions && <p style={{fontSize: '11px', alignSelf: 'center', background: 'var(--purple2)', borderRadius: '5px', padding: '2px', height: '14px', width: '12px'}}>1+</p>}
+                </div>
+                <img src={sortIcon} className="option-text-icon" />
             </div>
             <div
-                className="sort-container"
+                className="option-container"
                 ref={sortContainerRef}
-                style={{
-                    visibility: display ? 'visible' : 'hidden',
-                    position: 'absolute',
-                    width: '20vw',
-                    background: 'var(--blue3)',
-                    borderRadius: '5px',
-                    marginTop: '10px',
-                    zIndex: '2'
-                }}>
+                style={{ visibility: display ? 'visible' : 'hidden' }}>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',

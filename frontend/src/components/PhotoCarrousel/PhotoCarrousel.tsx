@@ -85,7 +85,7 @@ export default function PhotoCarrousel({ currentUser, photos, setPhotos, onChang
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
-        if (photos) {
+        if (photos && index === 0) {
             //init index to first find photo
             const validPhoto = photos.find((e: UserPhoto) => e.url !== "")
             if (validPhoto)

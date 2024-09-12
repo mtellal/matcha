@@ -10,8 +10,8 @@ import PickPhotos from '../../../components/PickPhotos/PickPhotos';
 import { useNavigate } from 'react-router';
 import { updatePhotosRequest } from '../../../requests';
 import { ButtonLarge } from '../../../components/Buttons/ButtonLarge';
-import PhotoCarrousel from '../../../components/PhotoCar/PhotoCarrousel';
-import PhotoCar from '../../../components/PhotoCar/PhotoCarrousel';
+import PhotoCarrousel from '../../../components/PhotoCarrousel/PhotoCarrousel';
+import PhotoCar from '../../../components/PhotoCarrousel/PhotoCarrousel';
 import { UserPhoto } from '../../../types';
 
 export default function SignupPhotosPage() {

@@ -2,7 +2,10 @@ import { useBrowserContext } from "../../../contexts/BrowserProvider";
 import { UserCart } from "../../../components/Label/UserCart/UserCart";
 import './BrowseUsersList.css'
 import { User } from "../../../types";
-import BrowserMenu from "../BrowserMenu/BrowserMenu";
+import MenuFilter from "../BrowserMenu/MenuFilter";
+import MenuFilterSearch from "../BrowserMenu/MenuFilterSearch";
+import MenuSort from "../BrowserMenu/Sort";
+import '../BrowserMenu/BrowserMenu.css'
 
 export default function BrowseUsersList({ currentUser }: any) {
 
@@ -10,7 +13,11 @@ export default function BrowseUsersList({ currentUser }: any) {
 
     return (
         <div className='brwuserl-users-c'>
-                <BrowserMenu user={currentUser} />
+            <div className="browsermenu">
+                <MenuFilterSearch title="Advanced Search" user={currentUser} />
+                <MenuFilter title="Filter" />
+                <MenuSort title="Sort" />
+            </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <h1 className="userscollection-title brwuserl-title">Recommanded Users</h1>

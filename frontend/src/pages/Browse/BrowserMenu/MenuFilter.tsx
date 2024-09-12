@@ -3,10 +3,12 @@ import { useBrowserContext } from "../../../contexts/BrowserProvider";
 import InputRangeText from "../../../components/Inputs/InputRangeText/InputRangeText";
 import { getUserAge } from "../../../utils";
 import { User } from "../../../types";
+import filterIcon from '../../../assets/filters.svg'
 
-import Icon from '../../../assets/Bell.svg'
-import InputLabelIcon from "../../../components/Inputs/InputLabelIcon/InputLabelIcon";
 import { useOutsideComponent } from "../../../hooks/useOutsideComponent";
+import { ButtonMedium } from "../../../components/Buttons/ButtonMedium";
+import { ButtonBorder, ButtonBorderMenu } from "../../../components/Buttons/ButtonBorder";
+import { ButtonLarge } from "../../../components/Buttons/ButtonLarge";
 
 type Values = {
     value1: string,
@@ -23,6 +25,7 @@ type MenuFilterType = {
 export default function MenuFilter(props: { title: string }) {
 
     const { browseUsers, setFilterIds, filterConfigRef } = useBrowserContext();
+    const [isOptions, setIsOptions] = useState(false)
 
     const [filters, setFilters] = useState({
         ageRange: { value1: '', value2: '' },
@@ -160,6 +163,10 @@ export default function MenuFilter(props: { title: string }) {
             return (null)
         })
         _filterIds = _filterIds.filter((id: number) => id)
+        if (_filterIds.length)
+            setIsOptions(true)
+        else
+            setIsOptions(false)
         setFilterIds(_filterIds)
     }, [filters.ageRange, filters.locationRange, filters.fameRatingRange, filters.commonTagsRange])
 
@@ -167,35 +174,20 @@ export default function MenuFilter(props: { title: string }) {
         <div style={{ position: 'relative' }}>
 
             <div
-                className="filter-title"
-                style={{
-                    padding: '0px 15px',
-                    borderRadius: '5px',
-                    display: 'flex',
-                    gap: '20px'
-                }}
+                className="option-text-container"
                 onClick={() => setDisplay(p => !p)}
             >
-                <p style={{
-                    color: 'white',
-                    fontSize: 'var(--font-400)'
-                }}
-                >Filters</p>
-
-                <img src={Icon} style={{ height: '20px', width: '20px', alignSelf: 'center' }} />
+                <div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>
+                    <p className="option-text">Filters</p>
+                    {isOptions && <p style={{fontSize: '11px', alignSelf: 'center', background: 'var(--purple2)', borderRadius: '5px', padding: '2px', height: '14px', width: '12px'}}>1+</p>}
+                </div>
+                <img src={filterIcon} className="option-text-icon" />
             </div>
+            
             <div
-                className="sort-container"
+                className="option-container"
                 ref={filterContainerRef}
-                style={{
-                    visibility: display ? 'visible' : 'hidden',
-                    position: 'absolute',
-                    width: '20vw',
-                    background: 'var(--blue3)',
-                    borderRadius: '5px',
-                    marginTop: '10px',
-                    zIndex: '2'
-                }}>
+                style={{ visibility: display ? 'visible' : 'hidden' }}>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',

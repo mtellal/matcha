@@ -9,10 +9,12 @@ import { TagsPickerPageContenxt } from "../../../components/TagsPickerPage/TagsP
 import { useBrowserContext } from "../../../contexts/BrowserProvider";
 import { InputCitiesReco } from "../../../components/Inputs/InputCitiesReco/InputCitiesReco";
 import { AdvancedOptions, City, User } from "../../../types";
+import { useOutsideComponent } from "../../../hooks/useOutsideComponent";
 
+import searchIcon from '../../../assets/Search.svg'
 
 type MenuFilterSearchProps = {
-    user: User, 
+    user: User,
     title: string
 }
 
@@ -28,6 +30,8 @@ export default function MenuFilterSearch(props: MenuFilterSearchProps) {
         removeTagFunctionRef
     } = useContext(TagsPickerPageContenxt);
 
+    const [display, setDisplay] = useState(false)
+
     const { loadUsersAdvanced, searchConfigRef } = useBrowserContext()
 
     const [searchOptions, setSearchOptions] = useState<AdvancedOptions>({
@@ -38,7 +42,9 @@ export default function MenuFilterSearch(props: MenuFilterSearchProps) {
     })
 
     const intervalRef = useRef(null);
+    const searchContainerRef = useRef(null)
 
+    useOutsideComponent(searchContainerRef, () => setDisplay(false))
 
     useEffect(() => {
         if (!addTagFunctionRef.current) {
@@ -127,52 +133,69 @@ export default function MenuFilterSearch(props: MenuFilterSearchProps) {
     }
 
     return (
-        <div style={{ width: '100%', maxWidth: '250px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <h1 className="menusort-title">{props.title}</h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', width: '100%' }}>
-                <InputRange
-                    id="filtersearch-agegap"
-                    title="Age gap"
-                    min={1}
-                    max={30}
-                    value={searchOptions && String(searchOptions.ageGap)}
-                    setValue={setAgeGap}
-                />
-                <InputRange
-                    id="filtersearch-scoregap"
-                    title="Score gap"
-                    min={0.1}
-                    max={5.0}
-                    step={0.1}
-                    value={searchOptions && String(searchOptions.fameRatingGap)}
-                    setValue={setFameRatingGap}
-                />
+        <div style={{ position: 'relative', width: 'auto' }}>
+            <div
+                className="option-text-container"
+                onClick={() => setDisplay(true)}
+            >
+                <p className="option-text"
+                >Advanced search {}</p>
+                <img src={searchIcon} className="option-text-icon" />
+            </div>
+            <div
+                className="option-container"
+                ref={searchContainerRef}
+                style={{ visibility: display ? 'visible' : 'hidden' }}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px',
+                    padding: '20px',
+                }}>   
+                 <InputRange
+                        id="filtersearch-agegap"
+                        title="Age gap"
+                        min={1}
+                        max={30}
+                        value={searchOptions && String(searchOptions.ageGap)}
+                        setValue={setAgeGap}
+                    />
+                    <InputRange
+                        id="filtersearch-scoregap"
+                        title="Score gap"
+                        min={0.1}
+                        max={5.0}
+                        step={0.1}
+                        value={searchOptions && String(searchOptions.fameRatingGap)}
+                        setValue={setFameRatingGap}
+                    />
 
-                <InputCitiesReco
-                    city={props.user && props.user.city && props.user.city.name}
-                    setCity={setCity}
-                />
+                    <InputCitiesReco
+                        city={props.user && props.user.city && props.user.city.name}
+                        setCity={setCity}
+                    />
 
-                <div className='signuppage-intereststags'>
-                    <div className='signuppage-intereststags-title'>
-                        <p className='title-input' style={{ margin: '0px', alignSelf: 'center' }}>Interests Tags</p>
-                        <Icon icon={addIcon} style={{ height: '30px' }} onClick={() => setShowTagsPage((p: boolean) => !p)} />
+                    <div className='signuppage-intereststags'>
+                        <div className='signuppage-intereststags-title'>
+                            <p className='title-input' style={{ margin: '0px', alignSelf: 'center' }}>Interests Tags</p>
+                            <Icon icon={addIcon} style={{ height: '30px' }} onClick={() => setShowTagsPage((p: boolean) => !p)} />
+                        </div>
+
+                        {
+                            tags && tags.length > 0 &&
+                            <div className='signuppage-tags'>
+                                {
+                                    tags.map((t: string) =>
+                                        <Tags key={t} tag={t} onClick={() => { removeTag(t, setLocalTags) }} />
+                                    )
+                                }
+                            </div>
+                        }
                     </div>
 
-                    {
-                        tags && tags.length > 0 &&
-                        <div className='signuppage-tags'>
-                            {
-                                tags.map((t: string) =>
-                                    <Tags key={t} tag={t} onClick={() => { removeTag(t, setLocalTags) }} />
-                                )
-                            }
-                        </div>
-                    }
                 </div>
 
             </div>
-
         </div>
     )
 }

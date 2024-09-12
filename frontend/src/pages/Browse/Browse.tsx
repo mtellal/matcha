@@ -7,7 +7,6 @@ import paramsIcon from '../../assets/Params.svg'
 
 import { useBrowserContext } from "../../contexts/BrowserProvider";
 import BrowseUsersList from "./BrowseUsersList/BrowseUsersList";
-import BrowserMenu from "./BrowserMenu/BrowserMenu";
 import TagsPickerPage, { useTagsPage } from "../../components/TagsPickerPage/TagsPickerPage";
 import { useCurrentUser } from "../../contexts/UserContext";
 import { useOutsideComponent } from "../../hooks/useOutsideComponent";
@@ -42,7 +41,6 @@ function MobileMenu({ user, showMenu, setShowMenu }: MobileMenuProps) {
                         onClick={() => setShowMenu((b: boolean) => !b)}
                     />
                 }
-                <BrowserMenu user={user} />
             </div>
         </div>
     )

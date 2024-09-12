@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import '../ProfileUser.css'
 import { differenceInYears, parse } from 'date-fns'
 
-import PhotoCarrousel from "../../../components/PhotoCar/PhotoCarrousel";
+import PhotoCarrousel from "../../../components/PhotoCarrousel/PhotoCarrousel";
 import ProfileInfos from "../../../components/ProfilePage/ProfileInfos/ProfileInfos";
 import PickPhotos from "../../../components/PickPhotos/PickPhotos";
 

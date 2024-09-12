@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import '../ProfileUser.css'
 
-import PhotoCarrousel from "../../../components/PhotoCar/PhotoCarrousel";
+import PhotoCarrousel from "../../../components/PhotoCarrousel/PhotoCarrousel";
 import ProfileInfos from "../../../components/ProfilePage/ProfileInfos/ProfileInfos";
 import { InfoLabel, InfoLabelTags } from "../../../components/ProfilePage/InfoLabel/InfoLabel";
 import { useNavigate, useParams } from "react-router";
