@@ -10,6 +10,11 @@
     min-width: 850px;
 }
 
+.brwuserl-users-c {
+    height: 100%;
+    min-width: 40%;
+}
+
 .brwuserl-users {
     display: grid;
     grid-template: 1fr / 1fr 1fr 1fr 1fr;

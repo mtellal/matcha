@@ -5,8 +5,8 @@ import './ProfilePicture.css'
 
 
 type TProfilePicture = {
-    userId: number, 
-    url: string, 
+    userId: number,
+    url: string,
     onClick?: () => void,
     style?: {}
 }
@@ -14,7 +14,7 @@ type TProfilePicture = {
 export function ProfilePicture(props: TProfilePicture) {
 
     const [userBlocked, setUserBlocked] = useState(false);
-    const {currentUser} = useCurrentUser();
+    const { currentUser } = useCurrentUser();
 
     useEffect(() => {
         if (currentUser && currentUser.blockIds && currentUser.blockIds.length) {
@@ -24,11 +24,23 @@ export function ProfilePicture(props: TProfilePicture) {
     }, [currentUser, props.userId])
 
     return (
-        <img 
-            src={props.url} 
-            className="profilepicture-img" 
-            onClick={props.onClick}
-            style={userBlocked ? {...props.style, opacity: '60%'} : props.style}
-        />
+        <>
+            {
+                props.url ?
+                    <img
+                        src={props.url}
+                        className="profilepicture-img"
+                        onClick={props.onClick}
+                        style={userBlocked ? { ...props.style, opacity: '60%' } : props.style}
+                    />
+                    :
+                    <div
+                        className='profilepicture-img'
+                        style={{ background: 'var(--blue2)' }}
+                        onClick={props.onClick}
+                    >
+                    </div>
+            }
+        </>
     )
 }

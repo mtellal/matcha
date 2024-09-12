@@ -2,13 +2,16 @@ import { useBrowserContext } from "../../../contexts/BrowserProvider";
 import { UserCart } from "../../../components/Label/UserCart/UserCart";
 import './BrowseUsersList.css'
 import { User } from "../../../types";
+import BrowserMenu from "../BrowserMenu/BrowserMenu";
 
-export default function BrowseUsersList() {
+export default function BrowseUsersList({ currentUser }: any) {
 
     const { browseUsers, filterIds, userIdsRef } = useBrowserContext();
 
     return (
         <div className='brwuserl-users-c'>
+                <BrowserMenu user={currentUser} />
+
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <h1 className="userscollection-title brwuserl-title">Recommanded Users</h1>
                 <p className="font-14 brwuserl-nbusers" >{userIdsRef.current && userIdsRef.current.length} users found</p>

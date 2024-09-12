@@ -5,6 +5,7 @@ import { City, Tag, User } from '~/type';
 import { getUserAge, isDate, validEmail, validNames, validUsername } from '~/utils';
 import citiesService from '~/services/cities.service';
 import { Dirent } from 'fs';
+import userPhotosService from '~/services/userPhotos.service';
 
 const fs = require('fs');
 const path = require('path');
@@ -39,6 +40,31 @@ const deleteUsers = exports.deleteUsers = async (req: Request, res: Response) =>
     catch (e) {
         // console.log(e)
         return (res.status(500).json({ message: "Delete users datas failed", error: e }))
+    }
+}
+
+const deleteUserPhoto = exports.deleteUserPhoto = async (req: Request, res: Response) => {
+    try {
+        const userId = res.locals.token.id;
+        const photoIndex = req.params.id
+        if (!photoIndex || photoIndex >= "5")
+            return (res.status(400).json({ message: "Invalid photo index", error: "index need to be between 0 and 4" }))
+
+        await userPhotosService.deletePhotoUser(userId, Number(photoIndex));
+
+        const photoPath = await userPhotosService.getPathFromIds(userId, Number(photoIndex))
+        if (photoPath) {
+            fs.unlink(path.resolve(process.cwd() + `/uploads/${photoPath}`), (err: NodeJS.ErrnoException | null) => {
+                if (err)
+                    console.log("Error: updating photos from user ", userId, err)
+            })
+        }
+
+        return (res.status(200).json({ message: `User photo ${photoIndex} successfully deleted` }))
+    }
+    catch (e) {
+        // console.log(e)
+        return (res.status(500).json({ message: "Delete user photo request failed", error: e }))
     }
 }
 
@@ -358,7 +384,7 @@ const resetPassword = exports.resetPassword = async (req: Request, res: Response
         if (!userId)
             throw "";
         const token = jwt.sign({ resetPassword: true, id: userId }, process.env.JWT_SECRET, { expiresIn: 60 * 20 })
-		const url = `${process.env.FRONT_DOMAIN}/signin/resetPassword?token=${token}`;
+        const url = `${process.env.FRONT_DOMAIN}/signin/resetPassword?token=${token}`;
         await userService.sendMail({
             from: process.env.MAIL_ADDRESS,
             to: req.query.email,
@@ -572,5 +598,6 @@ export default {
     resetPassword,
     updatePassword,
     update,
-    photos
+    photos,
+    deleteUserPhoto
 }

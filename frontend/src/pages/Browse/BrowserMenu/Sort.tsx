@@ -4,20 +4,23 @@ import { useBrowserContext } from "../../../contexts/BrowserProvider";
 import { getUserAge } from "../../../utils";
 import { User } from "../../../types";
 
+import Icon from '../../../assets/Bell.svg'
+import { useOutsideComponent } from "../../../hooks/useOutsideComponent";
+
 type MenuSortProps = {
     title: string
 }
 
 type Sort = {
-    age: string, 
-    location: string, 
-    fameRating: string, 
+    age: string,
+    location: string,
+    fameRating: string,
     commonTags: string
 }
 
 export default function MenuSort(props: MenuSortProps) {
 
-    const { browseUsers, browseDispatch, sortConfigRef }  = useBrowserContext();
+    const { browseUsers, browseDispatch, sortConfigRef } = useBrowserContext();
 
     const [sorts, setSorts] = useState<Sort>({
         age: 'none',
@@ -26,7 +29,12 @@ export default function MenuSort(props: MenuSortProps) {
         commonTags: 'none'
     });
 
+    const sortContainerRef = useRef(null)
+    const [display, setDisplay] = useState(false)
+
     const sortConfigInitRef = useRef(false);
+
+    useOutsideComponent(sortContainerRef, () => setDisplay(false))
 
     useEffect(() => {
         if (sortConfigRef.current && !sortConfigInitRef.current) {
@@ -143,38 +151,72 @@ export default function MenuSort(props: MenuSortProps) {
     }, [sorts])
 
     return (
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', }}>
-            <h1 className="menusort-title">{props.title}</h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', maxWidth: '250px' }}>
-                <PickMenuSmall
-                    title="Age"
-                    options={["younger", "older"]}
-                    value={sorts && sorts.age}
-                    setValue={setAge}
-                    outside={true}
-                />
-                <PickMenuSmall
-                    title="Localisation"
-                    options={["nearer", "furthest"]}
-                    value={sorts && sorts.location}
-                    setValue={setLocation}
-                    outside={true}
-                />
-                <PickMenuSmall
-                    title="Fame Rating"
-                    options={["higher", "lower"]}
-                    value={sorts && sorts.fameRating}
-                    setValue={setFameRating}
-                    outside={true}
-                />
-                <PickMenuSmall
-                    title="Interests Tags"
-                    options={["higher", "lower"]}
-                    value={sorts && sorts.commonTags}
-                    setValue={setCommonTags}
-                    displayUp={true}
-                    outside={true}
-                />
+        <div style={{ position: 'relative' }}>
+
+            <div
+                className="filter-title"
+                style={{
+                    padding: '0px 15px',
+                    borderRadius: '5px',
+                    display: 'flex',
+                    gap: '20px'
+                }}
+                onClick={() => setDisplay(p => !p)}
+            >
+                <p style={{
+                    color: 'white',
+                    fontSize: 'var(--font-400)'
+                }}
+                >Sorts</p>
+                <img src={Icon} style={{ height: '20px', width: '20px', alignSelf: 'center' }} />
+            </div>
+            <div
+                className="sort-container"
+                ref={sortContainerRef}
+                style={{
+                    visibility: display ? 'visible' : 'hidden',
+                    position: 'absolute',
+                    width: '20vw',
+                    background: 'var(--blue3)',
+                    borderRadius: '5px',
+                    marginTop: '10px',
+                    zIndex: '2'
+                }}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
+                    padding: '20px'
+                }}>
+                    <PickMenuSmall
+                        title="Age"
+                        options={["younger", "older"]}
+                        value={sorts && sorts.age}
+                        setValue={setAge}
+                        outside={true}
+                    />
+                    <PickMenuSmall
+                        title="Localisation"
+                        options={["nearer", "furthest"]}
+                        value={sorts && sorts.location}
+                        setValue={setLocation}
+                        outside={true}
+                    />
+                    <PickMenuSmall
+                        title="Fame Rating"
+                        options={["higher", "lower"]}
+                        value={sorts && sorts.fameRating}
+                        setValue={setFameRating}
+                        outside={true}
+                    />
+                    <PickMenuSmall
+                        title="Interests Tags"
+                        options={["higher", "lower"]}
+                        value={sorts && sorts.commonTags}
+                        setValue={setCommonTags}
+                        outside={true}
+                    />
+                </div>
             </div>
         </div>
     )

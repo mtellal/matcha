@@ -8,9 +8,10 @@ import AddIcon from '../../assets/Add_Plus.svg'
 import CrossIcon from '../../assets/cross-svgrepo-com.svg'
 import { Icon } from "../Icons/Icon";
 import { UserPhoto } from "../../types";
+import { requestDeleteUserPhoto } from "../../requests";
 
 
-function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto }: any) {
+function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto, onChangeProps }: any) {
 
     const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -18,6 +19,7 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto }: a
                 let url = window.URL.createObjectURL(e.target.files[0]);
                 const photoIndexs = photos.map((p: UserPhoto) => p.index);
                 if (photoIndexs.includes(index)) {
+                    onChangeProps()
                     setPhotos((t: UserPhoto[]) =>
                         t.map((p: UserPhoto) => p.index === index ?
                             { url, index: index, file: e.target.files[0] } : p));
@@ -28,7 +30,7 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto }: a
             }
             catch (e) { }
         }
-    }, [photos])
+    }, [photos, onChangeProps])
 
     return (
         <div className="photocar-c1-c">
@@ -77,10 +79,19 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto }: a
 }
 
 
-export default function PhotoCarrousel({ currentUser, photos, setPhotos }: any) {
+export default function PhotoCarrousel({ currentUser, photos, setPhotos, onChangeProps }: any) {
 
 
-    const [index, setIndex] = useState(1);
+    const [index, setIndex] = useState(0);
+
+    useEffect(() => {
+        if (photos) {
+            //init index to first find photo
+            const validPhoto = photos.find((e: UserPhoto) => e.url !== "")
+            if (validPhoto)
+                setIndex(validPhoto.index)
+        }
+    }, [photos])
 
     const extractURL = (id: number) => {
         if (photos) {
@@ -92,13 +103,12 @@ export default function PhotoCarrousel({ currentUser, photos, setPhotos }: any) 
 
     const deletePhoto = useCallback((id: number) => {
         if (photos && setPhotos) {
-            const photoObj = photos.map((p: UserPhoto) => {
-                if (p.index === id) {
-                    return { index: p.index, url: "" }
-                }
-                return p
-            })
+            const photoObj = photos.map((p: UserPhoto) => p.index === id ?
+                { index: p.index, url: "" } : p
+            )
+            //onChangeProps()
             setPhotos(photoObj)
+            requestDeleteUserPhoto(id)
         }
     }, [setPhotos, photos])
 
@@ -113,8 +123,7 @@ export default function PhotoCarrousel({ currentUser, photos, setPhotos }: any) 
                         {
                             photos[index - 1].url ?
                                 < img className="photocar-image" src={extractURL(index - 1)} />
-                                :
-                                <div className="photocar-noimage"></div>
+                                : <div className="photocar-noimage"></div>
                         }
                         <div className="photocar-shadow-left">
                             <Icon
@@ -136,11 +145,16 @@ export default function PhotoCarrousel({ currentUser, photos, setPhotos }: any) 
                         index={index}
                         extractURL={extractURL}
                         deletePhoto={deletePhoto}
+                        onChangeProps={onChangeProps}
                     />
                     :
                     <div className="photocar-c1-c">
                         <div className="photocar-c1">
-                            < img className="photocar-image" src={extractURL(index)} />
+                            {
+                                photos[index] && photos[index].url ?
+                                    < img className="photocar-image" src={extractURL(index)} />
+                                    : <div className="photocar-noimage"></div>
+                            }
                         </div>
                     </div>
             }
@@ -153,8 +167,8 @@ export default function PhotoCarrousel({ currentUser, photos, setPhotos }: any) 
                     <>
                         {
                             photos[index + 1].url ?
-                                < img className="photocar-image" src={extractURL(index + 1)} /> :
-                                <div className="photocar-noimage"></div>
+                                < img className="photocar-image" src={extractURL(index + 1)} /> 
+                                : <div className="photocar-noimage"></div>
                         }
                         <div className="photocar-shadow-right">
                             <Icon

@@ -40,8 +40,15 @@ const updateUserPhotos = exports.updateUserPhotos = async (userId: number, fileN
     return (await pool.query(query, params))
 }
 
+const deletePhotoUser = exports.deletePhotoUser = async (userId: number, photoIndex: number) => {
+    
+    const query = `DELETE FROM userPhotos WHERE userId=? AND photoId=?;`
+    return (await pool.query(query, [userId, userId * 5 + photoIndex]))
+}
+
 export default {
     getUserPhotos,
     getPathFromIds,
     updateUserPhotos,
+    deletePhotoUser
 }

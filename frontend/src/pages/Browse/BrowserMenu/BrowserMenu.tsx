@@ -12,10 +12,11 @@ type BrowserMenu = {
 export default function BrowserMenu(props: BrowserMenu) {
 
     return (
-        <div className="browsermenu" >
-            <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+
+        <div className="browsermenu">
+            {/* <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
                 <MenuFilterSearch title="Advanced Search" {...props} />
-            </div>
+            </div> */}
             <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
                 <MenuFilter title="Filter" />
             </div>

@@ -42,19 +42,6 @@ io.of("/").use(SocketJWTAuthentification)
 io.of("/").on("connection", (socket: Socket) => {
 	socketIds.addSocketId(socket);
 	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
-	console.log("///////////////   socket connected ///////////////");
     UserEvents(io, socket, socketIds);
     socket.on('disconnect', (reason: DisconnectReason) => {
         socketIds.deleteSocketId(socket.data.token.id)
@@ -97,6 +84,7 @@ app.patch("/user/confirmAccount", JWTAuthentification, userController.confirmAcc
 app.patch("/user/photos", JWTAuthentification, userController.photos)
 
 app.delete("/user/deleteUsers", userController.deleteUsers)
+app.delete("/user/photo/:id", JWTAuthentification, userController.deleteUserPhoto)
 
 // CONVERSATIONS
 

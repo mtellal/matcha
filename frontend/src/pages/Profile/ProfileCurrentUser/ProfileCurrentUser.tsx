@@ -58,6 +58,8 @@ export default function ProfileCurrentUser() {
             url: "",
         }
     ]);
+
+    const [triggerUpdatePhotos, setTriggerUpdatePhotos] = useState<boolean>(false)
     const [error, setError] = useState("");
 
     const initRef = useRef(false);
@@ -68,7 +70,7 @@ export default function ProfileCurrentUser() {
             if (currentUser.photos) {
                 const indexPhotosUser = currentUser.photos.map(e => e.index)
                 const initPhotos = photos.map(e => indexPhotosUser.includes(e.index) ? currentUser.photos.find(v => e.index == v.index) : e)
-               setPhotos(initPhotos)
+                setPhotos(initPhotos)
             }
             initRef.current = true
         }
@@ -91,7 +93,6 @@ export default function ProfileCurrentUser() {
     }
 
     const updatePhotos = useCallback(async () => {
-
         setEditPhotos((p: boolean) => !p);
 
         let updatePhotos = [];
@@ -104,8 +105,8 @@ export default function ProfileCurrentUser() {
                 updatePhotos.push(photos[i])
         }
 
-        console.log(updatePhotos)
         if (updatePhotos.length) {
+            setTriggerUpdatePhotos(false)
             await updatePhotosRequest(updatePhotos)
                 .catch(err => { })
         }
@@ -171,12 +172,17 @@ export default function ProfileCurrentUser() {
                     currentUser={true}
                     photos={photos}
                     setPhotos={setPhotos}
+                    onChangeProps= {() => setTriggerUpdatePhotos(true)}
                 />
-                <ButtonLarge
-                    title="Valid"
-                    style={{ marginTop: '2vh' }}
-                    onClick={updatePhotos}
-                />
+
+                <div style={{visibility: triggerUpdatePhotos === true ? 'visible' : 'hidden'}}>
+                    <ButtonLarge
+                        title="Valid"
+                        style={{ marginTop: '2vh' }}
+                        onClick={updatePhotos}
+                    />
+                </div>
+
                 {error && <p className="font-14" style={{ color: 'var(--red)' }}>{error}</p>}
             </div>
 

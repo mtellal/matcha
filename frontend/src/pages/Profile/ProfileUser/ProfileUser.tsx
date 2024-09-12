@@ -22,7 +22,28 @@ export default function ProfileUser() {
     const { currentUser } = useCurrentUser();
 
     const [user, setUser] = useState<User>();
-    const [photos, setPhotos] = useState([]);
+    const [photos, setPhotos] = useState([
+        {
+            index: 0,
+            url: "",
+        },
+        {
+            index: 1,
+            url: "",
+        },
+        {
+            index: 2,
+            url: "",
+        },
+        {
+            index: 3,
+            url: "",
+        },
+        {
+            index: 4,
+            url: "",
+        }
+    ]);
 
     const userLoadedRef = useRef(false);
 
@@ -78,7 +99,11 @@ export default function ProfileUser() {
         <div className="profileuser">
             <div className="profileuser-c1">
                 <div className="profileuser-carousel">
-                    <PhotoCarrousel currentUser={false} photos={photos} user={user} />
+                    <PhotoCarrousel
+                        currentUser={false}
+                        photos={photos}
+                        user={user}
+                    />
                     <ProfileInfos user={user} isCurrentUser={user && currentUser && user.userId === currentUser.userId} />
 
                 </div>

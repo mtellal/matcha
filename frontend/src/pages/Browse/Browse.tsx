@@ -89,29 +89,15 @@ export default function Browse() {
 
 
     return (
-        <div className="browse" style={{ position: 'relative' }}>
+        <div
+            className="browse">
             <TagsPickerPage>
                 <div ref={usersContainerRef} className="browse-users">
-                    <BrowseUsersList />
-                </div>
-                {
-                    width < 1150 && !showMenu &&
-                    <div className="browse-slidemenu">
-                        <img
-                            className="browse-slidemenu-img"
-                            src={paramsIcon}
-                            onClick={() => setShowMenu((b: boolean) => !b)}
-                        />
-                    </div>
-                }
-                {
-                    (width >= 1150 || (showMenu)) &&
-                    <MobileMenu
-                        user={currentUser}
-                        showMenu={showMenu}
-                        setShowMenu={setShowMenu}
+                    <BrowseUsersList
+                        currentUser={currentUser}
                     />
-                }
+                </div>
+
             </TagsPickerPage>
         </div>
     )

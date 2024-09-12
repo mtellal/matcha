@@ -24,8 +24,13 @@ const getUserPhotosIndexs = exports.getUserPhotosIndexs = async (userId: string 
     return ([])
 }
 
+const deletePhotoUser = exports.deletePhotoUser = async (userId: number, photoIndex: number) => {
+    return (await userPhotosModels.deletePhotoUser(userId, photoIndex))
+}
+
 export default {
     getUserPhotosIndexs,
     getPathFromIds,
-    updateUserPhotos
+    updateUserPhotos, 
+    deletePhotoUser
 }

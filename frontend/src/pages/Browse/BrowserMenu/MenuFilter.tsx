@@ -4,6 +4,10 @@ import InputRangeText from "../../../components/Inputs/InputRangeText/InputRange
 import { getUserAge } from "../../../utils";
 import { User } from "../../../types";
 
+import Icon from '../../../assets/Bell.svg'
+import InputLabelIcon from "../../../components/Inputs/InputLabelIcon/InputLabelIcon";
+import { useOutsideComponent } from "../../../hooks/useOutsideComponent";
+
 type Values = {
     value1: string,
     value2: string
@@ -27,7 +31,12 @@ export default function MenuFilter(props: { title: string }) {
         commonTagsRange: { value1: '', value2: '' }
     });
 
+    const [display, setDisplay] = useState(false)
+
     const filterInitRef = useRef(false);
+    const filterContainerRef = useRef(null)
+
+    useOutsideComponent(filterContainerRef, () => setDisplay(false))
 
     useEffect(() => {
         if (filterConfigRef.current && !filterInitRef.current) {
@@ -155,53 +164,89 @@ export default function MenuFilter(props: { title: string }) {
     }, [filters.ageRange, filters.locationRange, filters.fameRatingRange, filters.commonTagsRange])
 
     return (
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', }}>
-            <h1 className="menusort-title">{props.title}</h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', maxWidth: '250px' }}>
-                <InputRangeText
-                    id='filter-agerange'
-                    label="Age range"
-                    value1={filters.ageRange.value1}
-                    value2={filters.ageRange.value2}
-                    setValue1={setAgeRange1}
-                    setValue2={setAgeRange2}
-                    placeholder1="25"
-                    placeholder2="35"
-                    maxLength={2}
-                />
-                <InputRangeText
-                    id='filter-distrange'
-                    label="Distance range"
-                    value1={filters.locationRange.value1}
-                    value2={filters.locationRange.value2}
-                    setValue1={setLocationRange1}
-                    setValue2={setLocationRange2}
-                    placeholder1="0"
-                    placeholder2="100"
-                    maxLength={3}
-                />
-                <InputRangeText
-                    id='filter-ratingrange'
-                    label="Fame Rating range"
-                    value1={filters.fameRatingRange.value1}
-                    value2={filters.fameRatingRange.value2}
-                    setValue1={setFameRating1}
-                    setValue2={setFameRating2}
-                    placeholder1="0"
-                    placeholder2="5"
-                    maxLength={1}
-                />
-                <InputRangeText
-                    id='filter-tagsrange'
-                    label="Common Tags range"
-                    value1={filters.commonTagsRange.value1}
-                    value2={filters.commonTagsRange.value2}
-                    setValue1={setCommonTagsRange1}
-                    setValue2={setCommonTagsRange2}
-                    placeholder1="2"
-                    placeholder2="5"
-                    maxLength={2}
-                />
+        <div style={{ position: 'relative' }}>
+
+            <div
+                className="filter-title"
+                style={{
+                    padding: '0px 15px',
+                    borderRadius: '5px',
+                    display: 'flex',
+                    gap: '20px'
+                }}
+                onClick={() => setDisplay(p => !p)}
+            >
+                <p style={{
+                    color: 'white',
+                    fontSize: 'var(--font-400)'
+                }}
+                >Filters</p>
+
+                <img src={Icon} style={{ height: '20px', width: '20px', alignSelf: 'center' }} />
+            </div>
+            <div
+                className="sort-container"
+                ref={filterContainerRef}
+                style={{
+                    visibility: display ? 'visible' : 'hidden',
+                    position: 'absolute',
+                    width: '20vw',
+                    background: 'var(--blue3)',
+                    borderRadius: '5px',
+                    marginTop: '10px',
+                    zIndex: '2'
+                }}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
+                    padding: '20px'
+                }}>
+                    <InputRangeText
+                        id='filter-agerange'
+                        label="Age range"
+                        value1={filters.ageRange.value1}
+                        value2={filters.ageRange.value2}
+                        setValue1={setAgeRange1}
+                        setValue2={setAgeRange2}
+                        placeholder1="25"
+                        placeholder2="35"
+                        maxLength={2}
+                    />
+                    <InputRangeText
+                        id='filter-distrange'
+                        label="Distance range"
+                        value1={filters.locationRange.value1}
+                        value2={filters.locationRange.value2}
+                        setValue1={setLocationRange1}
+                        setValue2={setLocationRange2}
+                        placeholder1="0"
+                        placeholder2="100"
+                        maxLength={3}
+                    />
+                    <InputRangeText
+                        id='filter-ratingrange'
+                        label="Fame Rating range"
+                        value1={filters.fameRatingRange.value1}
+                        value2={filters.fameRatingRange.value2}
+                        setValue1={setFameRating1}
+                        setValue2={setFameRating2}
+                        placeholder1="0"
+                        placeholder2="5"
+                        maxLength={1}
+                    />
+                    <InputRangeText
+                        id='filter-tagsrange'
+                        label="Common Tags range"
+                        value1={filters.commonTagsRange.value1}
+                        value2={filters.commonTagsRange.value2}
+                        setValue1={setCommonTagsRange1}
+                        setValue2={setCommonTagsRange2}
+                        placeholder1="2"
+                        placeholder2="5"
+                        maxLength={2}
+                    />
+                </div>
             </div>
         </div>
     )

@@ -101,6 +101,12 @@ export async function updatePhotosRequest(photos: any[]) {
 }
 
 
+/// DELETE 
+
+export async function requestDeleteUserPhoto(photoIndex: number) {
+    return (axios.delete(`${apiURL}/user/photo/${photoIndex}`))
+}
+
 
 /* ////////////////////         / C O N V E R S A T I O N S       //////////////////// */
 

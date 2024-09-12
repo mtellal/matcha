@@ -24,7 +24,6 @@ function UserInfos({ user }: { user: User }) {
             <NotificationsMenu />
             <ProfilePicture
                 userId={user && user.userId}
-                style={{ height: '50px', width: '50px' }}
                 url={user && user.photos && user.photos[0] && user.photos[0].url}
                 onClick={() => navigate("/profile")}
             />
