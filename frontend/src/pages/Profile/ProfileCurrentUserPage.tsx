@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "react-router";
 
 import './ProfileCurrentUserPage.css'
-import TagsPickerPage from "../../../../components/TagsPickerPage/TagsPickerPage";
+import TagsPickerPage from "../../components/TagsPickerPage/TagsPickerPage";
 
 
 export default function ProfileCurrentUserPage() {

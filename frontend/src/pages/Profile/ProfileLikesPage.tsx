@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
-import { UserCart } from "../../../../components/Label/UserCart/UserCart";
-import { useLikesContext } from "../../../../contexts/LikesProvider";
-import { UsersList } from "../../../../components/UsersList/UsersList";
+import { useLikesContext } from "../../contexts/LikesProvider";
+import { UsersList } from "../../components/UsersList/UsersList";
 
 export default function ProfileLikesPage() {
     const {

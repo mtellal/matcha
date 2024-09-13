@@ -72,11 +72,12 @@ p {
 
 .app-carts-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: var(--font-400);
+  font-size: 15px;
+  font-weight: 400;
   color: white;
   margin: 5px 0;
   align-self: center;
-  max-width: 350px;
+  max-width: 400px;
   margin-bottom: 5vh;
   padding: 0 5px;
 }

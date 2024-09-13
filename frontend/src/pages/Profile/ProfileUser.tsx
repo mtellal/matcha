@@ -1,18 +1,26 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import '../ProfileUser.css'
 
-import PhotoCarrousel from "../../../components/PhotoCarrousel/PhotoCarrousel";
-import ProfileInfos from "../../../components/ProfilePage/ProfileInfos/ProfileInfos";
-import { InfoLabel, InfoLabelTags } from "../../../components/ProfilePage/InfoLabel/InfoLabel";
+import PhotoCarrousel from "../../components/PhotoCarrousel/PhotoCarrousel";
+import { InfoLabel, InfoLabelTags } from "../../components/ProfilePage/InfoLabel/InfoLabel";
 import { useNavigate, useParams } from "react-router";
-import { getUserPhotoRequest, getUserRequest, } from "../../../requests";
-import { useUserSocket } from "../../../contexts/UserSocketProvider";
-import { useCurrentUser } from "../../../contexts/UserContext";
-import Biolabel from "../../../components/Label/BioLabel/BioLabel";
-import { User, UserPhoto } from "../../../types";
+import { getUserPhotoRequest, getUserRequest, } from "../../requests";
+import { useUserSocket } from "../../contexts/UserSocketProvider";
+import { useCurrentUser } from "../../contexts/UserContext";
+import Biolabel from "../../components/Label/BioLabel/BioLabel";
+import { User, UserPhoto } from "../../types";
 import { AxiosResponse } from "axios";
+import ProfileInfosUser from "../../components/ProfilePage/ProfileInfos/ProfileInfosUser/ProfileInfosUser";
 
+import HeartBorder from '../../assets/Heart_Border.svg';
+import eyeIcon from '../../assets/eye.svg';
+import starIcon from '../../assets/Star.svg';
+import { convertDate } from "../../utils";
+
+
+import './ProfileUser.css'
+import ProfileUserPref from "../../components/ProfilePage/ProfileUserPref/ProfileUserPref";
+import { BioLabelEdit } from "./BioLabelEdit";
 
 export default function ProfileUser() {
 
@@ -104,22 +112,26 @@ export default function ProfileUser() {
                         photos={photos}
                         user={user}
                     />
-                    <ProfileInfos user={user} isCurrentUser={user && currentUser && user.userId === currentUser.userId} />
-
                 </div>
             </div>
 
             <div className="profileuser-infos">
-                <div className="profileuserpref-informations">
-                    <InfoLabel title="Gender" text={user && user.gender} />
-                    <InfoLabel title="Sexual Preferences" text={user && user.sexualPreferences} />
-                    <InfoLabelTags title="Interests Tags" tags={user && user.tags} seeCommonTags={true} />
-                </div>
+
+                <ProfileUserPref
+                    user={user}
+                    setUser={null}
+                    setEditInfos={null}
+                    editing={false}
+                    editable={false}
+                />
 
                 <div className="profileuser-biolabel">
-                    <Biolabel
-                        title="Biography"
-                        value={user && user.biography}
+                    <BioLabelEdit
+                        user={currentUser}
+                        profileUser={null}
+                        setProfileUser={null}
+                        editBio={false}
+                        setEditBio={null}
                     />
                 </div>
             </div>

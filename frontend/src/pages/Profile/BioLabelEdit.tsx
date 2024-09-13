@@ -1,7 +1,7 @@
 import { useCallback } from "react"
-import { updateUserRequest } from "../../../../requests"
-import Biolabel from "../../../../components/Label/BioLabel/BioLabel"
-import { User } from "../../../../types"
+import { updateUserRequest } from "../../requests"
+import Biolabel from "../../components/Label/BioLabel/BioLabel"
+import { User } from "../../types"
 
 type TBioLabelEdit = {
     user: User

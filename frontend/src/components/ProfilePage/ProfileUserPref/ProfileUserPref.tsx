@@ -19,7 +19,10 @@ import ProfileInfosUser from "../ProfileInfos/ProfileInfosUser/ProfileInfosUser"
 import HeartBorder from '../../../assets/Heart_Border.svg';
 import eyeIcon from '../../../assets/eye.svg';
 import starIcon from '../../../assets/Star.svg';
+import { convertDate } from "../../../utils";
 
+
+import '../ProfileInfos/ProfileInfos.css'
 
 type ProfileUserPrefEditProps = {
     user: User,
@@ -57,17 +60,13 @@ function ProfileUserPrefEdit(props: ProfileUserPrefEditProps) {
     }, [removeTagFunctionRef])
 
 
-    function setGender(s: string) {
-        props.setUser((u: User) => ({ ...u, gender: s }))
-    }
+    function setGender(s: string) { props.setUser((u: User) => ({ ...u, gender: s })) }
 
-    function setSexualPreferences(s: string) {
-        props.setUser((u: User) => ({ ...u, sexualPreferences: s }))
-    }
+    function setSexualPreferences(s: string) { props.setUser((u: User) => ({ ...u, sexualPreferences: s })) }
 
     return (
         <>
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <PickMenuSmall
                     title="Gender"
                     options={["male", "female"]}
@@ -108,22 +107,11 @@ type TProfileUserPref = {
     user: User,
     setUser: (U: User | ((u: User) => User)) => void,
     editing: boolean,
+    editable: boolean,
     setEditInfos: (p: boolean | ((b: boolean) => boolean)) => void,
 }
 
 export default function ProfileUserPref(props: TProfileUserPref) {
-
-
-    function convertDate(inputISOString: string) {
-        const inputDate = new Date(inputISOString);
-        const year = inputDate.getFullYear().toString().slice(-2);
-        const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
-        const day = inputDate.getDate().toString().padStart(2, '0');
-        const hours = inputDate.getHours().toString().padStart(2, '0');
-        const minutes = inputDate.getMinutes().toString().padStart(2, '0');
-        const seconds = inputDate.getSeconds().toString().padStart(2, '0');
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    }
 
     return (
         <div className="profileuserpref-informations" style={{ position: 'relative' }}>
@@ -135,23 +123,27 @@ export default function ProfileUserPref(props: TProfileUserPref) {
                     </>
                     :
                     <>
-                        <ProfileInfosUser user={props.user} isCurrentUser={true} />
+                        <ProfileInfosUser user={props.user} isCurrentUser={false} />
 
-                        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white' }}>
+
                             <div className="profileinfos-infos">
-                                <img src={HeartBorder} className="profileinfos-infos-icon" />
+                                <img src={HeartBorder} style={{ height: '20px', width: '20px' }} />
                                 <p className="profileinfos-name">{props.user && String(props.user.likes)}</p>
                             </div>
+
                             <div className="profileinfos-infos">
                                 <img src={eyeIcon} className="profileinfos-infos-icon" />
                                 <p className="profileinfos-name">{props.user && String(props.user.views)}</p>
                             </div>
+
                             <div className="profileinfos-infos">
                                 <img src={starIcon} className="profileinfos-infos-icon" />
                                 <p className="profileinfos-name">
                                     {props.user && String(props.user.fameRating)}
                                 </p>
                             </div>
+
                             <div className="profileinfos-infos">
                                 <div className="profileinfos-infos-icon-status" style={(true || props.user?.status) ? { backgroundColor: 'var(--green' } : {}} ></div>
                                 <p
@@ -170,13 +162,16 @@ export default function ProfileUserPref(props: TProfileUserPref) {
                         <InfoLabelTags title="Interests Tags" tags={props.user && props.user.tags} />
                     </>
             }
-            <div className="profileuserpref-informations-editicon" >
-                <RoundIconBorder
-                    icon={props.editing ? checkIcon : pencilIcon}
-                    onClick={() => props.setEditInfos((p: boolean) => !p)}
-                    style={{ height: '100%', width: '100%' }}
-                />
-            </div>
+            {
+                props.editable &&
+                <div className="profileuserpref-informations-editicon" >
+                    <RoundIconBorder
+                        icon={props.editing ? checkIcon : pencilIcon}
+                        onClick={() => props.setEditInfos((p: boolean) => !p)}
+                        style={{ height: '100%', width: '100%' }}
+                    />
+                </div>
+            }
         </div>
     )
 }

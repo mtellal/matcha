@@ -1,10 +1,10 @@
 .input {
-    width: 96%;
+    width: 92%;
     height: 60px;
     border-radius: 5px;
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: #13182D;
-    padding: 0 2%;
+    padding: 0 4%;
 
     caret-color: white;
     color: white;
@@ -19,7 +19,7 @@
     color: rgba(255, 255, 255);
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 

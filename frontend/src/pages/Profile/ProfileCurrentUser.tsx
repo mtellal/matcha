@@ -1,20 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import '../ProfileUser.css'
+import './ProfileUser.css'
 import { differenceInYears, parse } from 'date-fns'
 
-import PhotoCarrousel from "../../../components/PhotoCarrousel/PhotoCarrousel";
-import ProfileInfos from "../../../components/ProfilePage/ProfileInfos/ProfileInfos";
-import PickPhotos from "../../../components/PickPhotos/PickPhotos";
+import PhotoCarrousel from "../../components/PhotoCarrousel/PhotoCarrousel";
+import ProfileUserPref from "../../components/ProfilePage/ProfileUserPref/ProfileUserPref";
 
-import ProfileUserPref from "../../../components/ProfilePage/ProfileUserPref/ProfileUserPref";
-
-import { updatePhotosRequest, updateUserRequest } from "../../../requests";
-import { useCurrentUser } from "../../../contexts/UserContext";
-import { BioLabelEdit } from "./BioLabelEdit/BioLabelEdit";
-import { validateEmail, validateNames } from "../../../utils";
-import { City, User, UserPhoto } from "../../../types";
-import { ButtonLarge } from "../../../components/Buttons/ButtonLarge";
+import { updatePhotosRequest, updateUserRequest } from "../../requests";
+import { useCurrentUser } from "../../contexts/UserContext";
+import { BioLabelEdit } from "./BioLabelEdit";
+import { validateEmail, validateNames } from "../../utils";
+import { City, User, UserPhoto } from "../../types";
+import { ButtonLarge } from "../../components/Buttons/ButtonLarge";
 
 //        const keys = ["email", "username", "firstName", "lastName", "age", "location", "city"];
 
@@ -193,6 +190,7 @@ export default function ProfileCurrentUser() {
                     setUser={setProfileUser}
                     setEditInfos={updateInfos}
                     editing={editInfos}
+                    editable={true}
                 />
 
                 <div className="profileuser-biolabel">

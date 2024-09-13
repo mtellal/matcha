@@ -10,15 +10,15 @@ import SignupPage, { SignupPageForm } from './pages/Signup/SignupPage';
 import SignupInfosPage from './pages/Signup/SignupInfos/SignupInfosPage';
 import SignupPhotosPage from './pages/Signup/SignupPhotos/SignupPhotosPage';
 import ForgotPasswordPage from './pages/ForgotPassword/ForgotPasswordPage';
-import ProfileCurrentUser from './pages/Profile/ProfileCurrentUser/ProfileCurrentUser';
+import ProfileCurrentUser from './pages/Profile/ProfileCurrentUser';
 
 import Browse from './pages/Browse/Browse';
 import Chat, { ChatMessenger } from './pages/Chat/ChatPage';
 import ResetPasswordPage from './pages/ResetPassword/ResetPasswordPage';
-import ProfileUser from './pages/Profile/ProfileUser/ProfileUser';
-import ProfileCurrentUserPage from './pages/Profile/ProfileCurrentUser/Page/ProfileCurrentUserPage';
-import ProfileViewsPage from './pages/Profile/ProfileCurrentUser/ProfileViewsPage/ProfileViewsPage'
-import ProfileLikesPage from './pages/Profile/ProfileCurrentUser/ProfileLikesPage/ProfileLikesPage'
+import ProfileUser from './pages/Profile/ProfileUser';
+import ProfileCurrentUserPage from './pages/Profile/ProfileCurrentUserPage';
+import ProfileViewsPage from './pages/Profile/ProfileViewsPage'
+import ProfileLikesPage from './pages/Profile/ProfileLikesPage'
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ConfirmAccountPage from './pages/Signup/ConfirmAccountPage/ConfirmAccountPage';
 

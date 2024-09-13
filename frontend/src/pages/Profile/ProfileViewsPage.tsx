@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { useViewContext } from "../../../../contexts/ViewsProvider";
+import { useViewContext } from "../../contexts/ViewsProvider";
 
-import { UsersList } from "../../../../components/UsersList/UsersList";
+import { UsersList } from "../../components/UsersList/UsersList";
 
 export default function ProfileViewsPage() {
     const {

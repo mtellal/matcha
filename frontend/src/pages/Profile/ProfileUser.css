@@ -1,12 +1,10 @@
 .profileuser {
     display: flex;
-    width: 90%;
+    flex-direction: column;
+    width: 100%;
     overflow-y: auto;
-    overflow-x: hidden;
     justify-content: center;
     align-items: center;
-    height: 90%;
-    padding: 5%;
 }
 
 .profileuser-carousel {

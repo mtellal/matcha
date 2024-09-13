@@ -12,7 +12,7 @@ import UserSocketProvider from './contexts/UserSocketProvider';
 import NotificationsProvider from './contexts/NotificationsProvider';
 
 
-import loveIllustration from './assets/loveIllustration1.jpg'
+import loveIllustration from './assets/loveIllustration1.png'
 import cartsUsers from './assets/carts_users.png'
 
 import './pages/Singin/SigninPage.css'

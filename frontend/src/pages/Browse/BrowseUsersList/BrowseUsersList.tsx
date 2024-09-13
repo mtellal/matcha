@@ -19,9 +19,9 @@ export default function BrowseUsersList({ currentUser }: any) {
                 <MenuSort title="Sort" />
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <h1 className="userscollection-title brwuserl-title">Recommanded Users</h1>
-                <p className="font-14 brwuserl-nbusers" >{userIdsRef.current && userIdsRef.current.length} users found</p>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', padding: '15px 0', justifyContent: 'space-between'}}>
+                <h1 className="userscollection-title brwuserl-title" style={{alignSelf: 'center', height: '100%', margin: '0', fontWeight: '500', fontSize: '14'}}>Recommanded Users</h1>
+                <p className="font-14" style={{alignSelf: 'center', height: '100%', fontWeight: '400', fontSize: '13px'}}>{userIdsRef.current && userIdsRef.current.length} users found</p>
             </div>
             <div className="brwuserl-users">
                 {
