@@ -1,19 +1,19 @@
 .chatmenu {
     flex: 3;
     max-width: 30%;
-    background-color: var(--purple1);
+    background-color: var(--blue1);
     border-radius: 5px 0 0 5px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid white;
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
     overflow: hidden;
+    padding: 3%;
+    gap: 20px;
 }
 
 .chatmenu-title {
     display: flex;
     align-items: center;
-    height: 70px;    
-    padding: 0 10px;
 }
 
 .chatmenu-title>h1 {
@@ -32,6 +32,7 @@
 }
 
 .chatmenu-conversation-c {
+    height: 100%;
     overflow: auto;
     display: flex;
     flex-direction: column;

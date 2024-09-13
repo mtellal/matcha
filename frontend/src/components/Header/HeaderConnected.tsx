@@ -27,7 +27,6 @@ function UserInfos({ user }: { user: User }) {
                 url={user && user.photos && user.photos[0] && user.photos[0].url}
                 onClick={() => navigate("/profile")}
             />
-            <p className="header-c2-username">{user && user.firstName}</p>
             <ButtonBorder
                 style={{ marginLeft: '2vw', padding: '15px' }}
                 title="Logout"
@@ -90,7 +89,7 @@ export default function HeaderConnected() {
                             style={style(location.pathname, "/profile")}
                             onClick={() => onClick("/profile")} />
                         <ButtonBorderMenu
-                            title="Browse"
+                            title="Search"
                             style={style(location.pathname, "/browse")} onClick={() => onClick("/browse")} />
                         <ButtonBorderMenu
                             title="Chat"

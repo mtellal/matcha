@@ -8,6 +8,7 @@ import { ChangeEvent } from 'react';
 type BiolabelProps = {
     title: string,
     value: string,
+    editable: boolean,
     isCurrentUser?: boolean,
     editing?: boolean,
     editClick?: () => void,
@@ -46,7 +47,7 @@ export default function Biolabel(props: BiolabelProps) {
                 />
             </div>
             {
-                props.isCurrentUser &&
+                props.isCurrentUser && props.editable &&
                 <div className="biolabel-absolute-c">
                     {
                         props.editing &&

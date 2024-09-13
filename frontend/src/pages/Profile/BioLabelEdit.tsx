@@ -8,6 +8,7 @@ type TBioLabelEdit = {
     profileUser: User,
     setProfileUser: (u: User | ((u: User) => User)) => void,
     editBio: boolean,
+    editable: boolean,
     setEditBio: (b: boolean | ((B: boolean) => boolean)) => void
 }
 
@@ -16,6 +17,7 @@ export function BioLabelEdit({
     profileUser,
     setProfileUser,
     editBio,
+    editable,
     setEditBio
 }: TBioLabelEdit) {
 
@@ -41,6 +43,7 @@ export function BioLabelEdit({
             setValue={setBio}
             isCurrentUser={true}
             editing={editBio}
+            editable={editable}
             editClick={updateBiography}
             maxLength={400}
         />

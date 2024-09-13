@@ -2,7 +2,7 @@
     width: 96%;
     height: 50px;
     border-radius: 5px;
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: #13182D;
     padding: 0 2%;
     display: flex;

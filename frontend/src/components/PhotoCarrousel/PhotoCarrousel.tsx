@@ -19,10 +19,11 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto, onC
                 let url = window.URL.createObjectURL(e.target.files[0]);
                 const photoIndexs = photos.map((p: UserPhoto) => p.index);
                 if (photoIndexs.includes(index)) {
-                    onChangeProps()
-                    setPhotos((t: UserPhoto[]) =>
-                        t.map((p: UserPhoto) => p.index === index ?
-                            { url, index: index, file: e.target.files[0] } : p));
+                    if (onChangeProps)
+                        onChangeProps()
+                    const newPhotos = photos.map((p: UserPhoto) => p.index === index ?
+                    { url, index: index, file: e.target.files[0] } : p) 
+                    setPhotos(newPhotos);
                 }
                 else {
                     setPhotos([...photos, { url, index: index, file: e.target.files[0] }]);

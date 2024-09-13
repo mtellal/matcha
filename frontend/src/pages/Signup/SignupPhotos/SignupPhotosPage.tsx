@@ -2,16 +2,11 @@
 import './SignupPhotosPage.css'
 import '../../../generic.css'
 import { useState } from 'react';
-import { ButtonWrapper } from '../../../components/Buttons/ButtonWrapper';
-
-import arroRightIcon from '../../../assets/Arrow_Right.svg';
-import PickPhotos from '../../../components/PickPhotos/PickPhotos';
 
 import { useNavigate } from 'react-router';
 import { updatePhotosRequest } from '../../../requests';
 import { ButtonLarge } from '../../../components/Buttons/ButtonLarge';
 import PhotoCarrousel from '../../../components/PhotoCarrousel/PhotoCarrousel';
-import PhotoCar from '../../../components/PhotoCarrousel/PhotoCarrousel';
 import { UserPhoto } from '../../../types';
 
 export default function SignupPhotosPage() {
@@ -65,7 +60,8 @@ export default function SignupPhotosPage() {
             </p>
             <p className='c-description'>To uncover the most relevant profiles, we require additional details about you.</p>
             <div className='signup-photos-c'>
-                <PhotoCarrousel 
+                <PhotoCarrousel
+                    currentUser={true}
                     photos={photos}
                     setPhotos={setPhotos}
                 />

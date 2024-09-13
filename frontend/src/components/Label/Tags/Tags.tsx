@@ -74,7 +74,7 @@ export function TagsRaw(props: TTagRaw) {
             className="tags"
             style={props.selected ? {cursor: 'unset', paddingRight: '5px', backgroundColor: 'var(--purple4'} : {cursor: 'unset', paddingRight: '5px'}}
         >
-            <p className="tag-text" style={{ margin: '0' }} >#{props.tag}</p>
+            <p className="tag-text" style={{ margin: '0' }} >{props.tag}</p>
         </div>
     )
 }

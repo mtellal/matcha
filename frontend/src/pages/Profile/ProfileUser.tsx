@@ -2,20 +2,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 
 import PhotoCarrousel from "../../components/PhotoCarrousel/PhotoCarrousel";
-import { InfoLabel, InfoLabelTags } from "../../components/ProfilePage/InfoLabel/InfoLabel";
 import { useNavigate, useParams } from "react-router";
 import { getUserPhotoRequest, getUserRequest, } from "../../requests";
 import { useUserSocket } from "../../contexts/UserSocketProvider";
 import { useCurrentUser } from "../../contexts/UserContext";
-import Biolabel from "../../components/Label/BioLabel/BioLabel";
 import { User, UserPhoto } from "../../types";
 import { AxiosResponse } from "axios";
-import ProfileInfosUser from "../../components/ProfilePage/ProfileInfos/ProfileInfosUser/ProfileInfosUser";
-
-import HeartBorder from '../../assets/Heart_Border.svg';
-import eyeIcon from '../../assets/eye.svg';
-import starIcon from '../../assets/Star.svg';
-import { convertDate } from "../../utils";
 
 
 import './ProfileUser.css'
@@ -60,10 +52,9 @@ export default function ProfileUser() {
             getUserPhotoRequest(i, parseInt(id), 400)
                 .then(res => {
                     if (res && res.data) {
-                        if (i === 0)
-                            setPhotos((p: UserPhoto[]) => [{ index: 0, url: window.URL.createObjectURL(new Blob([res.data])) }, ...p])
-                        else
-                            setPhotos((p: UserPhoto[]) => [...p, { index: 0, url: window.URL.createObjectURL(new Blob([res.data])) }])
+                        setPhotos((photos: UserPhoto[]) => photos.map((photo: UserPhoto) =>
+                            photo.index === i ? { ...photo, url: window.URL.createObjectURL(new Blob([res.data])) } : photo
+                        ))
                     }
                 })
                 .catch(err => { })
@@ -104,35 +95,37 @@ export default function ProfileUser() {
     }, [id, currentUser, userLoadedRef.current])
 
     return (
-        <div className="profileuser">
-            <div className="profileuser-c1">
-                <div className="profileuser-carousel">
-                    <PhotoCarrousel
-                        currentUser={false}
-                        photos={photos}
-                        user={user}
-                    />
-                </div>
-            </div>
+        <div className="profilepage-c">
 
-            <div className="profileuser-infos">
+            <div className="profileuser">
+                <div>
 
-                <ProfileUserPref
-                    user={user}
-                    setUser={null}
-                    setEditInfos={null}
-                    editing={false}
-                    editable={false}
-                />
+                    <div className="profileuser-carousel">
+                        <PhotoCarrousel
+                            currentUser={false}
+                            photos={photos}
+                            user={user}
+                        />
+                    </div>
 
-                <div className="profileuser-biolabel">
-                    <BioLabelEdit
-                        user={currentUser}
-                        profileUser={null}
-                        setProfileUser={null}
-                        editBio={false}
-                        setEditBio={null}
-                    />
+                    <div className="profileuser-infos">
+
+                        <ProfileUserPref
+                            user={user}
+                            setUser={null}
+                            setEditInfos={null}
+                            editing={false}
+                            editable={false}
+                        />
+                        <BioLabelEdit
+                            user={user}
+                            profileUser={user}
+                            setProfileUser={null}
+                            editBio={null}
+                            setEditBio={null}
+                            editable={false}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

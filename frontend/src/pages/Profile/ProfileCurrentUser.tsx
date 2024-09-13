@@ -197,6 +197,7 @@ export default function ProfileCurrentUser() {
                     profileUser={profileUser}
                     setProfileUser={setProfileUser}
                     editBio={editBio}
+                    editable={true}
                     setEditBio={setEditBio}
                 />
             </div>

@@ -14,10 +14,10 @@
     align-items: flex-start;
     background-color: rgba(0, 0, 0, 0.2);
     padding: 20px;
-    height: fit-content;
     border-radius: 5px;
-    min-width: 40vw;
-    min-height: 60vh;
+    min-width: 80vh;
+    min-height: 80%;
+    height: fit-content;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -29,10 +29,9 @@
 }
 
 .userslist-no-users {
-    margin: 0;
     color: rgb(250, 250, 250, 0.7);
-    align-self: center;
-    margin-top: 50%;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .userslist-users {
