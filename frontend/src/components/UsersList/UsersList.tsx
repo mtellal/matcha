@@ -5,7 +5,7 @@ import './UsersList.css'
 import { User } from "../../types"
 
 type UsersListProps = {
-    title: string, 
+    title: string,
     usersContainerRef: RefObject<any>,
     userIdsRef: RefObject<number[]>,
     users: User[]
@@ -15,9 +15,9 @@ export function UsersList({ title, usersContainerRef, userIdsRef, users }: Users
     return (
         <div className="userslist" ref={usersContainerRef}>
             <div className='userslist-users-c'>
-                <div className="userslist-users-c1">
-                    <h1 className="userscollection-title" style={{ margin: '0 0 20px 0', color: 'white' }}>{title}</h1>
-                    <p className="font-14" style={{ paddingBottom: '5px' }}>{userIdsRef.current && userIdsRef.current.length} users found</p>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', padding: '15px 0', justifyContent: 'space-between', width: '100%' }}>
+                    <h1 className="userscollection-title brwuserl-title" style={{ alignSelf: 'center', height: '100%', margin: '0', fontWeight: '500', fontSize: '14' }}>Likes</h1>
+                    <p className="font-14" style={{ alignSelf: 'center', height: '100%', fontWeight: '400', fontSize: '13px' }}>{userIdsRef.current && userIdsRef.current.length} users found</p>
                 </div>
                 {
                     !userIdsRef.current || !userIdsRef.current.length ?

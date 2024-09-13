@@ -60,7 +60,7 @@ export default function HeaderConnected() {
 
     const style = useCallback((pathname: string, value: string) => {
         if (pathname === value) {
-            return ({ backgroundColor: 'var(--purple2)' });
+            return ({ backgroundColor: 'var(--blue1)' });
         }
         else if (value === "/chat" && newNotifChat) {
             return ({ border: '1px solid white' });

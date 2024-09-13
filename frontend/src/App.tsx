@@ -80,7 +80,7 @@ export function AuthenticateSpace() {
                            <UserSocketProvider>
                               <HeaderConnected />
                               <div style={{ height: '93vh', width: '100%' }}>
-                                 <Outlet context={{ user, salut: "dfwfw" }} />
+                                 <Outlet context={{ user }} />
                               </div>
                            </UserSocketProvider>
                         </NotificationsProvider>

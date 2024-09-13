@@ -4,21 +4,21 @@
 }
 
 .inputsmall {
-    width: 100%;
+    width: 92%;
     height: 35px;
     border-radius: 5px;
     border: none;
-    background-color: #13182D;
-    padding: 0 5px;
+    background-color: var(--blue1);
+    padding: 0 4%;
 
 
     caret-color: white;
     color: white;
-    color: rgba(255, 255, 255);
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 

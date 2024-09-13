@@ -2,7 +2,8 @@
 .profileuserpref-informations {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 50px;
+    width: 600px;
     max-width: 500px;
 }
 
@@ -17,11 +18,8 @@
 
 .profileuserpref-tags {
     display: flex;
-    width: 400px;
-    max-height: 100px;
     flex-wrap: wrap;
     gap: 5px;
-    overflow-y: auto;
 }
 
 

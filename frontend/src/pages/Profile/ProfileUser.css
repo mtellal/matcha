@@ -1,27 +1,22 @@
 .profileuser {
-    display: flex;
-    flex-direction: column;
     width: 100%;
-    overflow-y: auto;
-    justify-content: center;
-    align-items: center;
+    background-color: #00000066;
+    overflow: auto;
+    padding: 0 0 10vh 0
 }
 
 .profileuser-carousel {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 5vh;
-    height: auto;
-    flex: 2;
-    aspect-ratio: 2/1;
+    margin: 10vh 0 5vh 0;
 }
 
 .profileuser-infos {
-    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 10vh;
     padding: 0 10px;
 }

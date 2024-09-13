@@ -21,7 +21,8 @@
 
 .option-text {
     color: white;
-    font-size: var(--font-400);
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .option-text-icon {

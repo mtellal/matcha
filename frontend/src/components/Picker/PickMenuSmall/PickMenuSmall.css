@@ -11,7 +11,7 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     align-self: flex-start;
-    margin: 0 0 3px 0;
+    margin: 0 0 5px 0;
 }
 
 .pickmenusmall-select {
@@ -36,12 +36,13 @@
 .pickmenusmall-menu {
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
     background-color: #4A4E69;
     position: absolute;
     width: 100%;
     top: 60px;
     z-index: 2;
+    margin: 2px 0px;
+    border-radius: 5px;
 }
 
 .pickmenusmall-options {
@@ -55,13 +56,13 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
     padding: 0 15px;
     cursor: pointer;
 }
 
 .pickmenusmall-options:hover {
-    background-color: #9A8C98;
+    background-color: var(--purple3);
 }
 
 

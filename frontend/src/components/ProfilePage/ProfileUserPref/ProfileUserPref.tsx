@@ -123,7 +123,7 @@ export default function ProfileUserPref(props: TProfileUserPref) {
                     </>
                     :
                     <>
-                        <ProfileInfosUser user={props.user} isCurrentUser={false} />
+                        <ProfileInfosUser user={props.user} isCurrentUser={true} />
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white' }}>
 

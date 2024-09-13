@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: center;
     font-size: var(--font-500);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .browse-users {

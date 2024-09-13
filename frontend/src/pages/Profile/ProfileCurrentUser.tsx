@@ -169,10 +169,10 @@ export default function ProfileCurrentUser() {
                     currentUser={true}
                     photos={photos}
                     setPhotos={setPhotos}
-                    onChangeProps= {() => setTriggerUpdatePhotos(true)}
+                    onChangeProps={() => setTriggerUpdatePhotos(true)}
                 />
 
-                <div style={{visibility: triggerUpdatePhotos === true ? 'visible' : 'hidden'}}>
+                <div style={{ visibility: triggerUpdatePhotos === true ? 'visible' : 'hidden' }}>
                     <ButtonLarge
                         title="Valid"
                         style={{ marginTop: '2vh' }}
@@ -192,16 +192,13 @@ export default function ProfileCurrentUser() {
                     editing={editInfos}
                     editable={true}
                 />
-
-                <div className="profileuser-biolabel">
-                    <BioLabelEdit
-                        user={currentUser}
-                        profileUser={profileUser}
-                        setProfileUser={setProfileUser}
-                        editBio={editBio}
-                        setEditBio={setEditBio}
-                    />
-                </div>
+                <BioLabelEdit
+                    user={currentUser}
+                    profileUser={profileUser}
+                    setProfileUser={setProfileUser}
+                    editBio={editBio}
+                    setEditBio={setEditBio}
+                />
             </div>
         </div>
     )
