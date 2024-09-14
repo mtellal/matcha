@@ -113,6 +113,24 @@
 
 }
 
+.photocar-c1-heart-container {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    bottom: -20px;
+    right: -20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue2);
+}
+
+.photocar-c1-heart-container:hover {
+    background-color: var(--purple1);
+    cursor: pointer;
+}
+
 @media screen and (max-width:700px) {
     .photocar-heart1 {
         height: 30px;

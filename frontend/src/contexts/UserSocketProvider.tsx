@@ -26,14 +26,14 @@ export default function UserSocketProvider({ children }: { children: ReactNode }
 
 
     useEffect(() => {
-        const socket = io(`https://matcha.mezyann.fr`, {
+        const socket = io(`http://localhost:3000`, {
             transports: ['websocket'],
             withCredentials: true,
         })
 
         socket.on('connect', () => {
             setUserSocket(socket)
-		console.log("socket connected frontend")
+		//console.log("socket connected frontend")
         })
 
         return () => {

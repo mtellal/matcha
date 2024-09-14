@@ -25,12 +25,9 @@ export default function UserLabel({ user, message, onClick }: UserLabelProps) {
             </div>
             <div className="userlabel-infos">
                 <div className="usrlabel-usrinfos">
-                    <p className="userlabel-infos-username">{user && user.firstName}, </p>
-                    <p className="usrlabel-font-18">{user && getUserAge(user.age)} - </p>
-                    <p className="usrlabel-font-16">{user && user.city && user.city.name}</p>
-                    <p className="usrlabel-font-16">{user && user.department && user.department.name}</p>
+                    <p className="userlabel-infos-username" style={{fontSize: '16px'}}>{user && user.firstName}</p>
                 </div>
-                <p className="userlabel-infos-msg">{message || "no messages"}</p>
+                <p className="userlabel-infos-msg" style={{fontSize: '12px', color: 'rgba(255,255,255,0.5)'}}>{message || "no messages"}</p>
             </div>
         </div>
     )

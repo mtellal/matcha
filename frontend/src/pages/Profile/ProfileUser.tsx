@@ -9,7 +9,6 @@ import { useCurrentUser } from "../../contexts/UserContext";
 import { User, UserPhoto } from "../../types";
 import { AxiosResponse } from "axios";
 
-
 import './ProfileUser.css'
 import ProfileUserPref from "../../components/ProfilePage/ProfileUserPref/ProfileUserPref";
 import { BioLabelEdit } from "./BioLabelEdit";
@@ -20,6 +19,8 @@ export default function ProfileUser() {
     const navigate = useNavigate();
     const { userSocket } = useUserSocket();
     const { currentUser } = useCurrentUser();
+
+    const [isLiked, setLike] = useState(false)
 
     const [user, setUser] = useState<User>();
     const [photos, setPhotos] = useState([
@@ -94,38 +95,62 @@ export default function ProfileUser() {
         }
     }, [id, currentUser, userLoadedRef.current])
 
+    useEffect(() => {
+        if (user) {
+            setLike(user.isLiked)
+        }
+    }, [user])
+
+    const likeProfile = useCallback(async () => {
+        console.log(userSocket, user)
+        if (userSocket && user) {
+            if (isLiked) {
+                console.log("unlike user")
+                // console.log("emitted unlike profile event with ", props.user.userId)
+                userSocket.emit("unlike", user.userId);
+            }
+            else {
+                console.log("like user")
+                // console.log("emitted like profile event with ", props.user.userId)
+                userSocket.emit("like", user.userId);
+            }
+            setLike((p: boolean) => !p)
+        }
+    }, [user, isLiked, userSocket]);
+
+
     return (
         <div className="profilepage-c">
 
             <div className="profileuser">
-                <div>
 
-                    <div className="profileuser-carousel">
-                        <PhotoCarrousel
-                            currentUser={false}
-                            photos={photos}
-                            user={user}
-                        />
-                    </div>
+                <div className="profileuser-carousel">
+                    <PhotoCarrousel
+                        isCurrentUser={false}
+                        photos={photos}
+                        onLike={() => likeProfile()}
+                        isLiked={isLiked}
+                        setPhotos={null}
+                        onChangeProps={null}
+                    />
+                </div>
 
-                    <div className="profileuser-infos">
-
-                        <ProfileUserPref
-                            user={user}
-                            setUser={null}
-                            setEditInfos={null}
-                            editing={false}
-                            editable={false}
-                        />
-                        <BioLabelEdit
-                            user={user}
-                            profileUser={user}
-                            setProfileUser={null}
-                            editBio={null}
-                            setEditBio={null}
-                            editable={false}
-                        />
-                    </div>
+                <div className="profileuser-infos">
+                    <ProfileUserPref
+                        user={user}
+                        setUser={null}
+                        setEditInfos={null}
+                        editing={false}
+                        editable={false}
+                    />
+                    <BioLabelEdit
+                        user={user}
+                        profileUser={user}
+                        setProfileUser={null}
+                        editBio={null}
+                        setEditBio={null}
+                        editable={false}
+                    />
                 </div>
             </div>
         </div>

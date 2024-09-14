@@ -10,6 +10,9 @@ import { Icon } from "../Icons/Icon";
 import { UserPhoto } from "../../types";
 import { requestDeleteUserPhoto } from "../../requests";
 
+import HeartBorder from '../../assets/Heart_Border.svg'
+import HeartFill from '../../assets/Heart_Fill.svg'
+
 
 function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto, onChangeProps }: any) {
 
@@ -22,7 +25,7 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto, onC
                     if (onChangeProps)
                         onChangeProps()
                     const newPhotos = photos.map((p: UserPhoto) => p.index === index ?
-                    { url, index: index, file: e.target.files[0] } : p) 
+                        { url, index: index, file: e.target.files[0] } : p)
                     setPhotos(newPhotos);
                 }
                 else {
@@ -79,9 +82,24 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto, onC
     )
 }
 
+type PhotoCarrouselPropsType = {
+    key: any,
+    isCurrentUser: boolean,
+    photos: UserPhoto[],
+    setPhotos: (x: any) => any,
+    onChangeProps?: () => any,
+    isLiked?: boolean,
+    onLike?: (a: any) => any
+}
 
-export default function PhotoCarrousel({ currentUser, photos, setPhotos, onChangeProps }: any) {
-
+export default function PhotoCarrousel({
+    isCurrentUser,
+    photos,
+    setPhotos,
+    onChangeProps,
+    isLiked,
+    onLike
+}: any) {
 
     const [index, setIndex] = useState(0);
 
@@ -138,7 +156,7 @@ export default function PhotoCarrousel({ currentUser, photos, setPhotos, onChang
             </div>
 
             {
-                currentUser && photos ?
+                isCurrentUser && photos ?
                     <PhotoContainer
                         key={index}
                         photos={photos}
@@ -149,12 +167,19 @@ export default function PhotoCarrousel({ currentUser, photos, setPhotos, onChang
                         onChangeProps={onChangeProps}
                     />
                     :
-                    <div className="photocar-c1-c">
+                    <div className="photocar-c1-c" style={{ position: 'relative' }}>
                         <div className="photocar-c1">
                             {
                                 photos[index] && photos[index].url ?
                                     < img className="photocar-image" src={extractURL(index)} />
                                     : <div className="photocar-noimage"></div>
+                            }
+                        </div>
+                        <div className="photocar-c1-heart-container" onClick={onLike} >
+                            {
+                                isLiked ?
+                                    <img src={HeartFill} style={{ height: '80%' }} /> :
+                                    <img src={HeartBorder} style={{ height: '80%' }} />
                             }
                         </div>
                     </div>
@@ -168,7 +193,7 @@ export default function PhotoCarrousel({ currentUser, photos, setPhotos, onChang
                     <>
                         {
                             photos[index + 1].url ?
-                                < img className="photocar-image" src={extractURL(index + 1)} /> 
+                                < img className="photocar-image" src={extractURL(index + 1)} />
                                 : <div className="photocar-noimage"></div>
                         }
                         <div className="photocar-shadow-right">

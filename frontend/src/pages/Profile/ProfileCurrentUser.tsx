@@ -166,8 +166,8 @@ export default function ProfileCurrentUser() {
             <div className="profileuser-carousel">
                 <PhotoCarrousel
                     key={photos}
-                    currentUser={true}
                     photos={photos}
+                    isCurrentUser={true}
                     setPhotos={setPhotos}
                     onChangeProps={() => setTriggerUpdatePhotos(true)}
                 />
