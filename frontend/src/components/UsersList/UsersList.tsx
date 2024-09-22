@@ -32,7 +32,6 @@ export function UsersList({ title, usersContainerRef, userIdsRef, users }: Users
                                         <UserCart
                                             key={u.userId}
                                             user={u}
-                                            profilePicture={u && u.photos && u.photos.length ? u.photos[0].url : null}
                                         />
                                     )
                             }

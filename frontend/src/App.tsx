@@ -65,31 +65,3 @@ export function NotAuthenticateSpace() {
    );
 }
 
-export function AuthenticateSpace() {
-
-   const { user }: { user?: User } = useLoaderData();
-
-   return (
-      <UserProvider _user={user}>
-         <div className="App">
-            <ViewsProvider>
-               <LikesProvider>
-                  <BrowserProvider>
-                     <ChatProvider>
-                        <NotificationsProvider>
-                           <UserSocketProvider>
-                              <HeaderConnected />
-                              <div style={{ height: '93vh', width: '100%' }}>
-                                 <Outlet context={{ user }} />
-                              </div>
-                           </UserSocketProvider>
-                        </NotificationsProvider>
-                     </ChatProvider>
-                  </BrowserProvider>
-               </LikesProvider>
-            </ViewsProvider>
-         </div>
-      </UserProvider>
-   );
-}
-

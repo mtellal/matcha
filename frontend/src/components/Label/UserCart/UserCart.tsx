@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import pinIcon from '../../../assets/Map_Pin.svg'
 
 import './UserCart.css'
@@ -7,38 +7,60 @@ import HeartBlue from '../../../assets/Heart_Blue.svg'
 import { useCurrentUser } from '../../../contexts/UserContext';
 import { getUserAge } from '../../../utils';
 import { User, UserPhoto } from '../../../types';
+import { getUserPhotoRequest } from '../../../requests';
+import { useBrowserContext } from '../../../contexts/BrowserProvider';
 
 
 type TUserCart = {
     user: User,
-    profilePicture: string
 }
 
-export function UserCart({ user, profilePicture }: TUserCart) {
+export function UserCart({ user }: TUserCart) {
 
     const { currentUser } = useCurrentUser();
+    const [profilePicture, setProfilePicture] = useState("")
 
+    const { browseDispatch } = useBrowserContext()
     const navigate = useNavigate();
 
     const navigateProfile = useCallback(async () => {
         navigate(`/profile/${user.userId}`, { state: { user: user } })
     }, [user])
 
-    // console.log(profilePicture)
+
+    useEffect(() => {
+        if (user) {
+            if (user.photos)
+                setProfilePicture(user.photos[0].url || null)
+            else {
+                getUserPhotoRequest(0, user.userId, 400)
+                    .then(res => {
+                        setProfilePicture(window.URL.createObjectURL(res.data))
+                        browseDispatch({ type: 'addUserPhotos', data: res.data, userId: user.userId })
+                    })
+                    .catch(err => { })
+            }
+        }
+    }, [user])
+
 
     return (
         <div className="usercart-user-c" onClick={navigateProfile}>
             <div style={{ position: 'relative', minHeight: '70%' }}>
-                <img
-                    loading='lazy'
-                    className="usercart-user-img"
-                    src={profilePicture}
-                    style={
-                        currentUser && currentUser.blockIds && currentUser.blockIds.length && user &&
-                            currentUser.blockIds.find((id: number) => id === user.userId) ?
-                            { opacity: '50%' } : {}
-                    }
-                />
+                {
+                    !profilePicture ?
+                        <div className='usercart-user-img' style={{ background: 'var(--purple1)' }}></div> :
+                        <img
+                            loading='lazy'
+                            className="usercart-user-img"
+                            src={profilePicture}
+                            style={
+                                currentUser && currentUser.blockIds && currentUser.blockIds.length && user &&
+                                    currentUser.blockIds.find((id: number) => id === user.userId) ?
+                                    { opacity: '50%' } : {}
+                            }
+                        />
+                }
                 {user.likedYou ? <img src={HeartBlue} className='usrcart-heart' /> : null}
             </div>
             <div className="usercart-user-infos">

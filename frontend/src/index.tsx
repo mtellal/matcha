@@ -1,26 +1,45 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { NotAuthenticateSpace, AuthenticateSpace, authenticateLoader } from './App';
+import { NotAuthenticateSpace, authenticateLoader } from './App';
 import HomePage from './pages/HomePage/HomePage';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SigninPage from './pages/Singin/SigninPage';
 import SignupPage, { SignupPageForm } from './pages/Signup/SignupPage';
+import ForgotPasswordPage from './pages/ForgotPassword/ForgotPasswordPage';
+
+
 import SignupInfosPage from './pages/Signup/SignupInfos/SignupInfosPage';
 import SignupPhotosPage from './pages/Signup/SignupPhotos/SignupPhotosPage';
-import ForgotPasswordPage from './pages/ForgotPassword/ForgotPasswordPage';
-import ProfileCurrentUser from './pages/Profile/ProfileCurrentUser';
 
-import Browse from './pages/Browse/Browse';
-import Chat, { ChatMessenger } from './pages/Chat/ChatPage';
-import ResetPasswordPage from './pages/ResetPassword/ResetPasswordPage';
-import ProfileUser from './pages/Profile/ProfileUser';
-import ProfileCurrentUserPage from './pages/Profile/ProfileCurrentUserPage';
-import ProfileViewsPage from './pages/Profile/ProfileViewsPage'
-import ProfileLikesPage from './pages/Profile/ProfileLikesPage'
-import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ConfirmAccountPage from './pages/Signup/ConfirmAccountPage/ConfirmAccountPage';
+
+import ErrorPage from './pages/ErrorPage/ErrorPage';
+import LoadingPageFallback from './pages/LoadingPageFallback/LoadingPageFallback';
+
+
+const Browse = lazy(() => import("./pages/Browse/Browse"))
+const ResetPasswordPage = lazy(() => import("./pages/ResetPassword/ResetPasswordPage"))
+const ProfileUser = lazy(() => import("./pages/Profile/ProfileUser"))
+const ProfileCurrentUserPage = lazy(() => import("./pages/Profile/ProfileCurrentUserPage"))
+const ProfileViewsPage = lazy(() => import("./pages/Profile/ProfileViewsPage"))
+const ProfileLikesPage = lazy(() => import("./pages/Profile/ProfileLikesPage"))
+const ProfileCurrentUser = lazy(() => import("./pages/Profile/ProfileCurrentUser"))
+const Chat = lazy(() => import("./pages/Chat/ChatPage"))
+const ChatMessenger = lazy(() => import("./pages/Chat/ChatMessenger"))
+
+const AuthenticateSpace = lazy(() => import("./pages/AuthenticateSpace"))
+
+
+const LoadingPage = ({ fallback, children }: any) => {
+  return (
+    <Suspense fallback={fallback}>
+      {children}
+    </Suspense>
+  )
+}
+
 
 const router = createBrowserRouter([
   {
@@ -70,43 +89,43 @@ const router = createBrowserRouter([
   },
   {
     path: "",
-    element: <AuthenticateSpace />,
+    element: <LoadingPage fallback={<LoadingPageFallback />} children={<AuthenticateSpace />} />,
     loader: authenticateLoader,
     errorElement: <ErrorPage />,
     children: [
       {
         path: "profile",
-        element: <ProfileCurrentUserPage />,
+        element: <LoadingPage fallback={<LoadingPageFallback />} children={<ProfileCurrentUserPage />} />,
         children: [
           {
             path: "",
-            element: <ProfileCurrentUser />
+            element: <LoadingPage fallback={<LoadingPageFallback />} children={<ProfileCurrentUser />} />
           },
           {
             path: "likes",
-            element: <ProfileLikesPage />
+            element: <LoadingPage fallback={<LoadingPageFallback />} children={<ProfileLikesPage />} />
           },
           {
             path: "views",
-            element: <ProfileViewsPage />
+            element: <LoadingPage fallback={<LoadingPageFallback />} children={<ProfileViewsPage />} />
           }
         ]
       },
       {
-        path: "/profile/:id", 
-        element: <ProfileUser />
+        path: "/profile/:id",
+        element: <LoadingPage fallback={<LoadingPageFallback />} children={<ProfileUser />} />
       },
       {
         path: "browse",
-        element: <Browse />
+        element: <LoadingPage fallback={<LoadingPageFallback />} children={<Browse />} />
       },
       {
         path: "chat",
-        element: <Chat />, 
+        element: <LoadingPage fallback={<LoadingPageFallback />} children={<Chat />} />,
         children: [
           {
-            path: ":id", 
-            element: <ChatMessenger />
+            path: ":id",
+            element: <Suspense><ChatMessenger /></Suspense>
           }
         ]
       }
@@ -116,5 +135,5 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <RouterProvider router={router} />
+  <RouterProvider router={router} />
 );

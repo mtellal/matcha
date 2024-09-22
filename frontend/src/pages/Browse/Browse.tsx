@@ -11,6 +11,8 @@ import TagsPickerPage, { useTagsPage } from "../../components/TagsPickerPage/Tag
 import { useCurrentUser } from "../../contexts/UserContext";
 import { useOutsideComponent } from "../../hooks/useOutsideComponent";
 import { User } from "../../types";
+import { getBrowseUsersRequest } from "../../requests";
+import { AxiosResponse } from "axios";
 
 
 type MobileMenuProps = {
@@ -50,7 +52,7 @@ function MobileMenu({ user, showMenu, setShowMenu }: MobileMenuProps) {
 export default function Browse() {
 
     const { currentUser } = useCurrentUser();
-    const { loadMoreUsers, scrollHeightRef } = useBrowserContext();
+    const { browseUsers, loadUsers, loadMoreUsers, scrollHeightRef } = useBrowserContext();
 
     const { width } = useWindowDimensions();
     const [showMenu, setShowMenu] = useState(false);
@@ -59,6 +61,10 @@ export default function Browse() {
 
     const loadingUsers = useRef(false);
     const scrollInitRef = useRef(false);
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
 
     useEffect(() => {
         if (!scrollInitRef.current && scrollHeightRef.current && usersContainerRef.current) {

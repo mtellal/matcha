@@ -1,9 +1,10 @@
-import { Dispatch, MutableRefObject, ReactNode, createContext, useContext, useEffect, useReducer, useRef, useState } from "react";
+import { Dispatch, MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
 import { getAdvancedBrowseUsersRequest, getBrowseUsersRequest, getUserAdavancedOptionsRequest, getUserPhotoRequest, getUserRequest } from "../requests";
 import { AdvancedOptions, City, User } from "../types";
 import { AxiosResponse } from "axios";
 
 type BrowserContextType = {
+    loadUsers: () => {},
     userIdsRef: MutableRefObject<number[]>,
     browseUsers: User[],
     browseDispatch: Dispatch<any>,
@@ -35,6 +36,10 @@ export function browserReducer(browseUsers: User[], action: any) {
                     action.userIds.map((id: number) => browseUsers.find((u: User) => u.userId === id))
                 )
             }
+        }
+        case ('addUsers'): {
+            if (action.users)
+                return ([...browseUsers, ...action.users])
         }
         case ('addUser'): {
             if (action.user)
@@ -86,10 +91,10 @@ export default function BrowserProvider({ children }: { children: ReactNode }) {
 
     const scrollHeightRef = useRef(0);
 
-
     async function loadUsersDatas(userIds: number[], advancedOptions: AdvancedOptions) {
         try {
             if (userIds && userIds.length) {
+                let newUsers = []
                 for (let id of userIds) {
                     try {
                         let res;
@@ -97,20 +102,13 @@ export default function BrowserProvider({ children }: { children: ReactNode }) {
                             res = await getUserAdavancedOptionsRequest(id, advancedOptions)
                         else
                             res = await getUserRequest(id)
-                        let user = res.data.user;
-                        browseDispatch({ type: 'addUser', user: user })
-                        if (user && parseInt(user.nbPhotos)) {
-                            getUserPhotoRequest(0, Number(id), 400)
-                                .then(res => {
-                                    browseDispatch({ type: 'addUserPhotos', data: res.data, userId: id })
-                                })
-                                .catch(err => { })
-                        }
+                        newUsers.push(res.data.user)
                     }
                     catch (e) {
                         // console.log(e)
                     }
                 }
+                browseDispatch({ type: 'addUsers', users: newUsers })
             }
         }
         catch (e) {
@@ -127,22 +125,24 @@ export default function BrowserProvider({ children }: { children: ReactNode }) {
         }
     }
 
-    async function loadUsers() {
-        advancedOptionsRef.current = null;
-        userIdsIndexRef.current = 20;
+    const loadUsers = useCallback(async () => {
+        if (userIdsRef.current.length === 0) {
+            advancedOptionsRef.current = null;
+            userIdsIndexRef.current = 20;
 
-        let userIds = await getBrowseUsersRequest()
-            .then(async (res: AxiosResponse) => res.data.users)
-            .catch(err => { })
+            let userIds = await getBrowseUsersRequest()
+                .then(async (res: AxiosResponse) => res.data.users)
+                .catch(err => { })
 
-        browseDispatch({ type: 'removeUsers' })
-        userIdsRef.current = userIds
-        if (userIds && userIds.length) {
-            userIds = userIds.slice(0, 20);
-            loadUsersDatas(userIds, null);
+            browseDispatch({ type: 'removeUsers' })
+            userIdsRef.current = userIds
+            if (userIds && userIds.length) {
+                userIds = userIds.slice(0, 20);
+                loadUsersDatas(userIds, null);
+            }
+            return (userIds)
         }
-        return (userIds)
-    }
+    }, [])
 
     async function loadUsersAdvanced(advancedOptions: AdvancedOptions) {
         advancedOptionsRef.current = advancedOptions
@@ -161,13 +161,10 @@ export default function BrowserProvider({ children }: { children: ReactNode }) {
         return (userIds)
     }
 
-    useEffect(() => {
-        loadUsers();
-    }, [])
-
     return (
         <BrowserContext.Provider
             value={{
+                loadUsers,
                 userIdsRef,
                 browseUsers,
                 browseDispatch,

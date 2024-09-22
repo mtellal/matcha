@@ -6,4 +6,4 @@ npm start
 
 #npm install -g serve
 #npm run build
-serve -s build -l 8080
+#serve -s build -l 8080

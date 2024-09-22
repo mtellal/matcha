@@ -19,7 +19,6 @@ export default function UsersCollection(props: TUsersCollection) {
                             <UserCart
                                 key={o.id || o.userId}
                                 user={o}
-                                profilePicture={o.photos && o.photos[0] ? o.photos[0].url : null}
                             />
                         )
                     }
