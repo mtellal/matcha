@@ -1,5 +1,5 @@
 import { MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
-import { getUserPhotoRequest, getUserRequest, getUserViews } from "../requests";
+import { getProfilePicture, getUserPhotoRequest, getUserRequest, getUserViews } from "../requests";
 import { User } from "../types";
 import { AxiosResponse } from "axios";
 
@@ -34,7 +34,6 @@ export default function ViewsProvider({ children }: { children: ReactNode }) {
     const userIdsIndexRef = useRef(20);
 
     const scrollHeightRef = useRef(0);
-
 
 
     async function loadUsersDatas(userIds: number[]) {
@@ -85,14 +84,13 @@ export default function ViewsProvider({ children }: { children: ReactNode }) {
                     user = res.data.user;
                     setViewUsers((users: User[]) => [...users, res.data.user])
                     if (user && Number(user.nbPhotos)) {
-                        getUserPhotoRequest(0, Number(id), 400)
+                        getProfilePicture(id)
                             .then(res => {
                                 const photos = [{ index: 0, url: window.URL.createObjectURL(res.data) }]
                                 setViewUsers((_users: User[]) =>
                                     _users.map((u: User) => u.userId === id ? ({ ...u, photos }) : u)
                                 )
                             })
-                            .catch(err => { })
                     }
                 })
         }

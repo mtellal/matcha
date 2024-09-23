@@ -92,6 +92,28 @@ const notifications = exports.notifications = async (req: Request, res: Response
     }
 }
 
+
+const profilePicture = exports.profilePicture = async (req: Request, res: Response) => {
+    console.log("profilePicture controller called")
+    try {
+        let userId = req.params.id;
+        let pathFile = await userPhotosService.getUserProfilePicture(userId);
+        console.log("reuslt from pathFile => ", pathFile)
+        sharp(path.join(__dirname, "../../uploads", pathFile))
+            .jpeg()
+            .toBuffer()
+            .then((data: any) => res.type('jpeg').status(200).send(data))
+            .catch((err: Error) => {
+                console.log("Error: sharp resize function failed")
+                // console.log(err)
+            })
+    }
+    catch (e) {
+        // console.log(e)
+        return (res.status(400).json({ message: "Photo not found" }))
+    }
+}
+
 const photo = exports.photo = async (req: Request, res: Response) => {
     try {
         let userId = res.locals.token.id;
@@ -584,6 +606,7 @@ const photos = exports.photos = async (req: Request & { files: any }, res: Respo
 
 export default {
     users,
+    profilePicture,
     deleteUsers,
     confirmAccount,
     notifications,

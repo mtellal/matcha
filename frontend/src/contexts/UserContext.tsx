@@ -56,7 +56,6 @@ export function UserProvider({ children, _user }: UserProviderProps) {
         userPhotosLoadedRef.current = true;
     }
 
-
     useEffect(() => {
         if (_user) {
             setCurrentUser((u: User) => ({ ...u, ..._user }));

@@ -16,6 +16,12 @@ const getUserPhotos = exports.getUserPhotos = async (userId: string | number) =>
     return (await pool.query(query, [userId]))
 }
 
+const getUserProfilePicture = exports.getUserProfilePicture = async (userId: string | number) => {
+    const query = `SELECT * from userPhotos WHERE userId=? GROUP BY photoId ORDER BY photoId ASC;`
+    return (await pool.query(query, [userId]))
+}
+
+
 const getPathFromIds = exports.getPathFromIds = async (userId: number, index: number) => {
     const query = `SELECT path FROM userPhotos WHERE userId=? AND photoId=? ;`
     return (await pool.query(query, [userId, Number(userId) * 5 + Number(index)]))
@@ -48,6 +54,7 @@ const deletePhotoUser = exports.deletePhotoUser = async (userId: number, photoIn
 
 export default {
     getUserPhotos,
+    getUserProfilePicture,
     getPathFromIds,
     updateUserPhotos,
     deletePhotoUser

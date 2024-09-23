@@ -1,5 +1,5 @@
 import { Dispatch, MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
-import { getConversationMessagesRequest, getLastMessageRequest, getUserConversationIdsRequest, getUserPhotoRequest, getUserRequest } from "../requests";
+import { getConversationMessagesRequest, getLastMessageRequest, getProfilePicture, getUserConversationIdsRequest, getUserPhotoRequest, getUserRequest } from "../requests";
 import { Conversation, Message } from "../types";
 
 
@@ -91,7 +91,7 @@ function convReducer(conversations: Conversation[], action: any) {
                 return (
                     conversations.map((o: Conversation) => {
                         if (o.id === action.convId) {
-                            return ({ ...o, user: { ...o.user, photos: [{index: 0, url: action.photo}] } })
+                            return ({ ...o, user: { ...o.user, photos: [{ index: 0, url: action.photo }] } })
                         }
                         return (o)
                     })
@@ -130,11 +130,13 @@ export function ChatProvider({ children }: { children: ReactNode }) {
                                 })
                                 .catch(() => { })
                             if (res.data.user && parseInt(res.data.user.nbPhotos)) {
-                                getUserPhotoRequest(0, Number(conv.memberId), 100)
+                                getProfilePicture(res.data.user.userId)
                                     .then(res => {
                                         dispatchConversations({ type: 'addProfilePicture', convId: conv.id, photo: window.URL.createObjectURL(res.data) })
                                     })
-                                    .catch(err => { })
+                                    .catch(err => {
+                                        // console.log(err)
+                                    })
                             }
                         })
                 }
@@ -186,7 +188,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         dispatchConversations({ type: 'deleteConversation', convId })
     }
 
-    const addMessage = useCallback(async (message:Message) => {
+    const addMessage = useCallback(async (message: Message) => {
         if (conversations && conversations.length) {
             const conv = conversations.find((c: Conversation) => c.id === message.convId);
             if (conv) {

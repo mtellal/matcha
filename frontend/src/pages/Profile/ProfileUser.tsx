@@ -102,15 +102,12 @@ export default function ProfileUser() {
     }, [user])
 
     const likeProfile = useCallback(async () => {
-        console.log(userSocket, user)
         if (userSocket && user) {
             if (isLiked) {
-                console.log("unlike user")
                 // console.log("emitted unlike profile event with ", props.user.userId)
                 userSocket.emit("unlike", user.userId);
             }
             else {
-                console.log("like user")
                 // console.log("emitted like profile event with ", props.user.userId)
                 userSocket.emit("like", user.userId);
             }

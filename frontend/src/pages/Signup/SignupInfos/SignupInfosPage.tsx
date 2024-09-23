@@ -100,7 +100,7 @@ export default function SignupInfosPage() {
         if (form.age)
             finalForm.age = form.age
 
-        console.log(form.city)
+        // console.log(form.city)
         if (form.city.name || form.city)
             finalForm.city = form.city
         if (form.gender)

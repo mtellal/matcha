@@ -69,9 +69,11 @@ app.get("/user/tags", JWTAuthentification, userController.tags)
 app.get("/user/me", JWTAuthentification, userController.datas)
 app.get("/user/notifications", JWTAuthentification, userController.notifications)
 app.get("/user/recommandations", JWTAuthentification, userController.recommandedUsers)
-app.get("/user/:id", JWTAuthentification, userController.datas)
+app.get("/user/profilePicture/:id", JWTAuthentification, userController.profilePicture)
 app.get("/user/:userId/photo/:id", JWTAuthentification, userController.photo)
 app.get("/user/me/photo/:id", JWTAuthentification, userController.photo)
+app.get("/user/:id", JWTAuthentification, userController.datas)
+
 
 app.post("/user/signin", userController.signin) // {username, password}
 app.post("/user/signup", userController.signup) //  { email, username, firstName, lastName, password, city?}

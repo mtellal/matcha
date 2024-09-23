@@ -3,6 +3,8 @@ import { ProfilePicture } from "../../ProfilePicture/ProfilePicture";
 import './UserLabel.css'
 import { getUserAge } from "../../../utils";
 import { User } from "../../../types";
+import { useEffect, useState } from "react";
+import { getProfilePicture } from "../../../requests";
 
 type UserLabelProps = {
     user: User
@@ -11,6 +13,12 @@ type UserLabelProps = {
 }
 
 export default function UserLabel({ user, message, onClick }: UserLabelProps) {
+
+    const [photo, setPhoto] = useState(null);
+
+    // conversation store => update user profile picture 
+    // dissociate conv users and search users
+
     return (
         <div className="userlabel"
             onClick={onClick}
@@ -25,9 +33,9 @@ export default function UserLabel({ user, message, onClick }: UserLabelProps) {
             </div>
             <div className="userlabel-infos">
                 <div className="usrlabel-usrinfos">
-                    <p className="userlabel-infos-username" style={{fontSize: '16px'}}>{user && user.firstName}</p>
+                    <p className="userlabel-infos-username" style={{ fontSize: '16px' }}>{user && user.firstName}</p>
                 </div>
-                <p className="userlabel-infos-msg" style={{fontSize: '12px', color: 'rgba(255,255,255,0.5)'}}>{message || "no messages"}</p>
+                <p className="userlabel-infos-msg" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>{message || "no messages"}</p>
             </div>
         </div>
     )

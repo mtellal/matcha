@@ -1,5 +1,5 @@
 import { MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
-import { getUserLikes, getUserPhotoRequest, getUserRequest, getUserViews } from "../requests";
+import { getProfilePicture, getUserLikes, getUserPhotoRequest, getUserRequest, getUserViews } from "../requests";
 import { User } from "../types";
 import { AxiosResponse } from "axios";
 
@@ -59,14 +59,13 @@ export default function LikesProvider({ children }: { children: ReactNode }) {
                     user = res.data.user;
                     setlikesUsers((users: User[]) => [...users, res.data.user])
                     if (user && Number(user.nbPhotos)) {
-                        getUserPhotoRequest(0, Number(id), 400)
+                        getProfilePicture(id)
                             .then(res => {
                                 const photos = [{ index: 0, url: window.URL.createObjectURL(res.data) }]
                                 setlikesUsers((_users: User[]) =>
                                     _users.map((u: User) => u.userId === id ? ({ ...u, photos }) : u)
                                 )
                             })
-                            .catch(err => { })
                     }
                 })
         }

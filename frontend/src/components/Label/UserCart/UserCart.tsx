@@ -7,7 +7,7 @@ import HeartBlue from '../../../assets/Heart_Blue.svg'
 import { useCurrentUser } from '../../../contexts/UserContext';
 import { getUserAge } from '../../../utils';
 import { User, UserPhoto } from '../../../types';
-import { getUserPhotoRequest } from '../../../requests';
+import { getProfilePicture, getUserPhotoRequest } from '../../../requests';
 import { useBrowserContext } from '../../../contexts/BrowserProvider';
 
 
@@ -33,7 +33,7 @@ export function UserCart({ user }: TUserCart) {
             if (user.photos)
                 setProfilePicture(user.photos[0].url || null)
             else {
-                getUserPhotoRequest(0, user.userId, 400)
+                getProfilePicture(user.userId)
                     .then(res => {
                         setProfilePicture(window.URL.createObjectURL(res.data))
                         browseDispatch({ type: 'addUserPhotos', data: res.data, userId: user.userId })
@@ -42,7 +42,6 @@ export function UserCart({ user }: TUserCart) {
             }
         }
     }, [user])
-
 
     return (
         <div className="usercart-user-c" onClick={navigateProfile}>

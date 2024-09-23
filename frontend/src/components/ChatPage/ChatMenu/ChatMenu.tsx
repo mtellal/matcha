@@ -41,20 +41,20 @@ export default function ChatMenu(props: ChatMenuProps) {
     return (
         <div className='chatmenu'>
             <div className="chatmenu-title">
-                <div style={{position: 'relative', height: '100%'}}>
-                    <div style={{height: '10px', width: '10px', background: 'lightgreen', borderRadius: '5px', position: 'absolute', bottom: '5px', right: '5px'}}></div>
+                <div style={{ position: 'relative', height: '100%' }}>
+                    <div style={{ height: '10px', width: '10px', background: 'lightgreen', borderRadius: '5px', position: 'absolute', bottom: '5px', right: '5px' }}></div>
                     <ProfilePicture
-                        url={currentUser.photos[0].url}
+                        url={currentUser && currentUser.photos && currentUser.photos[0] && currentUser.photos[0].url}
                         userId={currentUser.userId}
                         onClick={() => { }}
-                        style={{height: '60px', width: '60px', border: '1px solid rgba(255,255,255,0.2)'}}
+                        style={{ height: '60px', width: '60px', border: '1px solid rgba(255,255,255,0.2)' }}
                     />
                 </div>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-start',
-                    padding: '0 15px', 
+                    padding: '0 15px',
                     gap: '5px',
                     color: 'white'
                 }}>
@@ -70,7 +70,7 @@ export default function ChatMenu(props: ChatMenuProps) {
                 </div>
             </div>
             <div className='chatmenu-conversation-c'>
-                <p style={{ margin: '0', width: '100%', color: 'white', fontWeight: '400', textAlign: 'start'}}>Messages</p>
+                <p style={{ margin: '0', width: '100%', color: 'white', fontWeight: '400', textAlign: 'start' }}>Messages</p>
                 <div className='chatmenu-users'>
                     {
                         conversations.map((c: Conversation) => {

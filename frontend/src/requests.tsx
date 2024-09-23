@@ -54,6 +54,10 @@ export async function getUserPhotoRequest(index: number, userId: number = null, 
     return (axios.get(url, { responseType: 'blob' }))
 }
 
+export async function getProfilePicture(userId: number) {
+    return axios.get(`${apiURL}/user/profilePicture/${userId}`, { responseType: 'blob' })
+}
+
 // POST 
 
 export async function signinRequest(username: string, password: string) {

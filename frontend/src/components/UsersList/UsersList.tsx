@@ -16,7 +16,7 @@ export function UsersList({ title, usersContainerRef, userIdsRef, users }: Users
         <div className="userslist" ref={usersContainerRef}>
             <div className='userslist-users-c' style={!userIdsRef.current || !userIdsRef.current.length ? {height:'auto'} : {}}>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', padding: '15px 0', justifyContent: 'space-between', width: '100%' }}>
-                    <h1 className="userscollection-title brwuserl-title" style={{ alignSelf: 'center', height: '100%', margin: '0', fontWeight: '500', fontSize: '14' }}>{title}</h1>
+                    <h1 className="userscollection-title brwuserl-title" style={{ alignSelf: 'center', height: '100%', margin: '0', fontWeight: '500', fontSize: '14', color: 'white' }}>{title}</h1>
                     <p className="font-14" style={{ alignSelf: 'center', height: '100%', fontWeight: '400', fontSize: '13px' }}>{userIdsRef.current && userIdsRef.current.length} users found</p>
                 </div>
                 {

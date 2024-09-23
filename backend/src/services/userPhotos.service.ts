@@ -24,12 +24,18 @@ const getUserPhotosIndexs = exports.getUserPhotosIndexs = async (userId: string 
     return ([])
 }
 
+const getUserProfilePicture = exports.getUserProfilePicture = async(userId: number | string) => {
+    let res = await userPhotosModels.getUserProfilePicture(userId) 
+    return ((res[0] && res[0].path) || null)
+}
+
 const deletePhotoUser = exports.deletePhotoUser = async (userId: number, photoIndex: number) => {
     return (await userPhotosModels.deletePhotoUser(userId, photoIndex))
 }
 
 export default {
     getUserPhotosIndexs,
+    getUserProfilePicture,
     getPathFromIds,
     updateUserPhotos, 
     deletePhotoUser
