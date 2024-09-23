@@ -1,5 +1,5 @@
 import HeaderConnected from '../components/Header/HeaderConnected';
-import { Outlet, redirect, useLoaderData } from 'react-router';
+import { Outlet, useLoaderData } from 'react-router';
 import { UserProvider } from '../contexts/UserContext';
 import BrowserProvider from '../contexts/BrowserProvider';
 import ViewsProvider from '../contexts/ViewsProvider';

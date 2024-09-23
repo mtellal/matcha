@@ -1,15 +1,7 @@
 import './App.css';
-import HeaderConnected from './components/Header/HeaderConnected';
 import Header from './components/Header/Header';
-import { Outlet, redirect, useLoaderData } from 'react-router';
-import { getUserPhotoRequest, getUserRequest } from './requests';
-import { UserProvider } from './contexts/UserContext';
-import BrowserProvider from './contexts/BrowserProvider';
-import ViewsProvider from './contexts/ViewsProvider';
-import LikesProvider from './contexts/LikesProvider';
-import { ChatProvider } from './contexts/ChatProvider';
-import UserSocketProvider from './contexts/UserSocketProvider';
-import NotificationsProvider from './contexts/NotificationsProvider';
+import { Outlet, redirect } from 'react-router';
+import { getUserRequest } from './requests';
 
 
 import loveIllustration from './assets/loveIllustration1.png'
@@ -59,7 +51,6 @@ export function NotAuthenticateSpace() {
                   </div>
                </div>
             </div>
-
          </div>
       </div>
    );

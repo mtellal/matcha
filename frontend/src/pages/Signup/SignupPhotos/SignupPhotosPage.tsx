@@ -61,9 +61,9 @@ export default function SignupPhotosPage() {
             <p className='c-description'>To uncover the most relevant profiles, we require additional details about you.</p>
             <div className='signup-photos-c'>
                 <PhotoCarrousel
-                    currentUser={true}
                     photos={photos}
                     setPhotos={setPhotos}
+                    isCurrentUser={true}
                 />
 
             </div>

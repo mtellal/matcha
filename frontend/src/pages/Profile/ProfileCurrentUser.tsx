@@ -165,7 +165,6 @@ export default function ProfileCurrentUser() {
         <div className="profileuser">
             <div className="profileuser-carousel">
                 <PhotoCarrousel
-                    key={photos}
                     photos={photos}
                     isCurrentUser={true}
                     setPhotos={setPhotos}

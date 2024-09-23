@@ -1,6 +1,8 @@
 
 import './SignupInfosPage.css'
 import '../../../generic.css'
+import '../../../components/Inputs/InputCitiesReco/InputCitiesReco.css'
+
 import { useCallback, useEffect, useState } from 'react';
 import PickMenu from '../../../components/Picker/PickMenu/PickMenu';
 import InputBiography from '../../../components/Inputs/InputBio/InputBiography';

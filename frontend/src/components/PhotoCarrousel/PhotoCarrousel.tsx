@@ -83,23 +83,25 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto, onC
 }
 
 type PhotoCarrouselPropsType = {
-    key: any,
-    isCurrentUser: boolean,
-    photos: UserPhoto[],
-    setPhotos: (x: any) => any,
-    onChangeProps?: () => any,
-    isLiked?: boolean,
-    onLike?: (a: any) => any
+    key?: any, 
+    isCurrentUser: boolean, 
+    photos: UserPhoto[], 
+    setPhotos: (photos: any) => any, 
+    onChangeProps?: () => any, 
+    isLiked?: boolean, 
+    onLike?: () => any
 }
 
+
 export default function PhotoCarrousel({
+    key,
     isCurrentUser,
     photos,
     setPhotos,
     onChangeProps,
     isLiked,
     onLike
-}: any) {
+}: PhotoCarrouselPropsType) {
 
     const [index, setIndex] = useState(0);
 

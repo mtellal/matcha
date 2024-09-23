@@ -10,7 +10,6 @@ import { InputIconPassword } from '../../components/Inputs/InputIcon/InputIcon';
 import { ButtonWrapper } from '../../components/Buttons/ButtonWrapper';
 
 
-import arrowRightIcon from '../../assets/Arrow_Right.svg'
 import TagsPickerPage from '../../components/TagsPickerPage/TagsPickerPage';
 import { validateEmail, validateNames } from '../../utils';
 import { useSearchParams } from 'react-router-dom';
