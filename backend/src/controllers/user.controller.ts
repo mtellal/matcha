@@ -406,7 +406,7 @@ const resetPassword = exports.resetPassword = async (req: Request, res: Response
         if (!userId)
             throw "";
         const token = jwt.sign({ resetPassword: true, id: userId }, process.env.JWT_SECRET, { expiresIn: 60 * 20 })
-        const url = `${process.env.FRONT_DOMAIN}/signin/resetPassword?token=${token}`;
+        const url = `${process.env.DOMAIN_URI}/signin/resetPassword?token=${token}`;
         await userService.sendMail({
             from: process.env.MAIL_ADDRESS,
             to: req.query.email,
