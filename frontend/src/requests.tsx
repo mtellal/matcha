@@ -1,6 +1,10 @@
 import axios from "axios";
 import { AdvancedOptions } from "./types";
 
+
+export const socketEntryPoint = process.env.REACT_APP_DEV_MODE === "false" ? 
+    process.env.REACT_APP_DOMAIN_URI : 'http://localhost:3000/'
+
 export const apiURL = process.env.REACT_APP_API_URI;
 
 

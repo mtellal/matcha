@@ -1,0 +1,25 @@
+
+frontend:
+- Refactor
+- Clean useless css/components
+- Update chat design 
+- Biography bug in profileUser
+- Linter
+- Understand Webpack -> ts -> babel -> ... stack system
+
+- integrate tailwind or css lib
+- integrate state management (redux, zustand or others...)
+- check useful libs (react-queries...)
+
+
+backend:
+- Refactor
+- Clean
+- Create a documentation
+- Use socket in script generateUsers script -> remove buggy routes (like/view)
+- transfer js logic in sql -> create more complex sql 
+
+- Integrate prisma or an ORM
+- Integrate a lib to secure the app, CSRF XSS ....
+- Check anti ddos
+

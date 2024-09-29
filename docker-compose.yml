@@ -9,15 +9,50 @@ services:
       - "80:80"
       - "443:443"
 
-  frontend: 
+##### DEVELOPMENT  MODE ####
+#  frontend: 
+#    build:
+#      context: ./frontend
+#    volumes:
+#      - ./frontend:/usr/src/app #dev
+#    ports:
+#      - 8080:8080 #dev
+#    environment:
+#      - REACT_APP_API_URI=${API_URI}
+#      - REACT_APP_DOMAIN_URI=${DOMAIN_URI}
+#      - PORT=8080 
+#      - REACT_APP_DEV_MODE=true 
+
+
+##### PRODUCTION  MODE ####
+frontend: 
     build:
       context: ./frontend
     volumes:
-      - ./frontend:/usr/src/app
+      - ./frontend:/usr/src/app 
     environment:
       - REACT_APP_API_URI=${API_URI}
       - REACT_APP_DOMAIN_URI=${DOMAIN_URI}
+      - REACT_APP_DEV_MODE=false 
 
+
+##### DEVELOPMENT  MODE ####
+#  backend:
+#    build:
+#      context: ./backend
+#    volumes: 
+#      - ./backend:/usr/src/app
+#    ports: # dev
+#      - 3000:3000 #dev
+#    env_file:
+#      - ./backend/.env
+#      - .env
+#    depends_on:
+#      mariadb:
+#        condition: service_healthy
+
+
+##### PRODUCTION  MODE ####
   backend:
     build:
       context: ./backend

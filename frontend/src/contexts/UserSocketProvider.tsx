@@ -6,14 +6,13 @@ import { useChatContext } from "./ChatProvider";
 import { Conversation, Message, Notification } from "../types";
 import { useLocation } from "react-router";
 import { useCurrentUser } from "./UserContext";
-import { apiURL } from "../requests";
+import { socketEntryPoint } from "../requests";
 
 export const UserSocketContext = createContext(null);
 
 export function useUserSocket() {
     return (useContext(UserSocketContext))
 }
-
 
 export default function UserSocketProvider({ children }: { children: ReactNode }) {
 
@@ -26,7 +25,7 @@ export default function UserSocketProvider({ children }: { children: ReactNode }
 
 
     useEffect(() => {
-        const socket = io(process.env.REACT_APP_DOMAIN_URI, {
+        const socket = io(socketEntryPoint, {
             transports: ['websocket'],
             withCredentials: true,
         })
