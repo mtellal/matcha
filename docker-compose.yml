@@ -16,6 +16,7 @@ services:
       - ./frontend:/usr/src/app
     environment:
       - REACT_APP_API_URI=${API_URI}
+      - REACT_APP_DOMAIN_URI=${DOMAIN_URI}
 
   backend:
     build:
