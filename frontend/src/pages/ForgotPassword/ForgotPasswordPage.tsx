@@ -12,16 +12,24 @@ export default function ForgotPasswordPage() {
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
 
     async function onSubmit() {
         setSuccess("");
         setError("");
+        setLoading(true)
         const _email = email.trim();
         if (!_email)
             return (setError("Mail required"));
         await resetPasswordRequest(_email)
-            .then(res => setSuccess(res.data.message))
-            .catch(err => setError(err.response.data.message))
+            .then(res => {
+                setSuccess(res.data.message)
+                setLoading(false)
+            })
+            .catch(err => {
+                setError(err.response.data.message)
+                setLoading(false)
+            })
     }
 
     return (
@@ -47,6 +55,7 @@ export default function ForgotPasswordPage() {
                         title="Send"
                         style={{ marginTop: '2vh' }}
                         onClick={onSubmit}
+                        onLoad={loading}
                     />
                     <div className='cb-text-c'>
                         <p className='cb-text'>Have an account ?</p>

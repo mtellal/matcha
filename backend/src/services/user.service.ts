@@ -36,7 +36,8 @@ const transporter = nodemailer.createTransport({
 })
 
 transporter.verify(function(error: string) {
-	console.log("Error => ", error);
+    if (error)
+	    console.log("Error => ", error);
 })
 
 type MailMessageOptions = {
@@ -520,7 +521,7 @@ const createUser = exports.createUser = async (datas: CreateUserDatas, fakeUser:
         }
 
         const token = jwt.sign({ accountConfirmed: true, id: user.userId }, process.env.JWT_SECRET);
-		const url = `${process.env.DOMAIN_URI}/signup?token=${token}`;
+		const url = process.env.ENV === 'development' ? `http://${process.env.DOMAIN}/signup?token=${token}` : `https://${process.env.DOMAIN}/signup?token=${token}`;
 
         if (fakeUser)
             return ({ token, user });

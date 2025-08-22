@@ -66,7 +66,7 @@ export function SignupPageForm() {
             return (setError("Invalid last name"))
 
         await signupRequest(_form)
-            .then(res => navigate("/signup/confirmAccount"))
+            .then(res => navigate("/signup/confirm"))
             .catch(err => handleError(err))
     }
 

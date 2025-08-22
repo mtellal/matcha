@@ -2,10 +2,11 @@ import axios from "axios";
 import { AdvancedOptions } from "./types";
 
 
-export const socketEntryPoint = process.env.REACT_APP_DEV_MODE === "false" ? 
-    process.env.REACT_APP_DOMAIN_URI : 'http://localhost:3000/'
 
-export const apiURL = process.env.REACT_APP_API_URI;
+export const socketEntryPoint = process.env.REACT_APP_DOMAIN
+
+
+export const apiURL = process.env.REACT_APP_ENV === 'development' ? `http://${process.env.REACT_APP_DOMAIN_API}` : `https://${process.env.REACT_APP_DOMAIN_API}`;
 
 
 axios.defaults.withCredentials = true;
@@ -93,7 +94,7 @@ export async function updatePasswordRequest(password: string) {
 }
 
 export async function confirmAccountRequest() {
-    return (axios.patch(`${apiURL}/user/confirmAccount`))
+    return (axios.patch(`${apiURL}/user/confirm`))
 }
 
 export async function updatePhotosRequest(photos: any[]) {

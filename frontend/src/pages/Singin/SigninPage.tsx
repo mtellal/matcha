@@ -81,7 +81,7 @@ export default function SigninPage() {
                         onChange={() => setError("")}
                     />
                     <p
-                        onClick={() => navigate("/signin/password")}
+                        onClick={() => navigate("/password/reset")}
                         className='cb-text-underline'>Forgot your password ? </p>
                 </div>
                 <div className='c-button'>

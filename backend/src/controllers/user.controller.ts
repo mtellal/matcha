@@ -406,7 +406,8 @@ const resetPassword = exports.resetPassword = async (req: Request, res: Response
         if (!userId)
             throw "";
         const token = jwt.sign({ resetPassword: true, id: userId }, process.env.JWT_SECRET, { expiresIn: 60 * 20 })
-        const url = `${process.env.DOMAIN_URI}/signin/resetPassword?token=${token}`;
+        const url = process.env.ENV === 'development' ? `http://${process.env.DOMAIN}/password/new?token=${token}` : `https://${process.env.DOMAIN}/password/new?token=${token}`;
+
         await userService.sendMail({
             from: process.env.MAIL_ADDRESS,
             to: req.query.email,
@@ -557,7 +558,7 @@ const update = exports.update = async (req: Request, res: Response) => {
     }
 }
 
-const maxFileSize = 1024 * 1024 * 50;
+const maxFileSize = 1024 * 1024 * 10;
 
 const upload = require('multer')({
     dest: 'uploads/',

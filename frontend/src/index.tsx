@@ -56,11 +56,11 @@ const router = createBrowserRouter([
         element: <SigninPage />
       },
       {
-        path: "signin/password",
+        path: "password/reset",
         element: <ForgotPasswordPage />
       },
       {
-        path: "signin/resetPassword",
+        path: "password/new",
         element: <ResetPasswordPage />
       },
       {
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
             element: <SignupPageForm />
           },
           {
-            path: "confirmAccount",
+            path: "confirm",
             element: <ConfirmAccountPage />
           },
           {

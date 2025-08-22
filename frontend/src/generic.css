@@ -41,7 +41,7 @@
     -1px 1px var(--background-color);
 }
 
-.c-succes-msg, 
+.c-success-msg, 
 .c-error-msg {
     font-size: 15px;
     margin: 0;
@@ -50,12 +50,12 @@
     font-weight: 500;
 }
 
-.c-succes-msg {
-    color: var(--green)
+.c-success-msg {
+    color: lightgreen
 }
 
 .c-error-msg {
-    color: var(--red)
+    color: lightpink
 }
 
 

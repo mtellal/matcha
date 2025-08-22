@@ -6,7 +6,7 @@ NO_COLOR='\033[0m'
 set -e 
 npm i
 
-if [ $REACT_APP_DEV_MODE == true ]; then
+if [[ $REACT_APP_ENV == "development" ]]; then
 	echo -e "${GREEN}Script - Starting in development mode ...${NO_COLOR}\n"
 	npm start
 else

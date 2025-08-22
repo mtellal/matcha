@@ -73,7 +73,7 @@ app.post("/user/:id/options", JWTAuthentification, userController.datasOptions)
 
 app.patch("/user/update", JWTAuthentification, userController.update)
 app.patch("/user/password", JWTAuthentification, userController.updatePassword) // { password }
-app.patch("/user/confirmAccount", JWTAuthentification, userController.confirmAccount)
+app.patch("/user/confirm", JWTAuthentification, userController.confirmAccount)
 app.patch("/user/photos", JWTAuthentification, userController.photos)
 
 app.delete("/user/deleteUsers", userController.deleteUsers)

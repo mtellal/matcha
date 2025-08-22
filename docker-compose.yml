@@ -8,6 +8,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - ENV=${ENV}
 
 ##### DEVELOPMENT  MODE ####
 #  frontend: 
@@ -25,15 +27,15 @@ services:
 
 
 ##### PRODUCTION  MODE ####
-frontend: 
-    build:
-      context: ./frontend
-    volumes:
-      - ./frontend:/usr/src/app 
-    environment:
-      - REACT_APP_API_URI=${API_URI}
-      - REACT_APP_DOMAIN_URI=${DOMAIN_URI}
-      - REACT_APP_DEV_MODE=false 
+  frontend: 
+      build:
+        context: ./frontend
+      volumes:
+        - ./frontend:/usr/src/app 
+      environment:
+        - REACT_APP_DOMAIN_API=${DOMAIN_API}
+        - REACT_APP_DOMAIN=${DOMAIN}
+        - REACT_APP_ENV=${ENV} 
 
 
 ##### DEVELOPMENT  MODE ####
@@ -74,7 +76,7 @@ frontend:
     env_file:
       - ./backend/.env
     healthcheck:
-      test: "mariadb -u$$MARIADB_USER -p$$MARIADB_ROOT_PASSWORD -e 'SELECT 1;'"
+      test: "mariadb -h localhost -u$$MARIADB_USER -p$$MARIADB_ROOT_PASSWORD -e 'SELECT 1;'"
       interval: 2s
       timeout: 5s
       retries: 10
