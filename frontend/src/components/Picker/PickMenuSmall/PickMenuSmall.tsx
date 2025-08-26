@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import './PickMenuSmall.css'
 
@@ -12,7 +12,7 @@ type PickMenuSmallProps = {
     setValue: (s:string) => void, 
     style?: {}, 
     displayUp?: boolean, 
-    outside?: boolean
+    visible?: boolean, 
 }
 
 export default function PickMenuSmall(props: PickMenuSmallProps) {
@@ -23,6 +23,12 @@ export default function PickMenuSmall(props: PickMenuSmallProps) {
     useOutsideComponent(menuRef, () => {
         setSelecting(false)
     })
+
+    useEffect(() => {
+        if (!props.visible) {
+            setSelecting(false)
+        }
+    }, [props, props.visible])
 
     function select(option: string)
     {

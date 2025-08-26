@@ -27,8 +27,9 @@ export function useBrowserContext() {
 export function browserReducer(browseUsers: User[], action: any) {
     switch (action.type) {
         case ('browseUsers'): {
-            if (action.browseUsers && typeof action.browseUsers === "object")
+            if (action.browseUsers && typeof action.browseUsers === "object") {
                 return (action.browseUsers)
+            }
             break
         }
         case ('resetOriginal'): {
@@ -64,16 +65,6 @@ export function browserReducer(browseUsers: User[], action: any) {
                 )
             }
             break
-        }
-        case ('sortYounger'): {
-            return (
-                [...browseUsers.sort((u1: User, u2: User) => parseInt(u1.age) - parseInt(u2.age))]
-            )
-        }
-        case ('sortOlder'): {
-            return (
-                [...browseUsers.sort((u1: User, u2: User) => parseInt(u2.age) - parseInt(u1.age))]
-            )
         }
         default: return browseUsers;
     }
@@ -121,7 +112,6 @@ export default function BrowserProvider({ children }: { children: ReactNode }) {
         }
     }
 
-
     async function loadMoreUsers() {
         if (userIdsRef.current && userIdsRef.current.length) {
             const userIds = userIdsRef.current.slice(userIdsIndexRef.current, userIdsIndexRef.current + 20)
@@ -131,7 +121,7 @@ export default function BrowserProvider({ children }: { children: ReactNode }) {
     }
 
     const loadUsers = useCallback(async () => {
-        if (userIdsRef.current.length === 0) {
+        if (userIdsRef.current && userIdsRef.current.length === 0) {
             advancedOptionsRef.current = null;
             userIdsIndexRef.current = 20;
 
@@ -147,7 +137,7 @@ export default function BrowserProvider({ children }: { children: ReactNode }) {
             }
             return (userIds)
         }
-    }, [])
+    }, [userIdsRef])
 
     async function loadUsersAdvanced(advancedOptions: AdvancedOptions) {
         advancedOptionsRef.current = advancedOptions

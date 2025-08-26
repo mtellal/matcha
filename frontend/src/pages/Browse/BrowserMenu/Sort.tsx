@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import PickMenuSmall from "../../../components/Picker/PickMenuSmall/PickMenuSmall";
 import { useBrowserContext } from "../../../contexts/BrowserProvider";
 import { getUserAge } from "../../../utils";
@@ -30,7 +30,7 @@ export default function MenuSort(props: MenuSortProps) {
     });
 
     const sortContainerRef = useRef(null)
-    
+
     const [display, setDisplay] = useState(false)
 
     const [isOptions, setIsOptions] = useState(false)
@@ -43,43 +43,11 @@ export default function MenuSort(props: MenuSortProps) {
         if (sortConfigRef.current && !sortConfigInitRef.current) {
             setSorts(sortConfigRef.current);
             sortConfigInitRef.current = true;
+            setIsOptions(true)
         }
     }, [sortConfigInitRef, sortConfigRef])
 
-    function setAge(s: string) {
-        setSorts((f: Sort) => {
-            const up = { ...f, age: s }
-            sortConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setLocation(s: string) {
-        setSorts((f: Sort) => {
-            const up = { ...f, location: s }
-            sortConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setFameRating(s: string) {
-        setSorts((f: Sort) => {
-            const up = { ...f, fameRating: s }
-            sortConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setCommonTags(s: string) {
-        setSorts((f: Sort) => {
-            const up = { ...f, commonTags: s }
-            sortConfigRef.current = up;
-            return (up)
-        })
-    }
-
-
-    useEffect(() => {
+    const sortUsers = useCallback((sorts: Sort) => {
         let weights = 0;
         for (let values of Object.values(sorts)) {
             if (values !== "none")
@@ -147,15 +115,53 @@ export default function MenuSort(props: MenuSortProps) {
                 else
                     scoreCommonTags = scoreCommonTagsU1 - scoreCommonTagsU2;
             }
-
             return (scoreAge + scoreDistance + scoreFame + scoreCommonTags)
         })
-        if (users.length && users !== browseUsers)
+        if (users.length && users !== browseUsers) {
             setIsOptions(true)
+        }
         else
             setIsOptions(false)
         browseDispatch({ type: 'browseUsers', browseUsers: users })
-    }, [sorts, browseDispatch])
+    }, [browseUsers, browseDispatch, setIsOptions])
+
+
+    const setAge = useCallback((s: string) => {
+        setSorts((f: Sort) => {
+            const up = { ...f, age: s }
+            sortConfigRef.current = up;
+            sortUsers(up)
+            return (up)
+        })
+    }, [sortUsers, sortConfigRef])
+
+    const setLocation = useCallback((s: string) => {
+        setSorts((f: Sort) => {
+            const up = { ...f, location: s }
+            sortConfigRef.current = up;
+            sortUsers(up)
+            return (up)
+        })
+    }, [sortUsers, sortConfigRef])
+
+    const setFameRating = useCallback((s: string) => {
+        setSorts((f: Sort) => {
+            const up = { ...f, fameRating: s }
+            sortConfigRef.current = up;
+            sortUsers(up)
+            return (up)
+        })
+    }, [sortUsers, sortConfigRef])
+
+    const setCommonTags = useCallback((s: string) => {
+        setSorts((f: Sort) => {
+            const up = { ...f, commonTags: s }
+            sortConfigRef.current = up;
+            sortUsers(up)
+            return (up)
+        })
+    }, [sortUsers, sortConfigRef])
+
 
     return (
         <div style={{ position: 'relative' }}>
@@ -163,9 +169,9 @@ export default function MenuSort(props: MenuSortProps) {
                 className="option-text-container"
                 onClick={() => setDisplay(p => !p)}
             >
-                <div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
                     <p className="option-text">Sorts</p>
-                    {isOptions && <p style={{fontSize: '11px', alignSelf: 'center', background: 'var(--purple2)', borderRadius: '5px', padding: '2px', height: '14px', width: '12px'}}>1+</p>}
+                    {isOptions && <p style={{ fontSize: '11px', alignSelf: 'center', background: 'var(--purple2)', borderRadius: '5px', padding: '2px', height: '14px', width: '12px' }}>1+</p>}
                 </div>
                 <img src={sortIcon} className="option-text-icon" alt="sort" />
             </div>
@@ -184,28 +190,28 @@ export default function MenuSort(props: MenuSortProps) {
                         options={["younger", "older"]}
                         value={sorts && sorts.age}
                         setValue={setAge}
-                        outside={true}
+                        visible={display}
                     />
                     <PickMenuSmall
                         title="Localisation"
                         options={["nearer", "furthest"]}
                         value={sorts && sorts.location}
                         setValue={setLocation}
-                        outside={true}
+                        visible={display}
                     />
                     <PickMenuSmall
                         title="Fame Rating"
                         options={["higher", "lower"]}
                         value={sorts && sorts.fameRating}
                         setValue={setFameRating}
-                        outside={true}
+                        visible={display}
                     />
                     <PickMenuSmall
                         title="Interests Tags"
                         options={["higher", "lower"]}
                         value={sorts && sorts.commonTags}
                         setValue={setCommonTags}
-                        outside={true}
+                        visible={display}
                     />
                 </div>
             </div>

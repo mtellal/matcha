@@ -10,8 +10,7 @@ import '../BrowserMenu/BrowserMenu.css'
 export default function BrowseUsersList({ currentUser }: any) {
 
     const { browseUsers, filterIds, userIdsRef } = useBrowserContext();
-
-
+    
     return (
         <div className='brwuserl-users-c'>
             <div className="browsermenu">

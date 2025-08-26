@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useBrowserContext } from "../../../contexts/BrowserProvider";
 import InputRangeText from "../../../components/Inputs/InputRangeText/InputRangeText";
 import { getUserAge } from "../../../utils";
@@ -12,14 +12,18 @@ type Values = {
     value2: string
 }
 
-type MenuFilterType = {
+type Filter = {
     ageRange: Values,
     locationRange: Values,
     fameRatingRange: Values,
     commonTagsRange: Values
 }
 
-export default function MenuFilter(props: { title: string }) {
+type MenuFilterProps = {
+    title: string,
+}
+
+export default function MenuFilter({ title }: MenuFilterProps) {
 
     const { browseUsers, setFilterIds, filterConfigRef } = useBrowserContext();
     const [isOptions, setIsOptions] = useState(false)
@@ -45,72 +49,8 @@ export default function MenuFilter(props: { title: string }) {
         }
     }, [filterConfigRef, filterInitRef])
 
-    function setAgeRange1(s: string) {
-        setFilters((f: MenuFilterType) => {
-            const up = { ...f, ageRange: { ...f.ageRange, value1: s } };
-            filterConfigRef.current = up;
-            return (up)
-        })
-    }
 
-    function setAgeRange2(s: string) {
-        setFilters((f: MenuFilterType) => {
-            const up = { ...f, ageRange: { ...f.ageRange, value2: s } }
-            filterConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setLocationRange1(s: string) {
-        setFilters((f: MenuFilterType) => {
-            const up = { ...f, locationRange: { ...f.locationRange, value1: s } }
-            filterConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setLocationRange2(s: string) {
-        setFilters((f: MenuFilterType) => {
-            const up = { ...f, locationRange: { ...f.locationRange, value2: s } }
-            filterConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setFameRating1(s: string) {
-        setFilters((f: MenuFilterType) => {
-            const up = { ...f, fameRatingRange: { ...f.fameRatingRange, value1: s } }
-            filterConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setFameRating2(s: string) {
-        setFilters((f: MenuFilterType) => {
-            const up = { ...f, fameRatingRange: { ...f.fameRatingRange, value2: s } }
-            filterConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setCommonTagsRange1(s: string) {
-        setFilters((f: MenuFilterType) => {
-            const up = { ...f, commonTagsRange: { ...f.commonTagsRange, value1: s } }
-            filterConfigRef.current = up;
-            return (up)
-        })
-    }
-
-    function setCommonTagsRange2(s: string) {
-        setFilters((f: MenuFilterType) => {
-            const up = { ...f, commonTagsRange: { ...f.commonTagsRange, value2: s } }
-            filterConfigRef.current = up;
-            return (up)
-        })
-    }
-
-
-    useEffect(() => {
+    const filterUsers = useCallback((filters: Filter) => {
         let _filterIds = browseUsers.map((u: User) => {
             if (filters.ageRange.value1 && filters.ageRange.value2) {
 
@@ -121,7 +61,7 @@ export default function MenuFilter(props: { title: string }) {
                     v1 = v2;
                     v2 = parseInt(filters.ageRange.value1);
                 }
-                if ((getUserAge(u.age) < v1 || getUserAge(u.age) > v2))
+                if ((getUserAge(u.age) <= v1 || getUserAge(u.age) >= v2))
                     return (u.userId)
             }
             if (filters.locationRange.value1 && filters.locationRange.value2) {
@@ -132,7 +72,7 @@ export default function MenuFilter(props: { title: string }) {
                     v1 = v2;
                     v2 = parseInt(filters.locationRange.value1);
                 }
-                if ((Number(u.distance) < v1 || Number(u.distance) > v2))
+                if ((Number(u.distance) <= v1 || Number(u.distance) >= v2))
                     return (u.userId)
             }
             if (filters.fameRatingRange.value1 && filters.fameRatingRange.value2) {
@@ -143,7 +83,7 @@ export default function MenuFilter(props: { title: string }) {
                     v1 = v2;
                     v2 = parseInt(filters.fameRatingRange.value1);
                 }
-                if ((Number(u.fameRating) < v1 || Number(u.fameRating) > v2))
+                if ((Number(u.fameRating) <= v1 || Number(u.fameRating) >= v2))
                     return (u.userId)
             }
             if (filters.commonTagsRange.value1 && filters.commonTagsRange.value2) {
@@ -154,7 +94,7 @@ export default function MenuFilter(props: { title: string }) {
                     v1 = v2;
                     v2 = parseInt(filters.commonTagsRange.value1);
                 }
-                if ((Number(u.commonTags) < v1 || Number(u.commonTags) > v2))
+                if ((Number(u.commonTags) <= v1 || Number(u.commonTags) >= v2))
                     return (u.userId)
             }
             return (null)
@@ -166,12 +106,82 @@ export default function MenuFilter(props: { title: string }) {
             setIsOptions(false)
         setFilterIds(_filterIds)
     }, [
-        filters.ageRange, 
-        filters.locationRange, 
-        filters.fameRatingRange, 
-        filters.commonTagsRange, 
+        browseUsers,
         setFilterIds
     ])
+
+    useEffect(() => {
+        filterUsers(filters)
+    }, [filters, filterUsers])
+
+    const setAgeRange1 = (s: string) => {
+        setFilters((f: Filter) => {
+            const up = { ...f, ageRange: { ...f.ageRange, value1: s } };
+            filterConfigRef.current = up;
+            return (up)
+        })
+    }
+
+    const setAgeRange2 = (s: string) => {
+        setFilters((f: Filter) => {
+            const up = { ...f, ageRange: { ...f.ageRange, value2: s } }
+            filterConfigRef.current = up;
+            return (up)
+        })
+    }
+
+    const setLocationRange1 = (s: string) => {
+        setFilters((f: Filter) => {
+            const up = { ...f, locationRange: { ...f.locationRange, value1: s } }
+            filterConfigRef.current = up;
+            return (up)
+        })
+    }
+
+
+    const setLocationRange2 = (s: string) => {
+        setFilters((f: Filter) => {
+            const up = { ...f, locationRange: { ...f.locationRange, value2: s } }
+            filterConfigRef.current = up;
+            return (up)
+        })
+    }
+
+
+    const setFameRating1 = (s: string) => {
+        setFilters((f: Filter) => {
+            const up = { ...f, fameRatingRange: { ...f.fameRatingRange, value1: s } }
+            filterConfigRef.current = up;
+            return (up)
+        })
+    }
+
+
+    const setFameRating2 = (s: string) => {
+        setFilters((f: Filter) => {
+            const up = { ...f, fameRatingRange: { ...f.fameRatingRange, value2: s } }
+            filterConfigRef.current = up;
+            return (up)
+        })
+    }
+
+
+    const setCommonTagsRange1 = (s: string) => {
+        setFilters((f: Filter) => {
+            const up = { ...f, commonTagsRange: { ...f.commonTagsRange, value1: s } }
+            filterConfigRef.current = up;
+            return (up)
+        })
+    }
+
+
+    const setCommonTagsRange2 = (s: string) => {
+        setFilters((f: Filter) => {
+            const up = { ...f, commonTagsRange: { ...f.commonTagsRange, value2: s } }
+            filterConfigRef.current = up;
+            return (up)
+        })
+    }
 
     return (
         <div style={{ position: 'relative' }}>
@@ -180,13 +190,13 @@ export default function MenuFilter(props: { title: string }) {
                 className="option-text-container"
                 onClick={() => setDisplay(p => !p)}
             >
-                <div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
                     <p className="option-text">Filters</p>
-                    {isOptions && <p style={{fontSize: '11px', alignSelf: 'center', background: 'var(--purple2)', borderRadius: '5px', padding: '2px', height: '14px', width: '12px'}}>1+</p>}
+                    {isOptions && <p style={{ fontSize: '11px', alignSelf: 'center', background: 'var(--purple2)', borderRadius: '5px', padding: '2px', height: '14px', width: '12px' }}>1+</p>}
                 </div>
                 <img src={filterIcon} className="option-text-icon" alt="filter" />
             </div>
-            
+
             <div
                 className="option-container"
                 ref={filterContainerRef}
