@@ -1,12 +1,9 @@
 # Matcha
 
-This project aims to create a dating website.
+Matcha is an online dating platform project. </br>
 
-You will need to create an application that allows two potential
-lovers to meet, from the registration process to the final encounter.
+The goal is to develop a full web application that allows users to register, create and manage their profiles, browse and search for other profiles, interact with “likes”, and chat in real-time once a mutual connection is established.
 
-Users will be able to register, log in, complete their profile, search and view the profiles
-of other users, and show interest in them with a “like”, chat with those that “liked” back.
 
 ## Use and Configuration 
 
@@ -48,7 +45,7 @@ When an user register, this mail address sent a confirmation link to the user's 
 MAIL_ADDRESS= 
 MAIL_PASSWORD=
 ```
-> You can bypass this step by running `npm run createUser` script or making a customized request to `http://matcha.mezyann.fr/user/signup?fakeUser=true` </br>
+> You can bypass the signup process by running `npm run createUser` script or making a customized request to `http://matcha.mezyann.fr/user/signup?fakeUser=true` </br>
 
 In the signup process a city is asked from the user. The project uses [locationiq](https://fr.locationiq.com/) API. 
 ```
@@ -60,22 +57,18 @@ Launch services:
 docker compose up 
 ```
 
-## Scripts 
-
-In the `./backend` directory you can find customized scripts:
-- `createUsers` creates 250 users by default up to 400, users are created via the backend API 
-- `deleteUsers` delete all the users records in the database 
+Finally open your web browser and go to `http://matcha.mezyann.fr`
 
 # Site Preview
 
 ![alt text](./assets/matcha_home.png)
 ![alt text](./assets/matcha_login.png)
-![alt text](./assets/matcha_resetPassword.png)
+![alt text](./assets/matcha_password.png)
 ![alt text](./assets/matcha_signup.png)
-![alt text](./assets/matcha_signupInfos.png)
-![alt text](./assets/matcha_signupPhotos.png)
+![alt text](./assets/matcha_signup_info.png)
+![alt text](./assets/matcha_signup_photos.png)
 ![alt text](./assets/matcha_profile.png)
 ![alt text](./assets/matcha_likes.png)
 ![alt text](./assets/matcha_views.png)
 ![alt text](./assets/matcha_browse.png)
-![alt text](./assets/matcha_conversations.png)
+![alt text](./assets/matcha_chat.png)
