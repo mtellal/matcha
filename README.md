@@ -4,7 +4,6 @@ Matcha is an online dating platform project. </br>
 
 The goal is to develop a full web application that allows users to register, create and manage their profiles, browse and search for other profiles, interact with “likes”, and chat in real-time once a mutual connection is established.
 
-
 ## Use and Configuration 
 
 Clone the repository
@@ -40,14 +39,15 @@ User Created  Jaylen  - access_token: eyJhbGciOiJIUzI1Ni...
 ### Normal Configuration 
 
 Set the env file in `./backend/.env`: </br>
-When an user register, this mail address sent a confirmation link to the user's address. By default it uses `gmail` so you need to set a valid gmail account. 
+When an user register, this mail address sent a confirmation link to the user's address. </br> 
+This project uses *gmail*, `MAIL_ADDRESS` is the gmail address but `MAIL_PASSWORD` need to be a 16 char *app password* from gmail, you can generate one [here](https://myaccount.google.com/apppasswords)
 ```
 MAIL_ADDRESS= 
 MAIL_PASSWORD=
 ```
 > You can bypass the signup process by running `npm run createUser` script or making a customized request to `http://matcha.mezyann.fr/user/signup?fakeUser=true` </br>
 
-In the signup process a city is asked from the user. The project uses [locationiq](https://fr.locationiq.com/) API. 
+In the signup process a city is asked to geolocate the user, it can be done manually or automatically from the latitude and longitude. To make this second option available you need to set a [locationiq](https://fr.locationiq.com/) API Key. 
 ```
 LOCATIONIQ_API_KEY=
 ```
