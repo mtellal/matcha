@@ -39,15 +39,15 @@ export default function ProfileInfos(props: ProfileInfosProps) {
             }
 
             <div className="profileinfos-infos">
-                <img src={HeartBorder} className="profileinfos-infos-icon" />
+                <img src={HeartBorder} className="profileinfos-infos-icon" alt='likes'/>
                 <p className="profileinfos-name">{props.user && String(props.user.likes)}</p>
             </div>
             <div className="profileinfos-infos">
-                <img src={eyeIcon} className="profileinfos-infos-icon" />
+                <img src={eyeIcon} className="profileinfos-infos-icon" alt='views'/>
                 <p className="profileinfos-name">{props.user && String(props.user.views)}</p>
             </div>
             <div className="profileinfos-infos">
-                <img src={starIcon} className="profileinfos-infos-icon" />
+                <img src={starIcon} className="profileinfos-infos-icon" alt='stars'/>
                 <p className="profileinfos-name">
                     {props.user && String(props.user.fameRating)}
                 </p>

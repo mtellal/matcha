@@ -2,9 +2,9 @@ import axios from "axios";
 import { AdvancedOptions } from "./types";
 
 
-
-export const socketEntryPoint = process.env.REACT_APP_DOMAIN
-
+//export const socketEntryPoint = process.env.REACT_APP_DOMAIN_API
+export const socketEntryPoint = process.env.REACT_APP_ENV === 'development' ?
+    `http://${process.env.REACT_APP_DOMAIN}` : `https://${process.env.REACT_APP_DOMAIN}`;
 
 export const apiURL = process.env.REACT_APP_ENV === 'development' ? `http://${process.env.REACT_APP_DOMAIN_API}` : `https://${process.env.REACT_APP_DOMAIN_API}`;
 

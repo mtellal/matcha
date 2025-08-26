@@ -44,7 +44,7 @@ export default function MenuSort(props: MenuSortProps) {
             setSorts(sortConfigRef.current);
             sortConfigInitRef.current = true;
         }
-    }, [sortConfigInitRef.current, sortConfigInitRef.current])
+    }, [sortConfigInitRef, sortConfigRef])
 
     function setAge(s: string) {
         setSorts((f: Sort) => {
@@ -155,7 +155,7 @@ export default function MenuSort(props: MenuSortProps) {
         else
             setIsOptions(false)
         browseDispatch({ type: 'browseUsers', browseUsers: users })
-    }, [sorts])
+    }, [sorts, browseDispatch])
 
     return (
         <div style={{ position: 'relative' }}>
@@ -167,7 +167,7 @@ export default function MenuSort(props: MenuSortProps) {
                     <p className="option-text">Sorts</p>
                     {isOptions && <p style={{fontSize: '11px', alignSelf: 'center', background: 'var(--purple2)', borderRadius: '5px', padding: '2px', height: '14px', width: '12px'}}>1+</p>}
                 </div>
-                <img src={sortIcon} className="option-text-icon" />
+                <img src={sortIcon} className="option-text-icon" alt="sort" />
             </div>
             <div
                 className="option-container"

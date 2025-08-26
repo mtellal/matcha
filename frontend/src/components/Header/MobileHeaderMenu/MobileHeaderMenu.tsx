@@ -33,7 +33,7 @@ export default function MobileHeaderMenu() {
         setPicking((p: boolean) => !p)
         if (location.pathname !== path || !location.pathname.startsWith(path))
             navigate(`/${path.toLocaleLowerCase()}`)
-    }, [location])
+    }, [location, navigate])
 
     return (
         <div className="mobileheadermenu">

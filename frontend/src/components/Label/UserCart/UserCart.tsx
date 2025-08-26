@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router';
 import HeartBlue from '../../../assets/Heart_Blue.svg'
 import { useCurrentUser } from '../../../contexts/UserContext';
 import { getUserAge } from '../../../utils';
-import { User, UserPhoto } from '../../../types';
-import { getProfilePicture, getUserPhotoRequest } from '../../../requests';
+import { User } from '../../../types';
+import { getProfilePicture } from '../../../requests';
 import { useBrowserContext } from '../../../contexts/BrowserProvider';
 
 
@@ -25,7 +25,7 @@ export function UserCart({ user }: TUserCart) {
 
     const navigateProfile = useCallback(async () => {
         navigate(`/profile/${user.userId}`, { state: { user: user } })
-    }, [user])
+    }, [user, navigate])
 
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export function UserCart({ user }: TUserCart) {
                     .catch(err => { })
             }
         }
-    }, [user])
+    }, [user, browseDispatch])
 
     return (
         <div className="usercart-user-c" onClick={navigateProfile}>
@@ -58,9 +58,10 @@ export function UserCart({ user }: TUserCart) {
                                     currentUser.blockIds.find((id: number) => id === user.userId) ?
                                     { opacity: '50%' } : {}
                             }
+                            alt='user profile'
                         />
                 }
-                {user.likedYou ? <img src={HeartBlue} className='usrcart-heart' /> : null}
+                {user.likedYou ? <img src={HeartBlue} className='usrcart-heart' alt='liked'/> : null}
             </div>
             <div className="usercart-user-infos">
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
@@ -76,7 +77,7 @@ export function UserCart({ user }: TUserCart) {
                     user.department && user.region &&
                     <div style={{ width: '100%', overflow: 'hidden' }}>
                         <div className="likepage-localisation-c">
-                            <img src={pinIcon} />
+                            <img src={pinIcon} alt='pin'/>
                             <p className='usercart-city'>{user.city.name}</p>
                         </div>
                         <p className='usercart-city font-12' >{`${user.department.name}, ${user.region.name}`}</p>

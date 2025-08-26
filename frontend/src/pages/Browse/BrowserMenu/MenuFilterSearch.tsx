@@ -1,4 +1,4 @@
-import { MutableRefObject, useContext, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useCallback, useContext, useEffect, useRef, useState } from "react";
 import InputRange from "../../../components/Inputs/InputRange/InputRange";
 import Tags from "../../../components/Label/Tags/Tags";
 
@@ -46,17 +46,40 @@ export default function MenuFilterSearch(props: MenuFilterSearchProps) {
 
     useOutsideComponent(searchContainerRef, () => setDisplay(false))
 
+
+    const handleRequest = useCallback((intervalRef: MutableRefObject<any>, searchOptions: AdvancedOptions) => {
+        if (intervalRef.current)
+            clearInterval(intervalRef.current)
+        intervalRef.current = setTimeout(() => {
+            let opts: AdvancedOptions = {
+                ageGap: searchOptions.ageGap,
+                fameRatingGap: searchOptions.fameRatingGap,
+                tags: searchOptions.tags
+            }
+            if (searchOptions.city)
+                opts = { ...opts, city: searchOptions.city }
+            loadUsersAdvanced(opts)
+        }, 1000);
+    }, [loadUsersAdvanced])
+
+    const setLocalTags = useCallback((t: string[]) => {
+        const up = { ...searchOptions, tags: t }
+        searchConfigRef.current = up;
+        handleRequest(intervalRef, up);
+        setSearchOptions(up)
+    }, [handleRequest, searchConfigRef, searchOptions])
+
     useEffect(() => {
         if (!addTagFunctionRef.current) {
             addTagFunctionRef.current = setLocalTags;
         }
-    }, [addTagFunctionRef.current])
+    }, [addTagFunctionRef, setLocalTags])
 
     useEffect(() => {
         if (!removeTagFunctionRef.current) {
             removeTagFunctionRef.current = setLocalTags
         }
-    }, [removeTagFunctionRef.current])
+    }, [removeTagFunctionRef, setLocalTags])
 
     function setAgeGap(value: number) {
         setSearchOptions((s: AdvancedOptions) => {
@@ -86,12 +109,7 @@ export default function MenuFilterSearch(props: MenuFilterSearchProps) {
         })
     }
 
-    function setLocalTags(t: string[]) {
-        const up = { ...searchOptions, tags: t }
-        searchConfigRef.current = up;
-        handleRequest(intervalRef, up);
-        setSearchOptions(up)
-    }
+
 
     useEffect(() => {
         if (props.user) {
@@ -110,27 +128,14 @@ export default function MenuFilterSearch(props: MenuFilterSearchProps) {
                     setTags(searchConfigRef.current.tags)
             }
         }
-    }, [searchConfigRef, props.user])
+    }, [searchConfigRef, props.user, searchOptions, setTags])
 
     useEffect(() => {
         if (!validTagsFunctionRef.current)
             validTagsFunctionRef.current = setLocalTags;
-    }, [validTagsFunctionRef.current])
+    }, [validTagsFunctionRef, setLocalTags])
 
-    const handleRequest = (intervalRef: MutableRefObject<any>, searchOptions: AdvancedOptions) => {
-        if (intervalRef.current)
-            clearInterval(intervalRef.current)
-        intervalRef.current = setTimeout(() => {
-            let opts: AdvancedOptions = {
-                ageGap: searchOptions.ageGap,
-                fameRatingGap: searchOptions.fameRatingGap,
-                tags: searchOptions.tags
-            }
-            if (searchOptions.city)
-                opts = { ...opts, city: searchOptions.city }
-            loadUsersAdvanced(opts)
-        }, 1000);
-    }
+
 
     return (
         <div style={{ position: 'relative', width: 'auto' }}>
@@ -140,7 +145,7 @@ export default function MenuFilterSearch(props: MenuFilterSearchProps) {
             >
                 <p className="option-text"
                 >Advanced search {}</p>
-                <img src={searchIcon} className="option-text-icon" />
+                <img src={searchIcon} className="option-text-icon" alt="search" />
             </div>
             <div
                 className="option-container"

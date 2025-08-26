@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 
 import Banner from '../../components/ChatPage/Banner/Banner';
@@ -32,7 +32,7 @@ export default function ChatMessenger() {
             }
             navigate("/chat")
         }
-    }, [conversations, conversationsLoadedRef, id])
+    }, [conversations, conversationsLoadedRef, id, navigate, setNewNotifChat])
 
 
     return (

@@ -15,7 +15,7 @@ export function InputCitiesReco({ city, setCity }: TInputCitiesReco) {
     const { cities, setCities, citiesReco } = useCitiesReco();
 
     useEffect(() => {
-        if (!cityValue && city)
+        if (city)
             setCityValue(city)
     }, [city])
 

@@ -6,9 +6,6 @@ import { User } from "../../../types";
 import filterIcon from '../../../assets/filters.svg'
 
 import { useOutsideComponent } from "../../../hooks/useOutsideComponent";
-import { ButtonMedium } from "../../../components/Buttons/ButtonMedium";
-import { ButtonBorder, ButtonBorderMenu } from "../../../components/Buttons/ButtonBorder";
-import { ButtonLarge } from "../../../components/Buttons/ButtonLarge";
 
 type Values = {
     value1: string,
@@ -46,7 +43,7 @@ export default function MenuFilter(props: { title: string }) {
             setFilters(filterConfigRef.current);
             filterInitRef.current = true;
         }
-    }, [filterConfigRef.current, filterInitRef.current])
+    }, [filterConfigRef, filterInitRef])
 
     function setAgeRange1(s: string) {
         setFilters((f: MenuFilterType) => {
@@ -168,7 +165,13 @@ export default function MenuFilter(props: { title: string }) {
         else
             setIsOptions(false)
         setFilterIds(_filterIds)
-    }, [filters.ageRange, filters.locationRange, filters.fameRatingRange, filters.commonTagsRange])
+    }, [
+        filters.ageRange, 
+        filters.locationRange, 
+        filters.fameRatingRange, 
+        filters.commonTagsRange, 
+        setFilterIds
+    ])
 
     return (
         <div style={{ position: 'relative' }}>
@@ -181,7 +184,7 @@ export default function MenuFilter(props: { title: string }) {
                     <p className="option-text">Filters</p>
                     {isOptions && <p style={{fontSize: '11px', alignSelf: 'center', background: 'var(--purple2)', borderRadius: '5px', padding: '2px', height: '14px', width: '12px'}}>1+</p>}
                 </div>
-                <img src={filterIcon} className="option-text-icon" />
+                <img src={filterIcon} className="option-text-icon" alt="filter" />
             </div>
             
             <div

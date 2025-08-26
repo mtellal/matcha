@@ -1,4 +1,4 @@
-import { ReactNode, Ref, createContext, useCallback, useContext, useRef, useState } from "react"
+import { ReactNode, createContext, useCallback, useContext, useRef, useState } from "react"
 import InterestsTagsList from "../../pages/Signup/SignupInfos/InterestsTags/IntrestsTags";
 
 
@@ -33,7 +33,7 @@ export default function TagsPickerPage({ children }: { children: ReactNode }) {
         setTags(_tags)
         if (addTagFunctionRef && addTagFunctionRef.current && _tags)
             addTagFunctionRef.current(_tags);
-    }, [addTagFunctionRef.current, tags]);
+    }, [addTagFunctionRef, tags]);
 
     const removeTag = useCallback((tag: string, f: (t: any) => void = null) => {
         let _tags = tags.filter((o: string) => o !== tag);
@@ -47,7 +47,7 @@ export default function TagsPickerPage({ children }: { children: ReactNode }) {
             validTagsFunctionRef.current(tags)
         }
         setShowTagsPage((p: boolean) => !p)
-    }, [validTagsFunctionRef.current, tags]);
+    }, [validTagsFunctionRef, tags]);
 
     return (
         <TagsPickerPageContenxt.Provider

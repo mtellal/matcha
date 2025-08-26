@@ -6,7 +6,6 @@ import MenuFilter from "../BrowserMenu/MenuFilter";
 import MenuFilterSearch from "../BrowserMenu/MenuFilterSearch";
 import MenuSort from "../BrowserMenu/Sort";
 import '../BrowserMenu/BrowserMenu.css'
-import { useEffect } from "react";
 
 export default function BrowseUsersList({ currentUser }: any) {
 

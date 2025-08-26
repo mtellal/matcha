@@ -17,11 +17,11 @@ export default function ProfileInfosUser(props: { user: User, isCurrentUser: boo
                     <ProfileMenuSettings {...props} />
                 }
             <div className="profileinfosuser-infos">
-                <img src={calendarIcon} className="profileinfosuser-infos-icon" />
+                <img src={calendarIcon} className="profileinfosuser-infos-icon" alt="age"/>
                 <p className="profileinfosuser-name" style={{ fontSize: '14px', fontWeight: '400' }}>{props.user && props.user.age ? `${getUserAge(props.user.age)} years old` : "Age not specified"}</p>
             </div>
             <div className="profileinfosuser-infos">
-                <img src={mapIcon} className="profileinfosuser-infos-icon" />
+                <img src={mapIcon} className="profileinfosuser-infos-icon" alt="location" />
                 <p className="profileinfosuser-name" style={{ fontSize: '14px', fontWeight: '500' }}>
                     {props.user && props.user.city && props.user.city.name ?  `${props.user.department.name}, ${props.user.region.name}` : "Location not specified"}
                 </p>

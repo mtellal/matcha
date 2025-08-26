@@ -1,7 +1,8 @@
 .profileuser {
+    height: 93vh;
     width: 100%;
     background-color: #00000066;
-    overflow: auto;
+    overflow: scroll;
     padding: 0 0 10vh 0
 }
 

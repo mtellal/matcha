@@ -1,5 +1,5 @@
-import { MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
-import { getProfilePicture, getUserPhotoRequest, getUserRequest, getUserViews } from "../requests";
+import { MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { getProfilePicture, getUserRequest, getUserViews } from "../requests";
 import { User } from "../types";
 import { AxiosResponse } from "axios";
 
@@ -36,7 +36,7 @@ export default function ViewsProvider({ children }: { children: ReactNode }) {
     const scrollHeightRef = useRef(0);
 
 
-    async function loadUsersDatas(userIds: number[]) {
+    const loadUsersDatas = useCallback(async (userIds: number[]) => {
         try {
             if (userIds && userIds.length) {
                 for (let id of userIds) {
@@ -47,7 +47,7 @@ export default function ViewsProvider({ children }: { children: ReactNode }) {
         catch (e) {
             // console.log(e)
         }
-    }
+    }, [])
 
 
     async function loadMoreUsers() {
@@ -66,7 +66,7 @@ export default function ViewsProvider({ children }: { children: ReactNode }) {
             setUserFirstDatasLoaded(true)
         }
         return (userIds)
-    }, [userIdsRef.current])
+    }, [userIdsRef, loadUsersDatas])
 
     async function loadUserIds() {
         userIdsRef.current = await getUserViews()

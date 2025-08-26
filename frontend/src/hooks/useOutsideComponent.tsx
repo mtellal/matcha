@@ -15,5 +15,5 @@ export function useOutsideComponent(ref: React.RefObject<any>, f: (e: any) => vo
             window.addEventListener('mousedown', clickedOutside)
             return () => { window.removeEventListener('mousedown', clickedOutside) }
         }
-    }, [ref.current, f, ...depedencies])
+    }, [ref, f])
 }

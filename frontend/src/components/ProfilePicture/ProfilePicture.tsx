@@ -34,6 +34,7 @@ export function ProfilePicture(props: TProfilePicture) {
                         className="profilepicture-img"
                         onClick={props.onClick}
                         style={userBlocked ? { ...props.style, opacity: '60%' } : props.style}
+                        alt='user profile'
                     />
                     :
                     <div

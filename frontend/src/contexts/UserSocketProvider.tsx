@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useNotificationContext } from "./NotificationsProvider";
 import { useLikesContext } from "./LikesProvider";
@@ -32,7 +32,6 @@ export default function UserSocketProvider({ children }: { children: ReactNode }
 
         socket.on('connect', () => {
             setUserSocket(socket)
-		//console.log("socket connected frontend")
         })
 
         return () => {
@@ -41,7 +40,9 @@ export default function UserSocketProvider({ children }: { children: ReactNode }
         }
     }, [])
 
-    const recievedNotif = async (notification: Notification) => {
+
+
+    const recievedNotif = useCallback( async (notification: Notification) => {
         setNotifications((t: Notification[]) => {
 
             let newTabNotifs: Notification[] = t;
@@ -69,7 +70,7 @@ export default function UserSocketProvider({ children }: { children: ReactNode }
                 )
             return (t)
         })
-    }
+    }, [setNotifications])
 
     useEffect(() => {
         if (userSocket && userSocket.connected) {
@@ -152,7 +153,23 @@ export default function UserSocketProvider({ children }: { children: ReactNode }
                 userSocket.removeAllListeners();
             }
         }
-    }, [userSocket, location, currentUser, notifications])
+    }, [
+        userSocket, 
+        location, 
+        currentUser, 
+        notifications, 
+        addBlockUserId, 
+        deleteConversation, 
+        removeBlockUserId, 
+        addConversation, 
+        addMessage, 
+        addUserLike, 
+        recievedNotif, 
+        removeUserLike, 
+        setNewNotif, 
+        setNewNotifChat,
+        setNotifications
+    ])
 
     return (
         <UserSocketContext.Provider

@@ -5,8 +5,7 @@ const { fileFromPath } = require('formdata-node/file-from-path')
 const axios = require('axios')
 const jwt_decode = require('jwt-decode')
 
-//const apiURL = `https://matcha.mezyann.fr/api`;
-const apiURL = `http://localhost:3000`;
+const apiURL = `http://matcha.mezyann.fr/api`;
 
 // 400 male names
 const maleNames = [
@@ -903,7 +902,7 @@ async function generateViews(userTokens, userIds) {
         console.log("Err tokens !== ids")
         return;
     }
-    process.stdout.write("Generating users views")
+    process.stdout.write("Generating views")
 
     const bestIds = [];
     const worstIds = [];
@@ -980,7 +979,7 @@ async function generateLike(userTokens, userIds) {
         console.log("Err tokens !== ids")
         return;
     }
-    process.stdout.write("Generating users likes")
+    process.stdout.write("Generating likes")
 
     const bestIds = [];
     const worstIds = [];
@@ -1069,7 +1068,7 @@ async function createUsers(n) {
                 if (res.data && res.data.token) {
                     token = res.data.token;
                     userTokens.push(res.data.token)
-                    console.log("User Created ", user.firstName, " \n", token)
+                    console.log("User Created ", user.firstName, " - access_token:", token)
 
                     const photos = generatePhotos(user.gender);
                     await sendPhotos(photos, token)

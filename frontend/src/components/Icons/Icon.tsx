@@ -19,6 +19,7 @@ export const IconRef = React.forwardRef((props: IconProps, ref: React.RefObject<
                 style={props.disableHover ? { backgroundColor: 'unset' } : props.style}
                 src={props.icon}
                 onClick={props.onClick}
+                alt='iconn ref'
             />
             {props.notif > 0 && <div className='icon-notif'></div>}
         </div>
@@ -35,6 +36,7 @@ export function Icon(props: IconProps) {
                 style={props.disableHover ? { backgroundColor: 'unset' } : props.style}
                 src={props.icon}
                 onClick={props.onClick}
+                alt='icon'
             />
             {props.notif > 0 && <div className='icon-notif'></div>}
         </div>

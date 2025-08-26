@@ -38,7 +38,7 @@ export function NotAuthenticateSpace() {
          }}>
             <div className='app-c'>
                <div className='app-phoneimg-c'>
-                  <img src={loveIllustration} className='app-phoneimg' />
+                  <img src={loveIllustration} className='app-phoneimg' alt="love" />
                </div>
                <Outlet />
                <div className='app-usercarts-c'>
@@ -47,7 +47,7 @@ export function NotAuthenticateSpace() {
                         Online you can see the best profiles that match yours,
                         likes and chat with them to find the person that will share your life.
                      </p>
-                     <img src={cartsUsers} className='app-carts' />
+                     <img src={cartsUsers} className='app-carts' alt='cart users'/>
                   </div>
                </div>
             </div>

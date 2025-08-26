@@ -36,7 +36,7 @@ export default function ChatMenu(props: ChatMenuProps) {
             navigate(`/chat/${convId}`)
         if (props.onClick)
             props.onClick();
-    }, [id, props.onClick])
+    }, [id, props, navigate])
 
     return (
         <div className='chatmenu'>

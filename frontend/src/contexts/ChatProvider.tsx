@@ -1,5 +1,5 @@
-import { Dispatch, MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
-import { getConversationMessagesRequest, getLastMessageRequest, getProfilePicture, getUserConversationIdsRequest, getUserPhotoRequest, getUserRequest } from "../requests";
+import { Dispatch, MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef } from "react";
+import { getConversationMessagesRequest, getLastMessageRequest, getProfilePicture, getUserConversationIdsRequest, getUserRequest } from "../requests";
 import { Conversation, Message } from "../types";
 
 
@@ -28,6 +28,7 @@ function convReducer(conversations: Conversation[], action: any) {
         case ('initConversationsIds'): {
             if (action.initConversationsIds)
                 return (action.initConversationsIds)
+            break
         }
         case ('addConversation'): {
             if (action.conversation) {
@@ -36,10 +37,12 @@ function convReducer(conversations: Conversation[], action: any) {
                 else
                     return ([action.conversation])
             }
+            break
         }
         case ('deleteConversation'): {
             if (action.convId && conversations.length)
                 return (conversations.filter((c: Conversation) => c.id !== action.convId))
+            break
         }
         case ('addUser'): {
             if (action.user && action.convId) {
@@ -51,6 +54,7 @@ function convReducer(conversations: Conversation[], action: any) {
                     })
                 )
             }
+            break
         }
         case ('addMessages'): {
             if (conversations.length && action.convId && action.messages) {
@@ -62,6 +66,7 @@ function convReducer(conversations: Conversation[], action: any) {
                     })
                 )
             }
+            break
         }
         case ('addMessage'): {
             if (conversations.length && action.message && action.message.convId) {
@@ -74,6 +79,7 @@ function convReducer(conversations: Conversation[], action: any) {
                     })
                 )
             }
+            break
         }
         case ('updateLastMessage'): {
             if (conversations.length && action.message && action.message.convId) {
@@ -85,6 +91,7 @@ function convReducer(conversations: Conversation[], action: any) {
                     })
                 )
             }
+            break
         }
         case ('addProfilePicture'): {
             if (action.photo && action.convId && conversations.length) {
@@ -97,6 +104,7 @@ function convReducer(conversations: Conversation[], action: any) {
                     })
                 )
             }
+            break
         }
         default: return conversations
     }
@@ -150,7 +158,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         }
     }
 
-    async function loadConversationsDatas(convs: Conversation[], addConversation: boolean = null) {
+    const loadConversationsDatas = useCallback(async (convs: Conversation[], addConversation: boolean = null) => {
         try {
             if (convs && convs.length) {
                 for (let datas of convs) {
@@ -161,10 +169,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         catch (e) {
             // console.log(e)
         }
-    }
+    }, [])
 
 
-    async function loadConvIds() {
+    const loadConvIds = useCallback(async () => {
         let _conversations;
         await getUserConversationIdsRequest()
             .then(res => {
@@ -174,11 +182,11 @@ export function ChatProvider({ children }: { children: ReactNode }) {
             .catch(err => { })
         await loadConversationsDatas(_conversations);
         conversationsLoadedRef.current = true;
-    }
+    }, [loadConversationsDatas])
 
     useEffect(() => {
         loadConvIds()
-    }, [])
+    }, [loadConvIds])
 
     async function addConversation(conv: Conversation) {
         loadConversationData(conv, true)

@@ -7,8 +7,6 @@ import { Outlet, useNavigate } from 'react-router';
 import { confirmAccountRequest, signupRequest } from '../../requests';
 import { AxiosError } from 'axios';
 import { InputIconPassword } from '../../components/Inputs/InputIcon/InputIcon';
-import { ButtonWrapper } from '../../components/Buttons/ButtonWrapper';
-
 
 import TagsPickerPage from '../../components/TagsPickerPage/TagsPickerPage';
 import { validateEmail, validateNames } from '../../utils';
@@ -27,6 +25,7 @@ type TForm = {
 export function SignupPageForm() {
 
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState("");
     const [form, setForm] = useState<TForm>({
         email: '',
@@ -64,10 +63,16 @@ export function SignupPageForm() {
             return (setError("Invalid first name"))
         if (!validateNames(form.lastName))
             return (setError("Invalid last name"))
-
+        setLoading(true)
         await signupRequest(_form)
-            .then(res => navigate("/signup/confirm"))
-            .catch(err => handleError(err))
+            .then(res => {
+                navigate("/signup/confirm")
+                setLoading(false)
+            })
+            .catch(err => {
+                handleError(err)
+                setLoading(false)
+            })
     }
 
     return (
@@ -130,6 +135,7 @@ export function SignupPageForm() {
                         title="Continue"
                         style={{ marginTop: '2vh' }}
                         onClick={onSignup}
+                        onLoad={loading}
                     />
                     <div className='cb-text-c'>
                         <p className='cb-text'>Have an account ?</p>
@@ -150,7 +156,7 @@ export default function SignupPage() {
 
     const [confirmPage, setConfirmPage] = useState(false);
     const confirmPageRef = useRef(null);
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -160,7 +166,7 @@ export default function SignupPage() {
             navigate("/signup/informations")
             confirmAccountRequest()
         }
-    }, [])
+    }, [navigate, searchParams])
 
     return (
         <TagsPickerPage>

@@ -12,7 +12,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 export default function ResetPasswordPage() {
 
     const navigate = useNavigate();
-    const [params, setParams] = useSearchParams();
+    const [params] = useSearchParams();
 
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -26,7 +26,7 @@ export default function ResetPasswordPage() {
             else
                 document.cookie = `access_token=${params.get("token")}; path=/`
         }
-    }, [])
+    }, [navigate, params])
 
 
     function handleError(err: AxiosError) {
@@ -43,7 +43,7 @@ export default function ResetPasswordPage() {
 
     function handleSuccess(res: AxiosResponse) {
         if (res.data && res.data.message) {
-            navigate("/signin", { state: { message: "Password updated" } })
+            navigate("/signin", { state: { message: "Password updated !" } })
         }
     }
 

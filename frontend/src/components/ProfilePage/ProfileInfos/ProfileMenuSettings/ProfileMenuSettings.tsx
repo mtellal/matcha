@@ -53,7 +53,7 @@ export function ProfileMenuSettings(props: { user: User }) {
                 userSocket.emit("block", userId)
             }
         }
-    }, [userSocket, currentUser, userBlocked])
+    }, [userSocket, currentUser, userBlocked, addBlockUserId, removeBlockUserId ])
 
     const handleReport = useCallback((userId: number) => {
         setPicking((p: boolean) => !p);

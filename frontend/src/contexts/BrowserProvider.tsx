@@ -1,6 +1,6 @@
-import { Dispatch, MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
-import { getAdvancedBrowseUsersRequest, getBrowseUsersRequest, getUserAdavancedOptionsRequest, getUserPhotoRequest, getUserRequest } from "../requests";
-import { AdvancedOptions, City, User } from "../types";
+import { Dispatch, MutableRefObject, ReactNode, createContext, useCallback, useContext, useReducer, useRef, useState } from "react";
+import { getAdvancedBrowseUsersRequest, getBrowseUsersRequest, getUserAdavancedOptionsRequest, getUserRequest } from "../requests";
+import { AdvancedOptions, User } from "../types";
 import { AxiosResponse } from "axios";
 
 type BrowserContextType = {
@@ -29,6 +29,7 @@ export function browserReducer(browseUsers: User[], action: any) {
         case ('browseUsers'): {
             if (action.browseUsers && typeof action.browseUsers === "object")
                 return (action.browseUsers)
+            break
         }
         case ('resetOriginal'): {
             if (action.userIds && action.userIds.length) {
@@ -36,14 +37,17 @@ export function browserReducer(browseUsers: User[], action: any) {
                     action.userIds.map((id: number) => browseUsers.find((u: User) => u.userId === id))
                 )
             }
+            break
         }
         case ('addUsers'): {
             if (action.users)
                 return ([...browseUsers, ...action.users])
+            break
         }
         case ('addUser'): {
             if (action.user)
                 return ([...browseUsers, action.user])
+            break
         }
         case ('removeUsers'): {
             return ([]);
@@ -59,6 +63,7 @@ export function browserReducer(browseUsers: User[], action: any) {
                     })
                 )
             }
+            break
         }
         case ('sortYounger'): {
             return (

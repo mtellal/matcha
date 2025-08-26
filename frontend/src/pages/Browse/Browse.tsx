@@ -1,61 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 
 import './Browse.css'
 
-import useWindowDimensions from "../../hooks/useWindowDimensions";
-import paramsIcon from '../../assets/Params.svg'
-
 import { useBrowserContext } from "../../contexts/BrowserProvider";
 import BrowseUsersList from "./BrowseUsersList/BrowseUsersList";
-import TagsPickerPage, { useTagsPage } from "../../components/TagsPickerPage/TagsPickerPage";
+import TagsPickerPage from "../../components/TagsPickerPage/TagsPickerPage";
 import { useCurrentUser } from "../../contexts/UserContext";
-import { useOutsideComponent } from "../../hooks/useOutsideComponent";
-import { User } from "../../types";
-import { getBrowseUsersRequest } from "../../requests";
-import { AxiosResponse } from "axios";
 
-
-type MobileMenuProps = {
-    user: User,
-    showMenu: boolean,
-    setShowMenu: (s: boolean | ((b: boolean) => boolean)) => void
-}
-
-function MobileMenu({ user, showMenu, setShowMenu }: MobileMenuProps) {
-
-    const { showTagsPage } = useTagsPage();
-
-    const mobileMenuRef = useRef();
-
-    useOutsideComponent(mobileMenuRef, () => {
-        if (!showTagsPage && setShowMenu)
-            setShowMenu(false)
-    }, [showTagsPage])
-
-    return (
-        <div className="browse-menus">
-            <div className="browse-menus-c" ref={mobileMenuRef}>
-                {
-                    showMenu &&
-                    <img
-                        className="browse-slidemenu-img"
-                        src={paramsIcon}
-                        onClick={() => setShowMenu((b: boolean) => !b)}
-                    />
-                }
-            </div>
-        </div>
-    )
-}
 
 
 export default function Browse() {
 
     const { currentUser } = useCurrentUser();
-    const { browseUsers, loadUsers, loadMoreUsers, scrollHeightRef } = useBrowserContext();
-
-    const { width } = useWindowDimensions();
-    const [showMenu, setShowMenu] = useState(false);
+    const { loadUsers, loadMoreUsers, scrollHeightRef } = useBrowserContext();
 
     const usersContainerRef: React.MutableRefObject<HTMLDivElement> = useRef();
 
@@ -64,15 +21,15 @@ export default function Browse() {
 
     useEffect(() => {
         loadUsers()
-    }, [])
+    }, [loadUsers])
 
     useEffect(() => {
         if (!scrollInitRef.current && scrollHeightRef.current && usersContainerRef.current) {
             usersContainerRef.current.scrollTop = scrollHeightRef.current;
         }
-    }, [scrollHeightRef.current, usersContainerRef.current])
+    }, [scrollHeightRef, usersContainerRef, scrollInitRef])
 
-    async function handleScroll(e: any) {
+    const handleScroll = useCallback(async (e: any) => {
         scrollHeightRef.current = e.target.scrollTop;
         if (!loadingUsers.current &&
             e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 50) {
@@ -80,16 +37,17 @@ export default function Browse() {
             await loadMoreUsers();
             loadingUsers.current = false;
         }
-    }
+    }, [loadMoreUsers, scrollHeightRef])
 
     useEffect(() => {
-        if (usersContainerRef.current)
-            usersContainerRef.current.addEventListener('scroll', handleScroll)
+        const current = usersContainerRef.current 
+        if (current)
+            current.addEventListener('scroll', handleScroll)
         return () => {
-            if (usersContainerRef.current)
-                usersContainerRef.current.removeEventListener('scroll', handleScroll);
+            if (current)
+                current.removeEventListener('scroll', handleScroll);
         }
-    }, [usersContainerRef.current])
+    }, [usersContainerRef, handleScroll])
 
 
     return (

@@ -11,11 +11,9 @@ export default function ForgotPasswordPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
 
     async function onSubmit() {
-        setSuccess("");
         setError("");
         setLoading(true)
         const _email = email.trim();
@@ -23,7 +21,7 @@ export default function ForgotPasswordPage() {
             return (setError("Mail required"));
         await resetPasswordRequest(_email)
             .then(res => {
-                setSuccess(res.data.message)
+                navigate("/signin", { state: { message: "Email sent ! Click on the mail's link" } })
                 setLoading(false)
             })
             .catch(err => {
@@ -40,7 +38,6 @@ export default function ForgotPasswordPage() {
 
             <div className='c-input-c'>
                 {error && <p className='c-error-msg'>{error}</p>}
-                {success && <p className='c-success-msg'>{success}</p>}
                 <Input
                     id='forgetpass-firstname'
                     placeholder='Email'

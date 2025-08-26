@@ -1,5 +1,5 @@
-import { MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
-import { getProfilePicture, getUserLikes, getUserPhotoRequest, getUserRequest, getUserViews } from "../requests";
+import { MutableRefObject, ReactNode, createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { getProfilePicture, getUserLikes, getUserRequest } from "../requests";
 import { User } from "../types";
 import { AxiosResponse } from "axios";
 
@@ -36,7 +36,7 @@ export default function LikesProvider({ children }: { children: ReactNode }) {
     const userIdsIndexRef = useRef(20);
     const scrollHeightRef = useRef(0);
 
-    async function loadUsersDatas(userIds: number[]) {
+    const loadUsersDatas = useCallback(async (userIds: number[]) => {
         try {
             if (userIds && userIds.length) {
                 for (let id of userIds) {
@@ -47,7 +47,7 @@ export default function LikesProvider({ children }: { children: ReactNode }) {
         catch (e) {
             // console.log(e)
         }
-    }
+    }, [])
 
     async function addUserLike(id: number, addInUserIds: boolean = false) {
         if (addInUserIds)
@@ -91,7 +91,7 @@ export default function LikesProvider({ children }: { children: ReactNode }) {
             setUserFirstDatasLoaded(true)
         }
         return (userIds)
-    }, [userIdsRef.current])
+    }, [userIdsRef, loadUsersDatas])
 
     async function loadUserIds() {
         userIdsRef.current = await getUserLikes()

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "createUser": "node ./scripts/generateUsers.js",
+    "createUsers": "node ./scripts/generateUsers.js",
+    "deleteUsers": "curl -X DELETE matcha.mezyann.fr/api/user/deleteUsers",
     "testBackend": "npm run createUser 25 && node ./scripts/test.js --nodelete",
     "start": "nodemon --watch src -e js,ts,json --exec \"ts-node src/app.ts\"",
     "test": "echo \"Error: no test specified\" && exit 1"

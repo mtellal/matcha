@@ -4,25 +4,15 @@ import './ProfileUser.css'
 import { differenceInYears, parse } from 'date-fns'
 
 import PhotoCarrousel from "../../components/PhotoCarrousel/PhotoCarrousel";
-import ProfileUserPref from "../../components/ProfilePage/ProfileUserPref/ProfileUserPref";
+import ProfileCurrentUserInformations from "../../components/ProfilePage/ProfileCurrentUserInformations/ProfileCurrentUserInformations";
 
 import { updatePhotosRequest, updateUserRequest } from "../../requests";
 import { useCurrentUser } from "../../contexts/UserContext";
 import { BioLabelEdit } from "./BioLabelEdit";
 import { validateEmail, validateNames } from "../../utils";
-import { City, User, UserPhoto } from "../../types";
+import { User, UserPhoto } from "../../types";
 import { ButtonLarge } from "../../components/Buttons/ButtonLarge";
 
-//        const keys = ["email", "username", "firstName", "lastName", "age", "location", "city"];
-
-type UpdateDatas = {
-    email?: string,
-    username?: string,
-    firstName?: string,
-    lastName?: string,
-    age?: string,
-    city?: City,
-}
 
 
 export default function ProfileCurrentUser() {
@@ -30,9 +20,8 @@ export default function ProfileCurrentUser() {
     const { currentUser, setCurrentUser, userPhotosLoadedRef } = useCurrentUser();
 
     const [profileUser, setProfileUser] = useState<User>();
-    const [editPhotos, setEditPhotos] = useState(false);
-    const [editInfos, setEditInfos] = useState(false);
     const [editBio, setEditBio] = useState(false);
+    const [loading, setLoading] = useState(false)
     const [photos, setPhotos] = useState<UserPhoto[]>([
         {
             index: 0,
@@ -58,6 +47,7 @@ export default function ProfileCurrentUser() {
 
     const [triggerUpdatePhotos, setTriggerUpdatePhotos] = useState<boolean>(false)
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false);
 
     const initRef = useRef(false);
 
@@ -66,32 +56,31 @@ export default function ProfileCurrentUser() {
             setProfileUser(currentUser)
             if (currentUser.photos) {
                 const indexPhotosUser = currentUser.photos.map(e => e.index)
-                const initPhotos = photos.map(e => indexPhotosUser.includes(e.index) ? currentUser.photos.find(v => e.index == v.index) : e)
+                const initPhotos = photos.map(e => indexPhotosUser.includes(e.index) ? currentUser.photos.find(v => e.index === v.index) : e)
                 setPhotos(initPhotos)
             }
             initRef.current = true
         }
-    }, [currentUser, userPhotosLoadedRef.current, initRef.current])
+    }, [currentUser, userPhotosLoadedRef, initRef, photos])
 
 
     function verifyInputs(user: User) {
         if (!validateEmail(user.email.trim()))
-            throw ("Invalid email")
+            return ("Invalid email")
         if (!validateNames(user.username.trim()))
-            throw ("Invalid username");
+            return ("Invalid username");
         if (!validateNames(user.firstName.trim()))
-            throw ("Invalid first name");
+            return ("Invalid first name");
         if (!validateNames(user.lastName.trim()))
-            throw ("Invalid last name")
-        const differenceAnnees = differenceInYears(new Date(), parse(user.age, "yyyy-MM-dd", new Date()));
-        if (differenceAnnees < 18) {
-            throw ("Invalid Age")
+            return ("Invalid last name")
+        const differenceYears = differenceInYears(new Date(), parse(user.age, "yyyy-MM-dd", new Date()));
+        if (differenceYears < 18) {
+            return ("Invalid Age")
         }
+        return ""
     }
 
     const updatePhotos = useCallback(async () => {
-        setEditPhotos((p: boolean) => !p);
-
         let updatePhotos = [];
         const prevPhotos = profileUser.photos;
         for (let i in photos) {
@@ -108,39 +97,21 @@ export default function ProfileCurrentUser() {
                 .catch(err => { })
         }
 
-    }, [profileUser, photos, currentUser]);
-
-    const updateUserInfos = () => {
-        setError("");
-        try {
-            verifyInputs(profileUser);
-        }
-        catch (e) {
-            return (setError(e))
-        }
-
-        /*  const keys = ["email", "username", "firstName", "lastName", "age", "city"];
-        let updateDatas: any = {};
-        let update: boolean = false;
-        for (let k of keys) {
-            if (currentUser[k as keyof User] !== profileUser[k as keyof User]) {
-                if (!update)
-                    update = !update;
-                updateDatas[k] = profileUser[k as keyof User];
-            }
-        }
-        if (update) {
-            await updateUserRequest(updateDatas)
-                .then(() => { setCurrentUser(profileUser) })
-                .catch(() => { })
-        } */
-    }
+    }, [profileUser, photos]);
 
     const updateInfos = useCallback(async () => {
-        setEditInfos((b: boolean) => !b)
-        const keys = ["gender", "sexualPreferences"];
+
+        const err = verifyInputs(profileUser)
+        if (err) {
+            setError(err)
+            setSuccess(false)
+            return 
+        }
+        const keys = ["email", "username", "firstName", "lastName", "age", "location", "city", "gender", "sexualPreferences"];
+
         let updateDatas: any = {};
         let update: boolean = false;
+
         for (let k of keys) {
             if (currentUser[k as keyof User] !== profileUser[k as keyof User]) {
                 if (!update)
@@ -148,18 +119,26 @@ export default function ProfileCurrentUser() {
                 updateDatas[k] = profileUser[k as keyof User];
             }
         }
-        if (!profileUser.tags.length ||
-            profileUser.tags.length !== currentUser.tags.length ||
+        if (profileUser.tags.length !== currentUser.tags.length ||
             profileUser.tags.find((t: string) => !currentUser.tags.includes(t))) {
             update = true;
             updateDatas.tags = profileUser.tags;
         }
         if (update) {
+            setLoading(true)
             await updateUserRequest(updateDatas)
-                .then(() => { setCurrentUser(profileUser) })
-                .catch(() => { })
+                .then(() => { 
+                    setCurrentUser(profileUser)
+                    setLoading(false)
+                    setSuccess(true)
+                    setError("")
+                })
+                .catch(() => { 
+                    setLoading(false)
+                    setError("Server error (check logs)")
+                })
         }
-    }, [profileUser, currentUser]);
+    }, [profileUser, currentUser, setCurrentUser]);
 
     return (
         <div className="profileuser">
@@ -180,16 +159,16 @@ export default function ProfileCurrentUser() {
                 </div>
 
                 {error && <p className="font-14" style={{ color: 'var(--red)' }}>{error}</p>}
+                {success && <p className="font-14" style={{ color: 'var(--green)' }}>Informations updated</p>}
             </div>
 
             <div className="profileuser-infos">
 
-                <ProfileUserPref
+                <ProfileCurrentUserInformations
                     user={profileUser}
                     setUser={setProfileUser}
                     setEditInfos={updateInfos}
-                    editing={editInfos}
-                    editable={true}
+                    onLoad={loading}
                 />
                 <BioLabelEdit
                     user={currentUser}

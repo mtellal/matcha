@@ -10,23 +10,12 @@ services:
       - "443:443"
     environment:
       - ENV=${ENV}
+    depends_on:
+      frontend:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
 
-##### DEVELOPMENT  MODE ####
-#  frontend: 
-#    build:
-#      context: ./frontend
-#    volumes:
-#      - ./frontend:/usr/src/app #dev
-#    ports:
-#      - 8080:8080 #dev
-#    environment:
-#      - REACT_APP_API_URI=${API_URI}
-#      - REACT_APP_DOMAIN_URI=${DOMAIN_URI}
-#      - PORT=8080 
-#      - REACT_APP_DEV_MODE=true 
-
-
-##### PRODUCTION  MODE ####
   frontend: 
       build:
         context: ./frontend
@@ -36,25 +25,12 @@ services:
         - REACT_APP_DOMAIN_API=${DOMAIN_API}
         - REACT_APP_DOMAIN=${DOMAIN}
         - REACT_APP_ENV=${ENV} 
+      healthcheck:
+        test: "netstat -tulpn | grep 3000"
+        interval: 30s
+        timeout: 10s
+        retries: 5
 
-
-##### DEVELOPMENT  MODE ####
-#  backend:
-#    build:
-#      context: ./backend
-#    volumes: 
-#      - ./backend:/usr/src/app
-#    ports: # dev
-#      - 3000:3000 #dev
-#    env_file:
-#      - ./backend/.env
-#      - .env
-#    depends_on:
-#      mariadb:
-#        condition: service_healthy
-
-
-##### PRODUCTION  MODE ####
   backend:
     build:
       context: ./backend
@@ -63,6 +39,11 @@ services:
     env_file:
       - ./backend/.env
       - .env
+    healthcheck:
+        test: "netstat -tulpn | grep 3000"
+        interval: 30s
+        timeout: 10s
+        retries: 5
     depends_on:
       mariadb:
         condition: service_healthy

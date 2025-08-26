@@ -17,6 +17,7 @@ export function RoundIconBorder(props: RoundIconBorderProps) {
             <img
                 className="roundicon-img"
                 src={props.icon}
+                alt='round icon'
             />
         </button>
     )

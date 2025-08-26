@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useViewContext } from "../../contexts/ViewsProvider";
 
 import { UsersList } from "../../components/UsersList/UsersList";
@@ -21,17 +21,17 @@ export default function ProfileViewsPage() {
     useEffect(() => {
         if (userIdsLoaded && !userFirstDatasLoaded)
             loadUsers()
-    }, [userIdsLoaded, userFirstDatasLoaded])
+    }, [userIdsLoaded, userFirstDatasLoaded, loadUsers])
 
 
     useEffect(() => {
         if (!scrollInitRef.current && scrollHeightRef.current && usersContainerRef.current) {
             usersContainerRef.current.scrollTop = scrollHeightRef.current;
         }
-    }, [scrollHeightRef.current, usersContainerRef.current])
+    }, [usersContainerRef, scrollHeightRef])
 
 
-    async function handleScroll(e: any) {
+    const handleScroll = useCallback(async (e: any) => {
         scrollHeightRef.current = e.target.scrollTop;
         if (!loadingUsers.current &&
             e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 50) {
@@ -39,16 +39,17 @@ export default function ProfileViewsPage() {
             await loadMoreUsers();
             loadingUsers.current = false;
         }
-    }
+    }, [loadMoreUsers, scrollHeightRef])
 
     useEffect(() => {
-        if (usersContainerRef.current)
-            usersContainerRef.current.addEventListener('scroll', handleScroll)
+        const current = usersContainerRef.current
+        if (current)
+        current.addEventListener('scroll', handleScroll)
         return () => {
-            if (usersContainerRef.current)
-                usersContainerRef.current.removeEventListener('scroll', handleScroll);
+            if (current)
+                current.removeEventListener('scroll', handleScroll);
         }
-    }, [usersContainerRef.current])
+    }, [usersContainerRef, handleScroll])
 
     return (
         <UsersList

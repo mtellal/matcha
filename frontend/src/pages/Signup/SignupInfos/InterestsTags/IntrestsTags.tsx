@@ -4,7 +4,7 @@ import { TagsPick } from "../../../../components/Label/Tags/Tags";
 import './InterestsTags.css'
 
 import arrowRightIcon from '../../../../assets/Arrow_Right.svg'
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getTagsRequest } from "../../../../requests";
 import { useOutsideComponent } from "../../../../hooks/useOutsideComponent";
 import { AxiosResponse } from "axios";
@@ -32,15 +32,15 @@ export default function InterestsTagsList(props: TInterestsTagsList) {
         }
     }
 
-    async function getTags() {
+    const getTags = useCallback(async () => {
         await getTagsRequest()
             .then(res => handleSuccess(res))
             .catch(err => { })
-    }
+    }, [])
 
     useEffect(() => {
         getTags();
-    }, [])
+    }, [getTags])
 
     function addTag(tag: string) {
         if (!props.tagsSelected.find((t: string) => t === tag))
@@ -69,7 +69,7 @@ export default function InterestsTagsList(props: TInterestsTagsList) {
 
             <ButtonWrapper onClick={props.onClick}>
                 <h1 className='buttonlarge-title'>Valid</h1>
-                <img src={arrowRightIcon} style={{ marginLeft: '15px' }} />
+                <img src={arrowRightIcon} style={{ marginLeft: '15px' }} alt="right"/>
             </ButtonWrapper>
         </div>
     )

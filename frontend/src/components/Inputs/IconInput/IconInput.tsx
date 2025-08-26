@@ -1,4 +1,4 @@
-import React, { ChangeEvent, EventHandler } from "react";
+import { ChangeEvent } from "react";
 
 import './IconInput.css'
 
@@ -23,7 +23,7 @@ export default function IconInput(props: TIconInput) {
             className="iconinput"
             style={props.style}
         >
-            <img src={props.icon} style={{ height: '80%' }} />
+            <img src={props.icon} style={{ height: '80%' }} alt="input" />
             <input
                 type="text"
                 id={props.id}

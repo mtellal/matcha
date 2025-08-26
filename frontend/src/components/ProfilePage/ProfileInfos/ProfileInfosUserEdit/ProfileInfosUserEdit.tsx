@@ -7,6 +7,14 @@ type ProfileInfosUserEditProps = {
     setUser: (u: User | ((u: User) => User)) => void
 }
 
+const style = {
+    width: '100%',
+    display: 'flex',
+    gap: '2vh',
+    justifyContent: 'space-between',
+}
+
+
 export default function ProfileInfosUserEdit(props: ProfileInfosUserEditProps) {
 
     function setEmail(s: string) { props.setUser((u: User) => ({ ...u, email: s })) }
@@ -23,7 +31,7 @@ export default function ProfileInfosUserEdit(props: ProfileInfosUserEditProps) {
 
     return (
         <>
-            <div style={{ display: 'flex', gap: '2vh', justifyContent: 'space-between' }}>
+            <div style={style}>
 
                 <InputSmall
                     id="user-email"
@@ -42,7 +50,7 @@ export default function ProfileInfosUserEdit(props: ProfileInfosUserEditProps) {
                 />
             </div>
 
-            <div style={{ display: 'flex', gap: '2vh', justifyContent: 'space-between'}}>
+            <div style={style}>
                 <InputSmall
                     id="user-firstname"
                     label="First name"
@@ -60,7 +68,7 @@ export default function ProfileInfosUserEdit(props: ProfileInfosUserEditProps) {
                 />
             </div>
 
-            <div style={{display: 'flex', gap: '2vh', justifyContent: 'space-between'}}>
+            <div style={style}>
 
                 <InputSmall
                     id="user-birthday"

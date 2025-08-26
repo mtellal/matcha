@@ -41,7 +41,7 @@ export function UserProvider({ children, _user }: UserProviderProps) {
     async function loadUserPhotos(u: User) {
         if (u.photosIndex && u.photosIndex) {
             for (let index of u.photosIndex) {
-                await getUserPhotoRequest(index, null, 400)
+                await getUserPhotoRequest(index, null, 800)
                     .then(res => {
                         if (res && res.data) {
                             setCurrentUser((u: User) => ({

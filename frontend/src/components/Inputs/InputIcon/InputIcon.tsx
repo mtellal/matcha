@@ -1,6 +1,6 @@
 
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Icon } from '../../Icons/Icon';
 import './InputIcon.css'
 

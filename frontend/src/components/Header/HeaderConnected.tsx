@@ -55,7 +55,7 @@ export default function HeaderConnected() {
         }
         else if (path !== pathName)
             navigate(path)
-    }, [location.pathname])
+    }, [location.pathname, navigate])
 
     const style = useCallback((pathname: string, value: string) => {
         if (pathname === value) {
@@ -70,13 +70,13 @@ export default function HeaderConnected() {
     const titleClick = useCallback(() => {
         if (location.pathname && location.pathname !== "/")
             navigate("/")
-    }, [location.pathname])
+    }, [location.pathname, navigate])
 
 
     return (
         <header className="header" >
             <div className="header-c1" >
-                <img className="header-logo" src={heart} />
+                <img className="header-logo" src={heart} alt='heart' />
                 <h2 className="header-name" onClick={titleClick}>Matcha</h2>
             </div>
             {

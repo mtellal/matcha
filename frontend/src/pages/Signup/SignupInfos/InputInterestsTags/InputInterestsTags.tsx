@@ -28,7 +28,7 @@ export default function InputInterestsTags({ form, setForm }: InputInterestsTags
                 setForm((f: TForm) => ({ ...f, tags }))
             }
         }
-    }, [addTagFunctionRef.current])
+    }, [addTagFunctionRef, setForm])
 
     useEffect(() => {
         if (!removeTagFunctionRef.current) {
@@ -36,7 +36,7 @@ export default function InputInterestsTags({ form, setForm }: InputInterestsTags
                 setForm((f: TForm) => ({ ...f, tags }))
             }
         }
-    }, [removeTagFunctionRef.current])
+    }, [removeTagFunctionRef, setForm])
 
     return (
         <div>

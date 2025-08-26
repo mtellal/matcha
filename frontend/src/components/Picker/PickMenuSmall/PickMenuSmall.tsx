@@ -52,7 +52,7 @@ export default function PickMenuSmall(props: PickMenuSmallProps) {
                 onClick={() => setSelecting((s: boolean) => !s)}
             >
                 <p className="pickmenusmall-options-placeholder" >{props.value || "not specified"}</p>
-                <img src={arrowIcon} style={{marginLeft: 'auto'}}/>
+                <img src={arrowIcon} style={{marginLeft: 'auto'}} alt="arrow"/>
             </div>
 
             <div

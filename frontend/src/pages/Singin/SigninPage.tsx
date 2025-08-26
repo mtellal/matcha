@@ -22,7 +22,7 @@ export default function SigninPage() {
         document.cookie = 'access_token=; path=/';
         if (location.state && location.state.message)
             setMessage(location.state.message);
-    }, [])
+    }, [location.state])
 
     function handleError(error: AxiosError) {
         if (error.response.data && (error.response.data as any).message) {

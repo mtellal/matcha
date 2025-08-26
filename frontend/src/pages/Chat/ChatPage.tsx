@@ -3,7 +3,7 @@ import './ChatPage.css'
 import ChatMenu from '../../components/ChatPage/ChatMenu/ChatMenu';
 
 import { useEffect, useState } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router';
+import { Outlet, useParams } from 'react-router';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 

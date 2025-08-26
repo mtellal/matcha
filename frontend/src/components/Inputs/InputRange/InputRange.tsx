@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute, useState } from "react";
+import React from "react";
 
 
 import './InputRange.css'

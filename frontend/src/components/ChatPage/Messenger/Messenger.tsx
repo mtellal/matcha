@@ -119,7 +119,7 @@ export default function Messenger({ conversation }: TMessenger) {
                 }
             }
         }
-    }, [conversation, containerRef.current])
+    }, [conversation, containerRef, loadConversationMessages])
 
     return (
         <div ref={containerRef} className="messenger" >

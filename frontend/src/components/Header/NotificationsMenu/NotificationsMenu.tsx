@@ -47,7 +47,7 @@ export default function NotificationsMenu() {
             setCurrentUser((u: User) => u.notifications ? ({ ...u, notifications: 0 }) : u)
             userSocket.emit('removeNotifs')
         }
-    }, [userSocket, setCurrentUser, setNewNotif, notifications])
+    }, [userSocket, setCurrentUser, setNewNotif])
 
     function determineAction(s: string) {
         if (s === "view")

@@ -1,10 +1,7 @@
 import { ProfilePicture } from "../../ProfilePicture/ProfilePicture";
 
 import './UserLabel.css'
-import { getUserAge } from "../../../utils";
 import { User } from "../../../types";
-import { useEffect, useState } from "react";
-import { getProfilePicture } from "../../../requests";
 
 type UserLabelProps = {
     user: User
@@ -13,8 +10,6 @@ type UserLabelProps = {
 }
 
 export default function UserLabel({ user, message, onClick }: UserLabelProps) {
-
-    const [photo, setPhoto] = useState(null);
 
     // conversation store => update user profile picture 
     // dissociate conv users and search users

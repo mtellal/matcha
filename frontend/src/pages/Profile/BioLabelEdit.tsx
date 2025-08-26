@@ -34,7 +34,7 @@ export function BioLabelEdit({
             await updateUserRequest({ biography: profileUser.biography })
                 .catch(err => { })
         }
-    }, [profileUser]);
+    }, [profileUser, setEditBio, user]);
 
     return (
         <Biolabel

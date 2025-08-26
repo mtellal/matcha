@@ -6,9 +6,6 @@ import '../../../components/Inputs/InputCitiesReco/InputCitiesReco.css'
 import { useCallback, useEffect, useState } from 'react';
 import PickMenu from '../../../components/Picker/PickMenu/PickMenu';
 import InputBiography from '../../../components/Inputs/InputBio/InputBiography';
-import { ButtonWrapper } from '../../../components/Buttons/ButtonWrapper';
-
-import arroRightIcon from '../../../assets/Arrow_Right.svg';
 import { useNavigate, useOutletContext } from 'react-router';
 import { getGeolocationRequest, updateUserRequest } from '../../../requests';
 import InputLabel from '../../../components/Inputs/InputLabel/InputLabel';
@@ -18,11 +15,11 @@ import pinIcon from '../../../assets/Map_Pin_1.svg'
 import ConsentLocation from './ConsentLocation/ConsentLocation';
 import { useCitiesReco } from '../../../hooks/useCitiesReco';
 
-import { differenceInYears, parse, isBefore } from 'date-fns'
+import { differenceInYears, parse } from 'date-fns'
 import InputInterestsTags from './InputInterestsTags/InputInterestsTags';
 import { City } from '../../../types';
 import { ConfirmPage } from '../SignupPage';
-import { AxiosError, AxiosResponse, formToJSON } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { ButtonLarge } from '../../../components/Buttons/ButtonLarge';
 
 export type TForm = {
@@ -114,7 +111,7 @@ export default function SignupInfosPage() {
         await updateUserRequest(finalForm)
             .then((res: AxiosResponse) => { navigate("/signup/photos") })
             .catch((err: AxiosError) => { setError((err.response.data as any).message || "error invalid fields") })
-    }, [form])
+    }, [form, navigate])
 
     const getLocationPosition = useCallback(() => {
         setConfirmPage((p: boolean) => !p)
@@ -133,7 +130,7 @@ export default function SignupInfosPage() {
             }}
             deny={() => { setConfirmPage((p: boolean) => !p); }}
         />
-    }, [setConfirmPage, confirmPageRef.current, setForm]);
+    }, [setConfirmPage, confirmPageRef, setForm]);
 
 
     function verifyDate(date: string) {

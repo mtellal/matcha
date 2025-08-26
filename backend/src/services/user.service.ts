@@ -492,7 +492,6 @@ const getUserIdsLikedMe = exports.getUserIdsLikedMe = async (userId: string) => 
 const createUser = exports.createUser = async (datas: CreateUserDatas, fakeUser: boolean = false) => {
 
     try {
-
         const hashedPassword = await bcrypt.hash(datas.password, parseInt(process.env.BCRYPT_SALT as string))
         datas.password = hashedPassword;
 
@@ -532,6 +531,7 @@ const createUser = exports.createUser = async (datas: CreateUserDatas, fakeUser:
                 subject: "Confirm your account",
                 text: `Click this link to confirm your account: ${url}`
             })
+
             await updateUserDataFieldFromUserId("confirmToken", token, user.userId)
         }
         catch (e) {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useRef, useState } from "react";
 
 import './PhotoCarrousel.css'
 
@@ -34,14 +34,14 @@ function PhotoContainer({ photos, setPhotos, index, extractURL, deletePhoto, onC
             }
             catch (e) { }
         }
-    }, [photos, onChangeProps])
+    }, [photos, onChangeProps, index, setPhotos])
 
     return (
         <div className="photocar-c1-c">
             <div className="photocar-c1" style={{ position: 'relative' }}>
                 {
                     photos && photos[index] && photos[index].url ?
-                        <img className="photocar-image" src={extractURL(index)} />
+                        <img className="photocar-image" src={extractURL(index)} alt="user carousel"/>
                         :
                         <div className="photocar-noimage"></div>
                 }
@@ -104,15 +104,17 @@ export default function PhotoCarrousel({
 }: PhotoCarrouselPropsType) {
 
     const [index, setIndex] = useState(0);
+    const loadedRef = useRef(false)
 
     useEffect(() => {
-        if (photos && index === 0) {
+        if (photos && photos.length && photos.find((e: UserPhoto) => e.url !== "") &&  !loadedRef.current) {
+            loadedRef.current = true
             //init index to first find photo
             const validPhoto = photos.find((e: UserPhoto) => e.url !== "")
             if (validPhoto)
                 setIndex(validPhoto.index)
         }
-    }, [photos])
+    }, [photos, loadedRef])
 
     const extractURL = (id: number) => {
         if (photos) {
@@ -143,7 +145,7 @@ export default function PhotoCarrousel({
                     <>
                         {
                             photos[index - 1].url ?
-                                < img className="photocar-image" src={extractURL(index - 1)} />
+                                < img className="photocar-image" src={extractURL(index - 1)} alt="carousel user"/>
                                 : <div className="photocar-noimage"></div>
                         }
                         <div className="photocar-shadow-left">
@@ -173,15 +175,15 @@ export default function PhotoCarrousel({
                         <div className="photocar-c1">
                             {
                                 photos[index] && photos[index].url ?
-                                    < img className="photocar-image" src={extractURL(index)} />
+                                    < img className="photocar-image" src={extractURL(index)} alt="carousel user"/>
                                     : <div className="photocar-noimage"></div>
                             }
                         </div>
                         <div className="photocar-c1-heart-container" onClick={onLike} >
                             {
                                 isLiked ?
-                                    <img src={HeartFill} style={{ height: '80%' }} /> :
-                                    <img src={HeartBorder} style={{ height: '80%' }} />
+                                    <img src={HeartFill} style={{ height: '80%' }} alt="liked"/> :
+                                    <img src={HeartBorder} style={{ height: '80%' }} alt="not liked"/>
                             }
                         </div>
                     </div>
@@ -195,7 +197,7 @@ export default function PhotoCarrousel({
                     <>
                         {
                             photos[index + 1].url ?
-                                < img className="photocar-image" src={extractURL(index + 1)} />
+                                < img className="photocar-image" src={extractURL(index + 1)} alt="carousel user" />
                                 : <div className="photocar-noimage"></div>
                         }
                         <div className="photocar-shadow-right">
