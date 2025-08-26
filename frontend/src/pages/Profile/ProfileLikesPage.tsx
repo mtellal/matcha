@@ -14,7 +14,7 @@ export default function ProfileLikesPage() {
     } = useLikesContext();
 
 
-    const usersContainerRef: React.MutableRefObject<HTMLDivElement> = useRef();
+    const usersContainerRef: React.MutableRefObject<HTMLDivElement> = useRef(null);
     const loadingUsers = useRef(false);
     const scrollInitRef = useRef(false);
 

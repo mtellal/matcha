@@ -14,7 +14,7 @@ export default function ProfileViewsPage() {
         userFirstDatasLoaded
     } = useViewContext();
 
-    const usersContainerRef: React.MutableRefObject<HTMLDivElement> = useRef();
+    const usersContainerRef: React.MutableRefObject<HTMLDivElement> = useRef(null);
     const loadingUsers = useRef(false);
     const scrollInitRef = useRef(false);
 

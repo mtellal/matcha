@@ -77,9 +77,9 @@ export default function BrowserProvider({ children }: { children: ReactNode }) {
     const [filterIds, setFilterIds] = useState([]);
 
 
-    const filterConfigRef = useRef();
-    const sortConfigRef = useRef();
-    const searchConfigRef = useRef();
+    const filterConfigRef = useRef(null);
+    const sortConfigRef = useRef(null);
+    const searchConfigRef = useRef(null);
 
     const userIdsRef = useRef([]);
     const userIdsIndexRef = useRef(20);

@@ -14,7 +14,7 @@ export default function Browse() {
     const { currentUser } = useCurrentUser();
     const { loadUsers, loadMoreUsers, scrollHeightRef } = useBrowserContext();
 
-    const usersContainerRef: React.MutableRefObject<HTMLDivElement> = useRef();
+    const usersContainerRef: React.MutableRefObject<HTMLDivElement> = useRef(null);
 
     const loadingUsers = useRef(false);
     const scrollInitRef = useRef(false);

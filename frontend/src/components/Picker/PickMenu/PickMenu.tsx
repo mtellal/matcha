@@ -16,7 +16,7 @@ export default function PickMenu(props: PickMenuProps) {
 
     const [selecting, setSelecting] = useState(false);
 
-    const menuRef = useRef();
+    const menuRef = useRef(null);
 
     useOutsideComponent(menuRef, () => { setSelecting(false) })
 

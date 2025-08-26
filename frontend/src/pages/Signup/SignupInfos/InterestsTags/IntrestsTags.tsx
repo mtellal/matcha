@@ -20,7 +20,7 @@ export default function InterestsTagsList(props: TInterestsTagsList) {
 
     const [tags, setTags] = useState([]);
 
-    const tagsRef = useRef();
+    const tagsRef = useRef(null);
 
     useOutsideComponent(tagsRef, () => {
         props.onClick()

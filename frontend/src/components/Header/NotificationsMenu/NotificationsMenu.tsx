@@ -21,8 +21,8 @@ export default function NotificationsMenu() {
 
     const [showNotifs, setShowNotifs] = useState(false);
 
-    const menuRef: React.RefObject<HTMLDivElement> = useRef();
-    const iconRef: React.RefObject<HTMLDivElement> = useRef();
+    const menuRef: React.RefObject<HTMLDivElement> = useRef(null);
+    const iconRef: React.RefObject<HTMLDivElement> = useRef(null);
 
     useOutsideComponent(menuRef, (e: MouseEvent) => {
         if (iconRef.current && !iconRef.current.contains(e.target as Node))

@@ -11,7 +11,7 @@ type ConsentLocationProps = {
 
 export default function ConsentLocation(props: ConsentLocationProps) {
 
-    const containerRef = useRef()
+    const containerRef = useRef(null)
 
     useOutsideComponent(containerRef, () => {
         props.deny()
