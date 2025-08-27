@@ -3,7 +3,7 @@
 const { FormData } = require('formdata-node')
 const { fileFromPath } = require('formdata-node/file-from-path')
 const axios = require('axios')
-const jwt_decode = require('jwt-decode')
+const { jwtDecode } = require('jwt-decode')
 
 const apiURL = `http://matcha.mezyann.fr/api`;
 
@@ -1089,13 +1089,13 @@ async function createUsers(n) {
         console.log("Extracting users ids")
         userTokens.map(t => {
             try {
-                const token = jwt_decode(t);
+                const token = jwtDecode(t);
                 if (token)
                     userIds.push(token.id)
             }
             catch (e) {
                 console.log("decode jwt failed")
-                // console.log(e)
+                console.log(e)
             }
         })
     }
@@ -1110,7 +1110,7 @@ async function createUsers(n) {
 
 
 async function resetUsersDatas() {
-	//await axios.delete(`${apiURL}/user/deleteUsers`)
+    //await axios.delete(`${apiURL}/user/deleteUsers`)
 }
 
 console.log("script ...")
